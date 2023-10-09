@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Акты ГРО</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../SVZK.ico</normaloff>../SVZK.ico</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
@@ -3532,36 +3536,10 @@ p, li { white-space: pre-wrap; }
      </attribute>
     </widget>
    </widget>
-   <widget class="QPushButton" name="pushButtonSave">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>750</y>
-      <width>93</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>PushButton</string>
-    </property>
-   </widget>
-   <widget class="QProgressBar" name="progressBar">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>760</y>
-      <width>291</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="value">
-     <number>24</number>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButtonOpenini">
     <property name="geometry">
      <rect>
-      <x>530</x>
+      <x>220</x>
       <y>760</y>
       <width>93</width>
       <height>28</height>
@@ -3574,7 +3552,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="pushButtonClose">
     <property name="geometry">
      <rect>
-      <x>630</x>
+      <x>1000</x>
       <y>760</y>
       <width>93</width>
       <height>28</height>
@@ -3587,7 +3565,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="pushButtonClear">
     <property name="geometry">
      <rect>
-      <x>730</x>
+      <x>520</x>
       <y>760</y>
       <width>93</width>
       <height>28</height>
@@ -3595,6 +3573,39 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="text">
      <string>clear</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonSave">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>760</y>
+      <width>191</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Сохранить карточку</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../icons8-сохранить-48.png</normaloff>../icons8-сохранить-48.png</iconset>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonOpenCopy">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>760</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Скопировать</string>
     </property>
    </widget>
   </widget>

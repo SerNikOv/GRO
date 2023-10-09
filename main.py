@@ -4,27 +4,33 @@ from PyQt5.QtWidgets import QApplication, QFileDialog
 from PyQt5 import uic
 from PyQt5.Qt import QApplication, QSettings, QMainWindow, QLineEdit, QCheckBox, QVBoxLayout, QWidget
 import configparser
-from pathlib import Path
+from pathlib import Path, PurePath, PurePosixPath
+from os.path import abspath, dirname, exists
+import shutil
 
 defoult_form = './Config/defoult_form.ini'
 # last_form = './Config/ini_form.ini'
 open_form = ''
-
 settings = QSettings('User', 'GRO')
 config_data_dir = Path("User/GRO")
 
+# Последняя форма
 if settings.contains("last_form"):
     last_form = settings.value('last_form')
-
 else:
     settings.setValue('last_form', '/home')
     last_form = '/home'
+# Папка объекта
+if settings.contains("objFolder"):
+    objFolder = settings.value('objFolder')
+else:
+    settings.setValue('objFolder', '')
+    objFolder = ''
 
 
 def save_form(file=None):
-    file_config_form2 = './Config/ini_form2.ini'
     config2 = configparser.ConfigParser()
-    config2.read_file(open(file_config_form2))
+    config2.read_file(open(file))
     # Объект
     if not config2.has_section('Объект'):
         config2.add_section('Объект')
@@ -237,7 +243,7 @@ def save_form(file=None):
     config2.set('Акты', 'ShifrRD_14', form.ShifrRD_14.toPlainText())
     config2.set('Акты', 'ShifrRD_15', form.ShifrRD_15.toPlainText())
 
-    with open(file_config_form2, 'w') as configfile2:
+    with open(file, 'w+') as configfile2:
         config2.write(configfile2)
 
 
@@ -307,12 +313,21 @@ def save_form(file=None):
 
 def ini_form(file=None):
     try:
-        if file == '':
-            file = \
-                QFileDialog().getOpenFileName(window, 'Выберите файл паспорта Geoscan', last_form, filter="*.ini")[0]
         if file != "":
             config = configparser.ConfigParser()
             config.read_file(open(file))
+
+            # Папка объекта
+            if settings.contains("objFolder"):
+                objFolder = settings.value('objFolder')
+            else:
+                settings.setValue('objFolder', '')
+                objFolder = ''
+
+            if objFolder != '':
+                window.statusBar().showMessage(objFolder)
+            if objFolder == '':
+                window.statusBar().showMessage('Папка не задана!!!')
 
             # Объект
             window.setWindowTitle(config.get('Объект', 'object'))
@@ -765,11 +780,52 @@ def ini_form(file=None):
 #         Utils.add_channel()
 
 
-def openini(file=None):
-    file_config = \
-        QFileDialog().getOpenFileName(window, 'Выберите файл паспорта Geoscan', file, filter="*.ini")[1]
-    print(file_config)
-    # ini_form(file_config)
+def openini(mode=None):
+    try:
+        if mode != 'last':
+            file = \
+                QFileDialog().getOpenFileName(window, 'Выберите файл карточки объекта', last_form, filter="*.gro")[0]
+            if file != "":
+                if mode == 'open':
+                    objFolder = dirname(file)
+                if mode == 'copy':
+                    objFolder = ''
+        else:
+            objFolder = dirname(last_form)
+            file = last_form
+
+        # print(file)
+        # if file != "":
+        #     objFolder = dirname(file)
+        #     # if mode == 'open':
+        #     # objFolder = PurePath(file).as_posix()
+        #     # objFolder = abspath(file)
+        #     # print(objFolder)
+        #     if mode == 'copy':
+        #         objFolder = ''
+        settings.setValue("objFolder", objFolder)
+        settings.setValue("last_form", file)
+        ini_form(file)
+    except:
+        pass
+
+
+def save111():
+    objFolder = settings.value('objFolder')
+    if objFolder != '':
+        file = objFolder + '/Карточка объекта - ' + form.object.toPlainText() + '.gro'
+    else:
+        nfile = dirname(last_form) + '/Карточка объекта - ' + form.object.toPlainText() + '.gro'
+        file = \
+            QFileDialog().getSaveFileName(window, 'Выберите путь для карточки объекта', nfile, filter="*.gro")[0]
+        objFolder = dirname(file)
+        settings.setValue("objFolder", objFolder)
+    if file != '':
+    #     my_file = open(file, "w+")
+    #     my_file.close()
+    #     save_form(file)
+        print(exists(file))
+        shutil.copyfile('.\Shablon\!промежуточный.docx', f'{objFolder}\copyz.docx')
 
 
 if __name__ == '__main__':
@@ -780,14 +836,14 @@ if __name__ == '__main__':
     form.setupUi(window)
 
     window.show()
-    ini_form(last_form)
+    # ini_form(last_form)
+    openini('last')
 
     # форма
-    form.pushButtonSave.clicked.connect(save_form)
-
-    form.pushButtonOpenini.clicked.connect(lambda: ini_form(open_form))
+    form.pushButtonOpenini.clicked.connect(lambda: openini('open'))
+    form.pushButtonOpenCopy.clicked.connect(lambda: openini('copy'))
     form.pushButtonClear.clicked.connect(lambda: ini_form(defoult_form))
-
+    form.pushButtonSave.clicked.connect(save111)
     form.pushButtonClose.clicked.connect(window.close)
 
     #
