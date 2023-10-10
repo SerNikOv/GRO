@@ -28,7 +28,21 @@ else:
     objFolder = ''
 
 
-def save_form(file=None):
+def save_form():
+    objFolder = settings.value('objFolder')
+    if objFolder != '':
+        file = objFolder + '/Карточка объекта - ' + form.object.toPlainText() + '.gro'
+    else:
+        nfile = dirname(last_form) + '/Карточка объекта - ' + form.object.toPlainText() + '.gro'
+        file = \
+            QFileDialog().getSaveFileName(window, 'Выберите путь для карточки объекта', nfile, filter="*.gro")[0]
+        objFolder = dirname(file)
+        settings.setValue("objFolder", objFolder)
+        window.statusBar().showMessage(objFolder)
+    if file != '':
+        my_file = open(file, "w+")
+        my_file.close()
+        # save_form(file)
     config2 = configparser.ConfigParser()
     config2.read_file(open(file))
     # Объект
@@ -810,22 +824,10 @@ def openini(mode=None):
         pass
 
 
-def save111():
-    objFolder = settings.value('objFolder')
-    if objFolder != '':
-        file = objFolder + '/Карточка объекта - ' + form.object.toPlainText() + '.gro'
-    else:
-        nfile = dirname(last_form) + '/Карточка объекта - ' + form.object.toPlainText() + '.gro'
-        file = \
-            QFileDialog().getSaveFileName(window, 'Выберите путь для карточки объекта', nfile, filter="*.gro")[0]
-        objFolder = dirname(file)
-        settings.setValue("objFolder", objFolder)
-    if file != '':
-    #     my_file = open(file, "w+")
-    #     my_file.close()
-    #     save_form(file)
-        print(exists(file))
-        shutil.copyfile('.\Shablon\!промежуточный.docx', f'{objFolder}\copyz.docx')
+# def save111():
+#
+#         print(exists(file))
+#         shutil.copyfile('.\Shablon\!промежуточный.docx', f'{objFolder}\copyz.docx')
 
 
 if __name__ == '__main__':
@@ -843,7 +845,7 @@ if __name__ == '__main__':
     form.pushButtonOpenini.clicked.connect(lambda: openini('open'))
     form.pushButtonOpenCopy.clicked.connect(lambda: openini('copy'))
     form.pushButtonClear.clicked.connect(lambda: ini_form(defoult_form))
-    form.pushButtonSave.clicked.connect(save111)
+    form.pushButtonSave.clicked.connect(save_form)
     form.pushButtonClose.clicked.connect(window.close)
 
     #
