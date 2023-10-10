@@ -824,11 +824,65 @@ def openini(mode=None):
         pass
 
 
-# def save111():
-#
-#         print(exists(file))
-#         shutil.copyfile('.\Shablon\!промежуточный.docx', f'{objFolder}\copyz.docx')
+def save111():
+    # print(exists(file))
+    shutil.copyfile('.\Shablon\!промежуточный.docx', f'{objFolder}\copyz.docx')
 
+
+def allACT():
+    if form.CheckBoxALLACT.isChecked():
+        print('check')
+        form.CheckBoxALLRD.setChecked(True)
+        form.CheckBoxALLVSN.setChecked(True)
+        form.CheckBoxALLSP.setChecked(True)
+    else:
+        form.CheckBoxALLRD.setChecked(False)
+        form.CheckBoxALLVSN.setChecked(False)
+        form.CheckBoxALLSP.setChecked(False)
+
+
+def allRD():
+    if form.CheckBoxALLRD.isChecked():
+        # form.CheckBoxRD1.setEnabled(True)
+        form.CheckBoxRD1.setChecked(True)
+        form.CheckBoxRD2.setChecked(True)
+        form.CheckBoxRD3.setChecked(True)
+    else:
+        form.CheckBoxALLACT.setChecked(False)
+        form.CheckBoxRD1.setChecked(False)
+        form.CheckBoxRD2.setChecked(False)
+        form.CheckBoxRD3.setChecked(False)
+
+
+
+def allVSN():
+    if form.CheckBoxALLVSN.isChecked():
+        form.CheckBoxVSN2.setChecked(True)
+        form.CheckBoxVSN3.setChecked(True)
+    else:
+        form.CheckBoxALLACT.setChecked(False)
+        form.CheckBoxVSN2.setChecked(False)
+        form.CheckBoxVSN3.setChecked(False)
+
+
+def allSP():
+    if form.CheckBoxALLSP.isChecked():
+        form.CheckBoxSP2.setChecked(True)
+        form.CheckBoxSP3.setChecked(True)
+    else:
+        form.CheckBoxALLACT.setChecked(False)
+        form.CheckBoxSP2.setChecked(False)
+        form.CheckBoxSP3.setChecked(False)
+
+def allKAT():
+    if form.CheckBoxALLKAT.isChecked():
+        form.CheckBoxKAT1.setChecked(True)
+        form.CheckBoxKAT2.setChecked(True)
+        form.CheckBoxKAT3.setChecked(True)
+    else:
+        form.CheckBoxKAT1.setChecked(False)
+        form.CheckBoxKAT2.setChecked(False)
+        form.CheckBoxKAT3.setChecked(False)
 
 if __name__ == '__main__':
     Form, Window = uic.loadUiType("./form/GRO.ui")
@@ -841,56 +895,18 @@ if __name__ == '__main__':
     # ini_form(last_form)
     openini('last')
 
-    # форма
+    # работа с формой
     form.pushButtonOpenini.clicked.connect(lambda: openini('open'))
     form.pushButtonOpenCopy.clicked.connect(lambda: openini('copy'))
     form.pushButtonClear.clicked.connect(lambda: ini_form(defoult_form))
     form.pushButtonSave.clicked.connect(save_form)
     form.pushButtonClose.clicked.connect(window.close)
 
-    #
-    # # Установка плечей
-    # form.leverage.valueChanged.connect(lambda: change_form('leverage'))
-    # form.set_Leverage_Bybit.clicked.connect(set_leverage_bybit)
-    # # Установка маржи
-    # form.fix_margin.valueChanged.connect(lambda: change_form('fix_margin'))
-    # # Установка маржи %
-    # form.percent_margin.valueChanged.connect(lambda: change_form('percent_margin'))
-    # form.refresh_rec_ch.clicked.connect(lambda: change_form('MY_CHANNEL'))
-    # # change_vip
-    # form.VIP1.stateChanged.connect(
-    #     lambda: change_form('VIP1'))
-    # form.VIP2.stateChanged.connect(
-    #     lambda: change_form('VIP2'))
-    # form.VIP3.stateChanged.connect(
-    #     lambda: change_form('VIP3'))
-    # form.VIP4.stateChanged.connect(
-    #     lambda: change_form('VIP4'))
-    # form.VIP5.stateChanged.connect(
-    #     lambda: change_form('VIP5'))
-    # form.VIP6.stateChanged.connect(
-    #     lambda: change_form('VIP6'))
-    # form.VIP7.stateChanged.connect(
-    #     lambda: change_form('VIP7'))
-    # form.no_vip.stateChanged.connect(
-    #     lambda: change_form('no_vip'))
-    # form.test_ch.stateChanged.connect(
-    #     lambda: change_form('test_ch'))
-    # form.max_margin.valueChanged.connect(
-    #     lambda: change_form('max_margin'))  # Установка максимальной маржи в открытых позах
-    # form.panicsell.valueChanged.connect(
-    #     lambda: change_form('panicsell'))  # Установка максимальной просадки "ПАНИКСЕЛЛ"
-    # form.TP_1st.valueChanged.connect(
-    #     lambda: change_form('TP1'))  # Установка первого тейка
-    # form.TP_2nd.valueChanged.connect(
-    #     lambda: change_form('TP2'))  # Установка второго тейка
-    # form.poluorder.valueChanged.connect(
-    #     lambda: change_form('LMT'))  # Установка первого размера ордера
-    # form.LMT_1st.valueChanged.connect(
-    #     lambda: change_form('LMT1'))  # Установка первого добора позиции
-    # form.LMT_2nd.valueChanged.connect(
-    #     lambda: change_form('LMT2'))  # Установка первого добора позиции
-    # form.apply_telega.clicked.connect(
-    #     lambda: change_form('Telega'))  # Установка ключей телеги
+    # чекбоксы актов
+    form.CheckBoxALLACT.stateChanged.connect(allACT)
+    form.CheckBoxALLRD.stateChanged.connect(allRD)
+    form.CheckBoxALLVSN.stateChanged.connect(allVSN)
+    form.CheckBoxALLSP.stateChanged.connect(allSP)
+    form.CheckBoxALLKAT.stateChanged.connect(allKAT)
+
     app.exec()
-    # save_form()
