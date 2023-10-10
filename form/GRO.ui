@@ -3597,6 +3597,26 @@ p, li { white-space: pre-wrap; }
        <string>Промежуточный</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="pushButtonSaveAct">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>770</x>
+        <y>670</y>
+        <width>191</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Сформировать акты</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../icons8-сохранить-48.png</normaloff>../icons8-сохранить-48.png</iconset>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QPushButton" name="pushButtonOpenini">
@@ -3628,7 +3648,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="pushButtonClear">
     <property name="geometry">
      <rect>
-      <x>520</x>
+      <x>420</x>
       <y>760</y>
       <width>93</width>
       <height>28</height>

@@ -30,235 +30,240 @@ else:
 
 def save_form():
     objFolder = settings.value('objFolder')
-    if objFolder != '':
-        file = objFolder + '/Карточка объекта - ' + form.object.toPlainText() + '.gro'
+    objectName = form.object.toPlainText()
+    if objectName != '':
+        if objFolder != '':
+            file = objFolder + '/Карточка объекта - ' + objectName + '.gro'
+        else:
+            nfile = dirname(last_form) + '/Карточка объекта - ' + form.object.toPlainText() + '.gro'
+            file = \
+                QFileDialog().getSaveFileName(window, 'Выберите путь для карточки объекта', nfile, filter="*.gro")[0]
+            objFolder = dirname(file)
+            settings.setValue("objFolder", objFolder)
+            window.statusBar().showMessage(objFolder)
+        if file != '':
+            my_file = open(file, "w+")
+            my_file.close()
+            # save_form(file)
+        config2 = configparser.ConfigParser()
+        config2.read_file(open(file))
+        # Объект
+        if not config2.has_section('Объект'):
+            config2.add_section('Объект')
+        config2.set('Объект', 'object', form.object.toPlainText())
+        config2.set('Объект', 'msk', form.msk.text())
+        config2.set('Объект', 'naimobj', form.naimobj.toPlainText())
+        config2.set('Объект', 'uchastok', form.uchastok.toPlainText())
+        config2.set('Объект', 'kodstr', form.kodstr.text())
+        config2.set('Объект', 'adres', form.adres.toPlainText())
+        # Заказчик
+        if not config2.has_section('Заказчик'):
+            config2.add_section('Заказчик')
+        config2.set('Заказчик', 'zakazchik', form.zakazchik.toPlainText())
+        config2.set('Заказчик', 'zakazchikrekviz', form.zakazchikrekviz.toPlainText())
+        config2.set('Заказчик', 'zakazchikadres', form.zakazchikadres.toPlainText())
+        config2.set('Заказчик', 'zakazchiksro', form.zakazchiksro.toPlainText())
+        config2.set('Заказчик', 'zakazchikdolzhn', form.zakazchikdolzhn.toPlainText())
+        config2.set('Заказчик', 'zakazchikfio', form.zakazchikfio.toPlainText())
+        config2.set('Заказчик', 'zakazchikprikaz', form.zakazchikprikaz.toPlainText())
+        # Стройконтроль
+        if not config2.has_section('Стройконтроль'):
+            config2.add_section('Стройконтроль')
+        config2.set('Стройконтроль', 'SKrekviz', form.SKrekviz.toPlainText())
+        config2.set('Стройконтроль', 'SKadres', form.SKadres.toPlainText())
+        config2.set('Стройконтроль', 'SKdolzhnost', form.SKdolzhnost.toPlainText())
+        config2.set('Стройконтроль', 'SKfio', form.SKfio.toPlainText())
+        config2.set('Стройконтроль', 'SKprikaz', form.SKprikaz.toPlainText())
+
+        # Генподрядчик
+        if not config2.has_section('Генподрядчик'):
+            config2.add_section('Генподрядчик')
+        config2.set('Генподрядчик', 'genpodryadchik', form.genpodryadchik.toPlainText())
+        config2.set('Генподрядчик', 'genpodryadchikrekviz', form.genpodryadchikrekviz.toPlainText())
+        config2.set('Генподрядчик', 'genpodryadchikadres', form.genpodryadchikadres.toPlainText())
+        config2.set('Генподрядчик', 'genpodryadchiksro', form.genpodryadchiksro.toPlainText())
+        config2.set('Генподрядчик', 'genpodryadchikdolzhn', form.genpodryadchikdolzhn.toPlainText())
+        config2.set('Генподрядчик', 'genpodryadchikfio', form.genpodryadchikfio.toPlainText())
+        config2.set('Генподрядчик', 'genpodryadchikprikaz', form.genpodryadchikprikaz.toPlainText())
+        config2.set('Генподрядчик', 'genpodryadchikSKdolzhnost', form.genpodryadchikSKdolzhnost.toPlainText())
+        config2.set('Генподрядчик', 'genpodryadchikSKfio', form.genpodryadchikSKfio.toPlainText())
+        config2.set('Генподрядчик', 'genpodryadchikSKprikaz', form.genpodryadchikSKprikaz.toPlainText())
+        config2.set('Генподрядчик', 'genpodryadchikSKreestr', form.genpodryadchikSKreestr.toPlainText())
+        # Субподрядчик
+        if not config2.has_section('Субподрядчик'):
+            config2.add_section('Субподрядчик')
+        config2.set('Субподрядчик', 'stroitel', form.stroitel.toPlainText())
+        config2.set('Субподрядчик', 'stroiteldolzhn', form.stroiteldolzhn.toPlainText())
+        config2.set('Субподрядчик', 'stroitelfio', form.stroitelfio.toPlainText())
+        config2.set('Субподрядчик', 'stroitelprikaz', form.stroitelprikaz.toPlainText())
+        # АН
+        if not config2.has_section('АН'):
+            config2.add_section('АН')
+        config2.set('АН', 'proekt', form.proekt.toPlainText())
+        config2.set('АН', 'proektrekviz', form.proektrekviz.toPlainText())
+        config2.set('АН', 'proektadres', form.proektadres.toPlainText())
+        config2.set('АН', 'proektsro', form.proektsro.toPlainText())
+        config2.set('АН', 'GIP', form.GIP.toPlainText())
+        config2.set('АН', 'proektdolzhn', form.proektdolzhn.toPlainText())
+        config2.set('АН', 'proektfio', form.proektfio.toPlainText())
+        config2.set('АН', 'proektprikaz', form.proektprikaz.toPlainText())
+        # ГРО
+        if not config2.has_section('ГРО'):
+            config2.add_section('ГРО')
+        config2.set('ГРО', 'GRO', form.GRO.toPlainText())
+        config2.set('ГРО', 'GROrekviz', form.GROrekviz.toPlainText())
+        config2.set('ГРО', 'GROadres', form.GROadres.toPlainText())
+        config2.set('ГРО', 'GROdolzhn', form.GROdolzhn.toPlainText())
+        config2.set('ГРО', 'GROfio', form.GROfio.toPlainText())
+        config2.set('ГРО', 'GROprikaz', form.GROprikaz.toPlainText())
+
+        # Акты
+        if not config2.has_section('Акты'):
+            config2.add_section('Акты')
+        config2.set('Акты', 'nActOGS', form.nActOGS.text())
+        config2.set('Акты', 'nActOtvod', form.nActOtvod.text())
+        config2.set('Акты', 'allrp', str(form.allrp.value()))
+        config2.set('Акты', 'allnr', str(form.allnr.value()))
+        config2.set('Акты', 'l_shem_ogs', str(form.l_shem_ogs.value()))
+        config2.set('Акты', 'l_kat_ogs', str(form.l_kat_ogs.value()))
+        config2.set('Акты', 'ShifrGP', form.ShifrGP.text())
+        config2.set('Акты', 'tchk_otvod', str(form.tchk_otvod.value()))
+        config2.set('Акты', 'l_shem_otvod', str(form.l_shem_otvod.value()))
+        config2.set('Акты', 'l_kat_otvod', str(form.l_kat_otvod.value()))
+        config2.set('Акты', 'ShifrPPO', form.ShifrPPO.text())
+        config2.set('Акты', 'ActOs_1', form.ActOs_1.toPlainText())
+        config2.set('Акты', 'ActOs_2', form.ActOs_2.toPlainText())
+        config2.set('Акты', 'ActOs_3', form.ActOs_3.toPlainText())
+        config2.set('Акты', 'ActOs_4', form.ActOs_4.toPlainText())
+        config2.set('Акты', 'ActOs_5', form.ActOs_5.toPlainText())
+        config2.set('Акты', 'ActOs_6', form.ActOs_6.toPlainText())
+        config2.set('Акты', 'ActOs_7', form.ActOs_7.toPlainText())
+        config2.set('Акты', 'ActOs_8', form.ActOs_8.toPlainText())
+        config2.set('Акты', 'ActOs_9', form.ActOs_9.toPlainText())
+        config2.set('Акты', 'ActOs_10', form.ActOs_10.toPlainText())
+        config2.set('Акты', 'ActOs_11', form.ActOs_11.toPlainText())
+        config2.set('Акты', 'ActOs_12', form.ActOs_12.toPlainText())
+        config2.set('Акты', 'ActOs_13', form.ActOs_13.toPlainText())
+        config2.set('Акты', 'ActOs_14', form.ActOs_14.toPlainText())
+        config2.set('Акты', 'ActOs_15', form.ActOs_15.toPlainText())
+
+        config2.set('Акты', 'nActOs_1', form.nActOs_1.toPlainText())
+        config2.set('Акты', 'nActOs_2', form.nActOs_2.toPlainText())
+        config2.set('Акты', 'nActOs_3', form.nActOs_3.toPlainText())
+        config2.set('Акты', 'nActOs_4', form.nActOs_4.toPlainText())
+        config2.set('Акты', 'nActOs_5', form.nActOs_5.toPlainText())
+        config2.set('Акты', 'nActOs_6', form.nActOs_6.toPlainText())
+        config2.set('Акты', 'nActOs_7', form.nActOs_7.toPlainText())
+        config2.set('Акты', 'nActOs_8', form.nActOs_8.toPlainText())
+        config2.set('Акты', 'nActOs_9', form.nActOs_9.toPlainText())
+        config2.set('Акты', 'nActOs_10', form.nActOs_10.toPlainText())
+        config2.set('Акты', 'nActOs_11', form.nActOs_11.toPlainText())
+        config2.set('Акты', 'nActOs_12', form.nActOs_12.toPlainText())
+        config2.set('Акты', 'nActOs_13', form.nActOs_13.toPlainText())
+        config2.set('Акты', 'nActOs_14', form.nActOs_14.toPlainText())
+        config2.set('Акты', 'nActOs_15', form.nActOs_15.toPlainText())
+
+        config2.set('Акты', 'rp_1', str(form.rp_1.value()))
+        config2.set('Акты', 'rp_2', str(form.rp_2.value()))
+        config2.set('Акты', 'rp_3', str(form.rp_3.value()))
+        config2.set('Акты', 'rp_4', str(form.rp_4.value()))
+        config2.set('Акты', 'rp_5', str(form.rp_5.value()))
+        config2.set('Акты', 'rp_6', str(form.rp_6.value()))
+        config2.set('Акты', 'rp_7', str(form.rp_7.value()))
+        config2.set('Акты', 'rp_8', str(form.rp_8.value()))
+        config2.set('Акты', 'rp_9', str(form.rp_9.value()))
+        config2.set('Акты', 'rp_10', str(form.rp_10.value()))
+        config2.set('Акты', 'rp_11', str(form.rp_11.value()))
+        config2.set('Акты', 'rp_12', str(form.rp_12.value()))
+        config2.set('Акты', 'rp_13', str(form.rp_13.value()))
+        config2.set('Акты', 'rp_14', str(form.rp_14.value()))
+        config2.set('Акты', 'rp_15', str(form.rp_15.value()))
+
+        config2.set('Акты', 'nr_1', str(form.nr_1.value()))
+        config2.set('Акты', 'nr_2', str(form.nr_2.value()))
+        config2.set('Акты', 'nr_3', str(form.nr_3.value()))
+        config2.set('Акты', 'nr_4', str(form.nr_4.value()))
+        config2.set('Акты', 'nr_5', str(form.nr_5.value()))
+        config2.set('Акты', 'nr_6', str(form.nr_6.value()))
+        config2.set('Акты', 'nr_7', str(form.nr_7.value()))
+        config2.set('Акты', 'nr_8', str(form.nr_8.value()))
+        config2.set('Акты', 'nr_9', str(form.nr_9.value()))
+        config2.set('Акты', 'nr_10', str(form.nr_10.value()))
+        config2.set('Акты', 'nr_11', str(form.nr_11.value()))
+        config2.set('Акты', 'nr_12', str(form.nr_12.value()))
+        config2.set('Акты', 'nr_13', str(form.nr_13.value()))
+        config2.set('Акты', 'nr_14', str(form.nr_14.value()))
+        config2.set('Акты', 'nr_15', str(form.nr_15.value()))
+
+        config2.set('Акты', 'tos_1', str(form.tos_1.value()))
+        config2.set('Акты', 'tos_2', str(form.tos_2.value()))
+        config2.set('Акты', 'tos_3', str(form.tos_3.value()))
+        config2.set('Акты', 'tos_4', str(form.tos_4.value()))
+        config2.set('Акты', 'tos_5', str(form.tos_5.value()))
+        config2.set('Акты', 'tos_6', str(form.tos_6.value()))
+        config2.set('Акты', 'tos_7', str(form.tos_7.value()))
+        config2.set('Акты', 'tos_8', str(form.tos_8.value()))
+        config2.set('Акты', 'tos_9', str(form.tos_9.value()))
+        config2.set('Акты', 'tos_10', str(form.tos_10.value()))
+        config2.set('Акты', 'tos_11', str(form.tos_11.value()))
+        config2.set('Акты', 'tos_12', str(form.tos_12.value()))
+        config2.set('Акты', 'tos_13', str(form.tos_13.value()))
+        config2.set('Акты', 'tos_14', str(form.tos_14.value()))
+        config2.set('Акты', 'tos_15', str(form.tos_15.value()))
+
+        config2.set('Акты', 'lshem_1', str(form.lshem_1.value()))
+        config2.set('Акты', 'lshem_2', str(form.lshem_2.value()))
+        config2.set('Акты', 'lshem_3', str(form.lshem_3.value()))
+        config2.set('Акты', 'lshem_4', str(form.lshem_4.value()))
+        config2.set('Акты', 'lshem_5', str(form.lshem_5.value()))
+        config2.set('Акты', 'lshem_6', str(form.lshem_6.value()))
+        config2.set('Акты', 'lshem_7', str(form.lshem_7.value()))
+        config2.set('Акты', 'lshem_8', str(form.lshem_8.value()))
+        config2.set('Акты', 'lshem_9', str(form.lshem_9.value()))
+        config2.set('Акты', 'lshem_10', str(form.lshem_10.value()))
+        config2.set('Акты', 'lshem_11', str(form.lshem_11.value()))
+        config2.set('Акты', 'lshem_12', str(form.lshem_12.value()))
+        config2.set('Акты', 'lshem_13', str(form.lshem_13.value()))
+        config2.set('Акты', 'lshem_14', str(form.lshem_14.value()))
+        config2.set('Акты', 'lshem_15', str(form.lshem_15.value()))
+
+        config2.set('Акты', 'lkat_1', str(form.lkat_1.value()))
+        config2.set('Акты', 'lkat_2', str(form.lkat_2.value()))
+        config2.set('Акты', 'lkat_3', str(form.lkat_3.value()))
+        config2.set('Акты', 'lkat_4', str(form.lkat_4.value()))
+        config2.set('Акты', 'lkat_5', str(form.lkat_5.value()))
+        config2.set('Акты', 'lkat_6', str(form.lkat_6.value()))
+        config2.set('Акты', 'lkat_7', str(form.lkat_7.value()))
+        config2.set('Акты', 'lkat_8', str(form.lkat_8.value()))
+        config2.set('Акты', 'lkat_9', str(form.lkat_9.value()))
+        config2.set('Акты', 'lkat_10', str(form.lkat_10.value()))
+        config2.set('Акты', 'lkat_11', str(form.lkat_11.value()))
+        config2.set('Акты', 'lkat_12', str(form.lkat_12.value()))
+        config2.set('Акты', 'lkat_13', str(form.lkat_13.value()))
+        config2.set('Акты', 'lkat_14', str(form.lkat_14.value()))
+        config2.set('Акты', 'lkat_15', str(form.lkat_15.value()))
+
+        config2.set('Акты', 'ShifrRD_1', form.ShifrRD_1.toPlainText())
+        config2.set('Акты', 'ShifrRD_2', form.ShifrRD_2.toPlainText())
+        config2.set('Акты', 'ShifrRD_3', form.ShifrRD_3.toPlainText())
+        config2.set('Акты', 'ShifrRD_4', form.ShifrRD_4.toPlainText())
+        config2.set('Акты', 'ShifrRD_5', form.ShifrRD_5.toPlainText())
+        config2.set('Акты', 'ShifrRD_6', form.ShifrRD_6.toPlainText())
+        config2.set('Акты', 'ShifrRD_7', form.ShifrRD_7.toPlainText())
+        config2.set('Акты', 'ShifrRD_8', form.ShifrRD_8.toPlainText())
+        config2.set('Акты', 'ShifrRD_9', form.ShifrRD_9.toPlainText())
+        config2.set('Акты', 'ShifrRD_10', form.ShifrRD_10.toPlainText())
+        config2.set('Акты', 'ShifrRD_11', form.ShifrRD_11.toPlainText())
+        config2.set('Акты', 'ShifrRD_12', form.ShifrRD_12.toPlainText())
+        config2.set('Акты', 'ShifrRD_13', form.ShifrRD_13.toPlainText())
+        config2.set('Акты', 'ShifrRD_14', form.ShifrRD_14.toPlainText())
+        config2.set('Акты', 'ShifrRD_15', form.ShifrRD_15.toPlainText())
+
+        with open(file, 'w+') as configfile2:
+            config2.write(configfile2)
     else:
-        nfile = dirname(last_form) + '/Карточка объекта - ' + form.object.toPlainText() + '.gro'
-        file = \
-            QFileDialog().getSaveFileName(window, 'Выберите путь для карточки объекта', nfile, filter="*.gro")[0]
-        objFolder = dirname(file)
-        settings.setValue("objFolder", objFolder)
-        window.statusBar().showMessage(objFolder)
-    if file != '':
-        my_file = open(file, "w+")
-        my_file.close()
-        # save_form(file)
-    config2 = configparser.ConfigParser()
-    config2.read_file(open(file))
-    # Объект
-    if not config2.has_section('Объект'):
-        config2.add_section('Объект')
-    config2.set('Объект', 'object', form.object.toPlainText())
-    config2.set('Объект', 'msk', form.msk.text())
-    config2.set('Объект', 'naimobj', form.naimobj.toPlainText())
-    config2.set('Объект', 'uchastok', form.uchastok.toPlainText())
-    config2.set('Объект', 'kodstr', form.kodstr.text())
-    config2.set('Объект', 'adres', form.adres.toPlainText())
-    # Заказчик
-    if not config2.has_section('Заказчик'):
-        config2.add_section('Заказчик')
-    config2.set('Заказчик', 'zakazchik', form.zakazchik.toPlainText())
-    config2.set('Заказчик', 'zakazchikrekviz', form.zakazchikrekviz.toPlainText())
-    config2.set('Заказчик', 'zakazchikadres', form.zakazchikadres.toPlainText())
-    config2.set('Заказчик', 'zakazchiksro', form.zakazchiksro.toPlainText())
-    config2.set('Заказчик', 'zakazchikdolzhn', form.zakazchikdolzhn.toPlainText())
-    config2.set('Заказчик', 'zakazchikfio', form.zakazchikfio.toPlainText())
-    config2.set('Заказчик', 'zakazchikprikaz', form.zakazchikprikaz.toPlainText())
-    # Стройконтроль
-    if not config2.has_section('Стройконтроль'):
-        config2.add_section('Стройконтроль')
-    config2.set('Стройконтроль', 'SKrekviz', form.SKrekviz.toPlainText())
-    config2.set('Стройконтроль', 'SKadres', form.SKadres.toPlainText())
-    config2.set('Стройконтроль', 'SKdolzhnost', form.SKdolzhnost.toPlainText())
-    config2.set('Стройконтроль', 'SKfio', form.SKfio.toPlainText())
-    config2.set('Стройконтроль', 'SKprikaz', form.SKprikaz.toPlainText())
-
-    # Генподрядчик
-    if not config2.has_section('Генподрядчик'):
-        config2.add_section('Генподрядчик')
-    config2.set('Генподрядчик', 'genpodryadchik', form.genpodryadchik.toPlainText())
-    config2.set('Генподрядчик', 'genpodryadchikrekviz', form.genpodryadchikrekviz.toPlainText())
-    config2.set('Генподрядчик', 'genpodryadchikadres', form.genpodryadchikadres.toPlainText())
-    config2.set('Генподрядчик', 'genpodryadchiksro', form.genpodryadchiksro.toPlainText())
-    config2.set('Генподрядчик', 'genpodryadchikdolzhn', form.genpodryadchikdolzhn.toPlainText())
-    config2.set('Генподрядчик', 'genpodryadchikfio', form.genpodryadchikfio.toPlainText())
-    config2.set('Генподрядчик', 'genpodryadchikprikaz', form.genpodryadchikprikaz.toPlainText())
-    config2.set('Генподрядчик', 'genpodryadchikSKdolzhnost', form.genpodryadchikSKdolzhnost.toPlainText())
-    config2.set('Генподрядчик', 'genpodryadchikSKfio', form.genpodryadchikSKfio.toPlainText())
-    config2.set('Генподрядчик', 'genpodryadchikSKprikaz', form.genpodryadchikSKprikaz.toPlainText())
-    config2.set('Генподрядчик', 'genpodryadchikSKreestr', form.genpodryadchikSKreestr.toPlainText())
-    # Субподрядчик
-    if not config2.has_section('Субподрядчик'):
-        config2.add_section('Субподрядчик')
-    config2.set('Субподрядчик', 'stroitel', form.stroitel.toPlainText())
-    config2.set('Субподрядчик', 'stroiteldolzhn', form.stroiteldolzhn.toPlainText())
-    config2.set('Субподрядчик', 'stroitelfio', form.stroitelfio.toPlainText())
-    config2.set('Субподрядчик', 'stroitelprikaz', form.stroitelprikaz.toPlainText())
-    # АН
-    if not config2.has_section('АН'):
-        config2.add_section('АН')
-    config2.set('АН', 'proekt', form.proekt.toPlainText())
-    config2.set('АН', 'proektrekviz', form.proektrekviz.toPlainText())
-    config2.set('АН', 'proektadres', form.proektadres.toPlainText())
-    config2.set('АН', 'proektsro', form.proektsro.toPlainText())
-    config2.set('АН', 'GIP', form.GIP.toPlainText())
-    config2.set('АН', 'proektdolzhn', form.proektdolzhn.toPlainText())
-    config2.set('АН', 'proektfio', form.proektfio.toPlainText())
-    config2.set('АН', 'proektprikaz', form.proektprikaz.toPlainText())
-    # ГРО
-    if not config2.has_section('ГРО'):
-        config2.add_section('ГРО')
-    config2.set('ГРО', 'GRO', form.GRO.toPlainText())
-    config2.set('ГРО', 'GROrekviz', form.GROrekviz.toPlainText())
-    config2.set('ГРО', 'GROadres', form.GROadres.toPlainText())
-    config2.set('ГРО', 'GROdolzhn', form.GROdolzhn.toPlainText())
-    config2.set('ГРО', 'GROfio', form.GROfio.toPlainText())
-    config2.set('ГРО', 'GROprikaz', form.GROprikaz.toPlainText())
-
-    # Акты
-    if not config2.has_section('Акты'):
-        config2.add_section('Акты')
-    config2.set('Акты', 'nActOGS', form.nActOGS.text())
-    config2.set('Акты', 'nActOtvod', form.nActOtvod.text())
-    config2.set('Акты', 'allrp', str(form.allrp.value()))
-    config2.set('Акты', 'allnr', str(form.allnr.value()))
-    config2.set('Акты', 'l_shem_ogs', str(form.l_shem_ogs.value()))
-    config2.set('Акты', 'l_kat_ogs', str(form.l_kat_ogs.value()))
-    config2.set('Акты', 'ShifrGP', form.ShifrGP.text())
-    config2.set('Акты', 'tchk_otvod', str(form.tchk_otvod.value()))
-    config2.set('Акты', 'l_shem_otvod', str(form.l_shem_otvod.value()))
-    config2.set('Акты', 'l_kat_otvod', str(form.l_kat_otvod.value()))
-    config2.set('Акты', 'ShifrPPO', form.ShifrPPO.text())
-    config2.set('Акты', 'ActOs_1', form.ActOs_1.toPlainText())
-    config2.set('Акты', 'ActOs_2', form.ActOs_2.toPlainText())
-    config2.set('Акты', 'ActOs_3', form.ActOs_3.toPlainText())
-    config2.set('Акты', 'ActOs_4', form.ActOs_4.toPlainText())
-    config2.set('Акты', 'ActOs_5', form.ActOs_5.toPlainText())
-    config2.set('Акты', 'ActOs_6', form.ActOs_6.toPlainText())
-    config2.set('Акты', 'ActOs_7', form.ActOs_7.toPlainText())
-    config2.set('Акты', 'ActOs_8', form.ActOs_8.toPlainText())
-    config2.set('Акты', 'ActOs_9', form.ActOs_9.toPlainText())
-    config2.set('Акты', 'ActOs_10', form.ActOs_10.toPlainText())
-    config2.set('Акты', 'ActOs_11', form.ActOs_11.toPlainText())
-    config2.set('Акты', 'ActOs_12', form.ActOs_12.toPlainText())
-    config2.set('Акты', 'ActOs_13', form.ActOs_13.toPlainText())
-    config2.set('Акты', 'ActOs_14', form.ActOs_14.toPlainText())
-    config2.set('Акты', 'ActOs_15', form.ActOs_15.toPlainText())
-
-    config2.set('Акты', 'nActOs_1', form.nActOs_1.toPlainText())
-    config2.set('Акты', 'nActOs_2', form.nActOs_2.toPlainText())
-    config2.set('Акты', 'nActOs_3', form.nActOs_3.toPlainText())
-    config2.set('Акты', 'nActOs_4', form.nActOs_4.toPlainText())
-    config2.set('Акты', 'nActOs_5', form.nActOs_5.toPlainText())
-    config2.set('Акты', 'nActOs_6', form.nActOs_6.toPlainText())
-    config2.set('Акты', 'nActOs_7', form.nActOs_7.toPlainText())
-    config2.set('Акты', 'nActOs_8', form.nActOs_8.toPlainText())
-    config2.set('Акты', 'nActOs_9', form.nActOs_9.toPlainText())
-    config2.set('Акты', 'nActOs_10', form.nActOs_10.toPlainText())
-    config2.set('Акты', 'nActOs_11', form.nActOs_11.toPlainText())
-    config2.set('Акты', 'nActOs_12', form.nActOs_12.toPlainText())
-    config2.set('Акты', 'nActOs_13', form.nActOs_13.toPlainText())
-    config2.set('Акты', 'nActOs_14', form.nActOs_14.toPlainText())
-    config2.set('Акты', 'nActOs_15', form.nActOs_15.toPlainText())
-
-    config2.set('Акты', 'rp_1', str(form.rp_1.value()))
-    config2.set('Акты', 'rp_2', str(form.rp_2.value()))
-    config2.set('Акты', 'rp_3', str(form.rp_3.value()))
-    config2.set('Акты', 'rp_4', str(form.rp_4.value()))
-    config2.set('Акты', 'rp_5', str(form.rp_5.value()))
-    config2.set('Акты', 'rp_6', str(form.rp_6.value()))
-    config2.set('Акты', 'rp_7', str(form.rp_7.value()))
-    config2.set('Акты', 'rp_8', str(form.rp_8.value()))
-    config2.set('Акты', 'rp_9', str(form.rp_9.value()))
-    config2.set('Акты', 'rp_10', str(form.rp_10.value()))
-    config2.set('Акты', 'rp_11', str(form.rp_11.value()))
-    config2.set('Акты', 'rp_12', str(form.rp_12.value()))
-    config2.set('Акты', 'rp_13', str(form.rp_13.value()))
-    config2.set('Акты', 'rp_14', str(form.rp_14.value()))
-    config2.set('Акты', 'rp_15', str(form.rp_15.value()))
-
-    config2.set('Акты', 'nr_1', str(form.nr_1.value()))
-    config2.set('Акты', 'nr_2', str(form.nr_2.value()))
-    config2.set('Акты', 'nr_3', str(form.nr_3.value()))
-    config2.set('Акты', 'nr_4', str(form.nr_4.value()))
-    config2.set('Акты', 'nr_5', str(form.nr_5.value()))
-    config2.set('Акты', 'nr_6', str(form.nr_6.value()))
-    config2.set('Акты', 'nr_7', str(form.nr_7.value()))
-    config2.set('Акты', 'nr_8', str(form.nr_8.value()))
-    config2.set('Акты', 'nr_9', str(form.nr_9.value()))
-    config2.set('Акты', 'nr_10', str(form.nr_10.value()))
-    config2.set('Акты', 'nr_11', str(form.nr_11.value()))
-    config2.set('Акты', 'nr_12', str(form.nr_12.value()))
-    config2.set('Акты', 'nr_13', str(form.nr_13.value()))
-    config2.set('Акты', 'nr_14', str(form.nr_14.value()))
-    config2.set('Акты', 'nr_15', str(form.nr_15.value()))
-
-    config2.set('Акты', 'tos_1', str(form.tos_1.value()))
-    config2.set('Акты', 'tos_2', str(form.tos_2.value()))
-    config2.set('Акты', 'tos_3', str(form.tos_3.value()))
-    config2.set('Акты', 'tos_4', str(form.tos_4.value()))
-    config2.set('Акты', 'tos_5', str(form.tos_5.value()))
-    config2.set('Акты', 'tos_6', str(form.tos_6.value()))
-    config2.set('Акты', 'tos_7', str(form.tos_7.value()))
-    config2.set('Акты', 'tos_8', str(form.tos_8.value()))
-    config2.set('Акты', 'tos_9', str(form.tos_9.value()))
-    config2.set('Акты', 'tos_10', str(form.tos_10.value()))
-    config2.set('Акты', 'tos_11', str(form.tos_11.value()))
-    config2.set('Акты', 'tos_12', str(form.tos_12.value()))
-    config2.set('Акты', 'tos_13', str(form.tos_13.value()))
-    config2.set('Акты', 'tos_14', str(form.tos_14.value()))
-    config2.set('Акты', 'tos_15', str(form.tos_15.value()))
-
-    config2.set('Акты', 'lshem_1', str(form.lshem_1.value()))
-    config2.set('Акты', 'lshem_2', str(form.lshem_2.value()))
-    config2.set('Акты', 'lshem_3', str(form.lshem_3.value()))
-    config2.set('Акты', 'lshem_4', str(form.lshem_4.value()))
-    config2.set('Акты', 'lshem_5', str(form.lshem_5.value()))
-    config2.set('Акты', 'lshem_6', str(form.lshem_6.value()))
-    config2.set('Акты', 'lshem_7', str(form.lshem_7.value()))
-    config2.set('Акты', 'lshem_8', str(form.lshem_8.value()))
-    config2.set('Акты', 'lshem_9', str(form.lshem_9.value()))
-    config2.set('Акты', 'lshem_10', str(form.lshem_10.value()))
-    config2.set('Акты', 'lshem_11', str(form.lshem_11.value()))
-    config2.set('Акты', 'lshem_12', str(form.lshem_12.value()))
-    config2.set('Акты', 'lshem_13', str(form.lshem_13.value()))
-    config2.set('Акты', 'lshem_14', str(form.lshem_14.value()))
-    config2.set('Акты', 'lshem_15', str(form.lshem_15.value()))
-
-    config2.set('Акты', 'lkat_1', str(form.lkat_1.value()))
-    config2.set('Акты', 'lkat_2', str(form.lkat_2.value()))
-    config2.set('Акты', 'lkat_3', str(form.lkat_3.value()))
-    config2.set('Акты', 'lkat_4', str(form.lkat_4.value()))
-    config2.set('Акты', 'lkat_5', str(form.lkat_5.value()))
-    config2.set('Акты', 'lkat_6', str(form.lkat_6.value()))
-    config2.set('Акты', 'lkat_7', str(form.lkat_7.value()))
-    config2.set('Акты', 'lkat_8', str(form.lkat_8.value()))
-    config2.set('Акты', 'lkat_9', str(form.lkat_9.value()))
-    config2.set('Акты', 'lkat_10', str(form.lkat_10.value()))
-    config2.set('Акты', 'lkat_11', str(form.lkat_11.value()))
-    config2.set('Акты', 'lkat_12', str(form.lkat_12.value()))
-    config2.set('Акты', 'lkat_13', str(form.lkat_13.value()))
-    config2.set('Акты', 'lkat_14', str(form.lkat_14.value()))
-    config2.set('Акты', 'lkat_15', str(form.lkat_15.value()))
-
-    config2.set('Акты', 'ShifrRD_1', form.ShifrRD_1.toPlainText())
-    config2.set('Акты', 'ShifrRD_2', form.ShifrRD_2.toPlainText())
-    config2.set('Акты', 'ShifrRD_3', form.ShifrRD_3.toPlainText())
-    config2.set('Акты', 'ShifrRD_4', form.ShifrRD_4.toPlainText())
-    config2.set('Акты', 'ShifrRD_5', form.ShifrRD_5.toPlainText())
-    config2.set('Акты', 'ShifrRD_6', form.ShifrRD_6.toPlainText())
-    config2.set('Акты', 'ShifrRD_7', form.ShifrRD_7.toPlainText())
-    config2.set('Акты', 'ShifrRD_8', form.ShifrRD_8.toPlainText())
-    config2.set('Акты', 'ShifrRD_9', form.ShifrRD_9.toPlainText())
-    config2.set('Акты', 'ShifrRD_10', form.ShifrRD_10.toPlainText())
-    config2.set('Акты', 'ShifrRD_11', form.ShifrRD_11.toPlainText())
-    config2.set('Акты', 'ShifrRD_12', form.ShifrRD_12.toPlainText())
-    config2.set('Акты', 'ShifrRD_13', form.ShifrRD_13.toPlainText())
-    config2.set('Акты', 'ShifrRD_14', form.ShifrRD_14.toPlainText())
-    config2.set('Акты', 'ShifrRD_15', form.ShifrRD_15.toPlainText())
-
-    with open(file, 'w+') as configfile2:
-        config2.write(configfile2)
+        form.tabWidget.setCurrentIndex(0)
+        form.object.setFocus()
 
 
 #     ini_form_cfg.setValue('ON_Bybit', int(form.ON_Bybit.isChecked()))
@@ -824,9 +829,22 @@ def openini(mode=None):
         pass
 
 
-def save111():
-    # print(exists(file))
-    shutil.copyfile('.\Shablon\!промежуточный.docx', f'{objFolder}\copyz.docx')
+def saveActs():
+    objFolder = settings.value('objFolder')
+
+    if objFolder != '':
+        config = configparser.ConfigParser()
+        config.read_file(open(objFolder))
+        objectName = config.get('Объект', 'object')
+        # if objectName != '':
+        #     print(objectName)
+        #     # print(exists(file))
+        #     # if form.CheckBoxPromezh.isChecked():
+        #     #     shutil.copyfile('.\Shablon\!промежуточный.docx', f'{objFolder}\{objectName}.docx')
+        # else:
+        #     form.object.setFocus()
+    else:
+        pass
 
 
 def allACT():
@@ -854,7 +872,6 @@ def allRD():
         form.CheckBoxRD3.setChecked(False)
 
 
-
 def allVSN():
     if form.CheckBoxALLVSN.isChecked():
         form.CheckBoxVSN2.setChecked(True)
@@ -874,6 +891,7 @@ def allSP():
         form.CheckBoxSP2.setChecked(False)
         form.CheckBoxSP3.setChecked(False)
 
+
 def allKAT():
     if form.CheckBoxALLKAT.isChecked():
         form.CheckBoxKAT1.setChecked(True)
@@ -883,6 +901,7 @@ def allKAT():
         form.CheckBoxKAT1.setChecked(False)
         form.CheckBoxKAT2.setChecked(False)
         form.CheckBoxKAT3.setChecked(False)
+
 
 if __name__ == '__main__':
     Form, Window = uic.loadUiType("./form/GRO.ui")
@@ -908,5 +927,8 @@ if __name__ == '__main__':
     form.CheckBoxALLVSN.stateChanged.connect(allVSN)
     form.CheckBoxALLSP.stateChanged.connect(allSP)
     form.CheckBoxALLKAT.stateChanged.connect(allKAT)
+
+    # Акты
+    form.pushButtonSaveAct.clicked.connect(saveActs)
 
     app.exec()
