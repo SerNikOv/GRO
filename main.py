@@ -57,7 +57,7 @@ def save_form():
             config2.set('Объект', 'naimobj', form.naimobj.toPlainText())
             config2.set('Объект', 'uchastok', form.uchastok.toPlainText())
             config2.set('Объект', 'kodstr', form.kodstr.text())
-            config2.set('Объект', 'adres', form.adres.toPlainText())
+            config2.set('Объект', 'objadres', form.objadres.toPlainText())
             # Заказчик
             if not config2.has_section('Заказчик'):
                 config2.add_section('Заказчик')
@@ -87,10 +87,10 @@ def save_form():
             config2.set('Генподрядчик', 'genpodryadchikdolzhn', form.genpodryadchikdolzhn.toPlainText())
             config2.set('Генподрядчик', 'genpodryadchikfio', form.genpodryadchikfio.toPlainText())
             config2.set('Генподрядчик', 'genpodryadchikprikaz', form.genpodryadchikprikaz.toPlainText())
-            config2.set('Генподрядчик', 'genpodryadchikskdolzhnost', form.genpodryadchikskdolzhnost.toPlainText())
-            config2.set('Генподрядчик', 'genpodryadchikskfio', form.genpodryadchikskfio.toPlainText())
-            config2.set('Генподрядчик', 'genpodryadchikskprikaz', form.genpodryadchikskprikaz.toPlainText())
-            config2.set('Генподрядчик', 'genpodryadchikskreestr', form.genpodryadchikskreestr.toPlainText())
+            config2.set('Генподрядчик', 'skgpdolzhnost', form.skgpdolzhnost.toPlainText())
+            config2.set('Генподрядчик', 'skgpfio', form.skgpfio.toPlainText())
+            config2.set('Генподрядчик', 'skgpprikaz', form.skgpprikaz.toPlainText())
+            config2.set('Генподрядчик', 'skgpreestr', form.skgpreestr.toPlainText())
             # Субподрядчик
             if not config2.has_section('Субподрядчик'):
                 config2.add_section('Субподрядчик')
@@ -133,24 +133,24 @@ def save_form():
             config2.set('Акты', 'l_shem_otvod', str(form.l_shem_otvod.value()))
             config2.set('Акты', 'l_kat_otvod', str(form.l_kat_otvod.value()))
             config2.set('Акты', 'shifrppo', form.shifrppo.text())
-            #ОСИ
+            # ОСИ
             if not config2.has_section('ОСИ'):
                 config2.add_section('ОСИ')
-            config2.set('ОСИ', 'actos_1', form.actos_1.toPlainText())
-            config2.set('ОСИ', 'actos_2', form.actos_2.toPlainText())
-            config2.set('ОСИ', 'actos_3', form.actos_3.toPlainText())
-            config2.set('ОСИ', 'actos_4', form.actos_4.toPlainText())
-            config2.set('ОСИ', 'actos_5', form.actos_5.toPlainText())
-            config2.set('ОСИ', 'actos_6', form.actos_6.toPlainText())
-            config2.set('ОСИ', 'actos_7', form.actos_7.toPlainText())
-            config2.set('ОСИ', 'actos_8', form.actos_8.toPlainText())
-            config2.set('ОСИ', 'actos_9', form.actos_9.toPlainText())
-            config2.set('ОСИ', 'actos_10', form.actos_10.toPlainText())
-            config2.set('ОСИ', 'actos_11', form.actos_11.toPlainText())
-            config2.set('ОСИ', 'actos_12', form.actos_12.toPlainText())
-            config2.set('ОСИ', 'actos_13', form.actos_13.toPlainText())
-            config2.set('ОСИ', 'actos_14', form.actos_14.toPlainText())
-            config2.set('ОСИ', 'actos_15', form.actos_15.toPlainText())
+            config2.set('ОСИ', 'iactos_1', form.iactos_1.toPlainText())
+            config2.set('ОСИ', 'iactos_2', form.iactos_2.toPlainText())
+            config2.set('ОСИ', 'iactos_3', form.iactos_3.toPlainText())
+            config2.set('ОСИ', 'iactos_4', form.iactos_4.toPlainText())
+            config2.set('ОСИ', 'iactos_5', form.iactos_5.toPlainText())
+            config2.set('ОСИ', 'iactos_6', form.iactos_6.toPlainText())
+            config2.set('ОСИ', 'iactos_7', form.iactos_7.toPlainText())
+            config2.set('ОСИ', 'iactos_8', form.iactos_8.toPlainText())
+            config2.set('ОСИ', 'iactos_9', form.iactos_9.toPlainText())
+            config2.set('ОСИ', 'iactos_10', form.iactos_10.toPlainText())
+            config2.set('ОСИ', 'iactos_11', form.iactos_11.toPlainText())
+            config2.set('ОСИ', 'iactos_12', form.iactos_12.toPlainText())
+            config2.set('ОСИ', 'iactos_13', form.iactos_13.toPlainText())
+            config2.set('ОСИ', 'iactos_14', form.iactos_14.toPlainText())
+            config2.set('ОСИ', 'iactos_15', form.iactos_15.toPlainText())
 
             config2.set('ОСИ', 'nactos_1', form.nactos_1.toPlainText())
             config2.set('ОСИ', 'nactos_2', form.nactos_2.toPlainText())
@@ -298,7 +298,7 @@ def ini_form(file=None):
             form.naimobj.setText(config.get('Объект', 'naimobj'))
             form.uchastok.setText(config.get('Объект', 'uchastok'))
             form.kodstr.setText(config.get('Объект', 'kodstr'))
-            form.adres.setText(config.get('Объект', 'adres'))
+            form.objadres.setText(config.get('Объект', 'objadres'))
             # Заказчик
             form.zakazchiknaim.setText(config.get('Заказчик', 'zakazchiknaim'))
             form.zakazchikrekviz.setText(config.get('Заказчик', 'zakazchikrekviz'))
@@ -322,10 +322,10 @@ def ini_form(file=None):
             form.genpodryadchikdolzhn.setText(config.get('Генподрядчик', 'genpodryadchikdolzhn'))
             form.genpodryadchikfio.setText(config.get('Генподрядчик', 'genpodryadchikfio'))
             form.genpodryadchikprikaz.setText(config.get('Генподрядчик', 'genpodryadchikprikaz'))
-            form.genpodryadchikskdolzhnost.setText(config.get('Генподрядчик', 'genpodryadchikskdolzhnost'))
-            form.genpodryadchikskfio.setText(config.get('Генподрядчик', 'genpodryadchikskfio'))
-            form.genpodryadchikskprikaz.setText(config.get('Генподрядчик', 'genpodryadchikskprikaz'))
-            form.genpodryadchikskreestr.setText(config.get('Генподрядчик', 'genpodryadchikskreestr'))
+            form.skgpdolzhnost.setText(config.get('Генподрядчик', 'skgpdolzhnost'))
+            form.skgpfio.setText(config.get('Генподрядчик', 'skgpfio'))
+            form.skgpprikaz.setText(config.get('Генподрядчик', 'skgpprikaz'))
+            form.skgpreestr.setText(config.get('Генподрядчик', 'skgpreestr'))
             # Субподрядчик
             form.stroitelnaim.setText(config.get('Субподрядчик', 'stroitelnaim'))
             form.stroiteldolzhn.setText(config.get('Субподрядчик', 'stroiteldolzhn'))
@@ -360,21 +360,21 @@ def ini_form(file=None):
             form.l_kat_otvod.setValue(int(config.get('Акты', 'l_kat_otvod')))
             form.shifrppo.setText(config.get('Акты', 'shifrppo'))
             # ОСИ
-            form.actos_1.setText(config.get('ОСИ', 'actos_1'))
-            form.actos_2.setText(config.get('ОСИ', 'actos_2'))
-            form.actos_3.setText(config.get('ОСИ', 'actos_3'))
-            form.actos_4.setText(config.get('ОСИ', 'actos_4'))
-            form.actos_5.setText(config.get('ОСИ', 'actos_5'))
-            form.actos_6.setText(config.get('ОСИ', 'actos_6'))
-            form.actos_7.setText(config.get('ОСИ', 'actos_7'))
-            form.actos_8.setText(config.get('ОСИ', 'actos_8'))
-            form.actos_9.setText(config.get('ОСИ', 'actos_9'))
-            form.actos_10.setText(config.get('ОСИ', 'actos_10'))
-            form.actos_11.setText(config.get('ОСИ', 'actos_11'))
-            form.actos_12.setText(config.get('ОСИ', 'actos_12'))
-            form.actos_13.setText(config.get('ОСИ', 'actos_13'))
-            form.actos_14.setText(config.get('ОСИ', 'actos_14'))
-            form.actos_15.setText(config.get('ОСИ', 'actos_15'))
+            form.iactos_1.setText(config.get('ОСИ', 'iactos_1'))
+            form.iactos_2.setText(config.get('ОСИ', 'iactos_2'))
+            form.iactos_3.setText(config.get('ОСИ', 'iactos_3'))
+            form.iactos_4.setText(config.get('ОСИ', 'iactos_4'))
+            form.iactos_5.setText(config.get('ОСИ', 'iactos_5'))
+            form.iactos_6.setText(config.get('ОСИ', 'iactos_6'))
+            form.iactos_7.setText(config.get('ОСИ', 'iactos_7'))
+            form.iactos_8.setText(config.get('ОСИ', 'iactos_8'))
+            form.iactos_9.setText(config.get('ОСИ', 'iactos_9'))
+            form.iactos_10.setText(config.get('ОСИ', 'iactos_10'))
+            form.iactos_11.setText(config.get('ОСИ', 'iactos_11'))
+            form.iactos_12.setText(config.get('ОСИ', 'iactos_12'))
+            form.iactos_13.setText(config.get('ОСИ', 'iactos_13'))
+            form.iactos_14.setText(config.get('ОСИ', 'iactos_14'))
+            form.iactos_15.setText(config.get('ОСИ', 'iactos_15'))
 
             form.nactos_1.setText(config.get('ОСИ', 'nactos_1'))
             form.nactos_2.setText(config.get('ОСИ', 'nactos_2'))
@@ -708,57 +708,62 @@ def saveActs():
             # Промежуточный
             if form.CheckBoxPromezh.isChecked():
                 myFile = f'{objFolder}\промежуточный.docx'
+                d = config_to_dict(last_form, '')
                 # shutil.copyfile('.\Shablon\!промежуточный.docx', myFile)
-                shutil.copyfile(".\\Shablon\\промежуточный.docx", myFile)
-                changeDocx(myFile, last_form)
+                shutil.copyfile(".\\Shablon\\!промежуточный.docx", myFile)
+                changeDocx(myFile, d)
                 print('промежуточный OK')
             # ОГС
             if form.CheckBoxRD1.isChecked():
-                act = form.nActOGS.text().replace('/', '-')
+                act = form.nactogs.text().replace('/', '-')
                 print(act)
                 myFile = f'{objFolder}\{act}(1РД1(ГРО)).docx'
+                d = config_to_dict(last_form, '')
                 shutil.copyfile(".\\Shablon\\1РД1(ГРО).docx", myFile)
-                changeDocx1(myFile, last_form)
+                changeDocx(myFile, d)
                 print('РД ОГС OK')
             if form.CheckBoxKAT1.isChecked():
-                act = form.nActOGS.text().replace('/', '-')
+                act = form.nactogs.text().replace('/', '-')
                 myFile = f'{objFolder}\{act}(Каталог координат и высот ОГС).docx'
+                d = config_to_dict(last_form, '')
                 shutil.copyfile(".\\Shablon\\Каталог координат и высот ОГС.docx", myFile)
-                changeDocx1(myFile, last_form)
+                changeDocx(myFile, d)
                 print('каталог ОГС OK')
             # Отвод
             if form.CheckBoxRD2.isChecked():
-                act = form.nActOtvod.text().replace('/', '-')
+                act = form.nactotvod.text().replace('/', '-')
                 print(act)
                 myFile = f'{objFolder}\{act}(1РД2(землеотвод)).docx'
+                d = config_to_dict(last_form, '')
                 shutil.copyfile(".\\Shablon\\1РД2(землеотвод).docx", myFile)
-                changeDocx1(myFile, last_form)
+                changeDocx(myFile, d)
                 print('РД отвод OK')
             if form.CheckBoxVSN2.isChecked():
-                d = config_to_dict(last_form, '_1')
-                act = form.nActOtvod.text().replace('/', '-')
+                d = config_to_dict(last_form, '')
+                act = form.nactotvod.text().replace('/', '-')
                 myFile = f'{objFolder}\{act}(2ВСН(землеотвод)).docx'
                 shutil.copyfile(".\\Shablon\\2ВСН(землеотвод).docx", myFile)
-                # changeDocx1(myFile, last_form)
                 changeDocx(myFile, d)
                 print('ВСН отвод OK')
             if form.CheckBoxSP2.isChecked():
-                act = form.nActOtvod.text().replace('/', '-')
+                act = form.nactotvod.text().replace('/', '-')
                 myFile = f'{objFolder}\{act}(3СП(землеотвод)).docx'
+                d = config_to_dict(last_form, '')
                 shutil.copyfile(".\\Shablon\\3СП(землеотвод).docx", myFile)
-                changeDocx1(myFile, last_form)
+                changeDocx(myFile, d)
                 print('СП отвод OK')
             if form.CheckBoxKAT2.isChecked():
-                act = form.nActOtvod.text().replace('/', '-')
+                act = form.nactotvod.text().replace('/', '-')
                 myFile = f'{objFolder}\{act}(Каталог координат землеотвода).docx'
+                d = config_to_dict(last_form, '')
                 shutil.copyfile('.\\Shablon\\Каталог координат закрепительных знаков землеотвода.docx', myFile)
-                changeDocx1(myFile, last_form)
+                changeDocx(myFile, d)
                 print('каталог отвод OK')
             # ОСИ
             if form.CheckBoxActOs_1.isChecked():
-                act = form.nActOs_1.toPlainText().replace('/', '-')
+                act = form.nactos_1.toPlainText().replace('/', '-')
                 print(act)
-                d = config_to_dict(last_form, '_1')
+                d = config_to_dict(last_form, '1')
                 if form.CheckBoxRD3.isChecked():
                     myFile = f'{objFolder}\{act}(1РД2(ОСИ)).docx'
                     shutil.copyfile('.\\Shablon\\1РД2(ОСИ).docx', myFile)
@@ -766,8 +771,7 @@ def saveActs():
 
                 if form.CheckBoxVSN3.isChecked():
                     myFile = f'{objFolder}\{act}(2ВСН(ОСИ)).docx'
-                    # shutil.copyfile('.\\Shablon\\2ВСН(ОСИ).docx', myFile)
-                    shutil.copyfile('.\\Shablon\\ggg.docx', myFile)
+                    shutil.copyfile('.\\Shablon\\2ВСН(ОСИ).docx', myFile)
                     changeDocx(myFile, d)
 
                 if form.CheckBoxSP3.isChecked():
@@ -800,13 +804,12 @@ def config_to_dict(file_path, rt):
     for section in config.sections():
         for key in config[section]:
             if section == 'ОСИ':
-                if rt in key:
-                    key2 = '#' + key.replace(rt, '_0')
+                k = key.split('_', 1)[-1]
+                if rt == k:
+                    key2 = key.replace(k, '')
                     d[key2] = config[section][key]
             else:
-                key2 = '#' + key
-                d[key2] = config[section][key]
-            # print((f'${key}', config[section][key]))
+                d[key] = config[section][key]
     print(d)
     return d
 
@@ -913,20 +916,6 @@ if __name__ == '__main__':
 
     # form.bg = QButtonGroup()
     # form.bg.addButton(form.CheckBoxActOs_1, 1)
-    # form.bg.addButton(form.CheckBoxActOs_2, 1)
-    # form.bg.addButton(form.CheckBoxActOs_3, 1)
-    # form.bg.addButton(form.CheckBoxActOs_4, 1)
-    # form.bg.addButton(form.CheckBoxActOs_5, 5)
-    # form.bg.addButton(form.CheckBoxActOs_6, 6)
-    # form.bg.addButton(form.CheckBoxActOs_7, 7)
-    # form.bg.addButton(form.CheckBoxActOs_8, 8)
-    # form.bg.addButton(form.CheckBoxActOs_9, 9)
-    # form.bg.addButton(form.CheckBoxActOs_10, 10)
-    # form.bg.addButton(form.CheckBoxActOs_11, 11)
-    # form.bg.addButton(form.CheckBoxActOs_12, 12)
-    # form.bg.addButton(form.CheckBoxActOs_13, 13)
-    # form.bg.addButton(form.CheckBoxActOs_14, 14)
-    # form.bg.addButton(form.CheckBoxActOs_15, 15)
     # form.bg.buttonClicked[QAbstractButton].connect(btngroup)
     window.show()
 

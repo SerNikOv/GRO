@@ -169,7 +169,7 @@
        <string>почтовый или строительный адрес объекта капитального строительства</string>
       </property>
      </widget>
-     <widget class="QTextEdit" name="adres">
+     <widget class="QTextEdit" name="objadres">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -673,7 +673,7 @@
           <string>(lдолжность)</string>
          </property>
         </widget>
-        <widget class="QTextEdit" name="genpodryadchikskprikaz">
+        <widget class="QTextEdit" name="skgpprikaz">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -702,7 +702,7 @@
           <string> (фамилия, инициалы))</string>
          </property>
         </widget>
-        <widget class="QTextEdit" name="genpodryadchikskfio">
+        <widget class="QTextEdit" name="skgpfio">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -712,7 +712,7 @@
           </rect>
          </property>
         </widget>
-        <widget class="QTextEdit" name="genpodryadchikskdolzhnost">
+        <widget class="QTextEdit" name="skgpdolzhnost">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -760,7 +760,7 @@
           <string>(идентификационный номер в национальном реестре специалистов в области строительства )</string>
          </property>
         </widget>
-        <widget class="QTextEdit" name="genpodryadchikskreestr">
+        <widget class="QTextEdit" name="skgpreestr">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1726,7 +1726,7 @@ p, li { white-space: pre-wrap; }
        </rect>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="ogs">
        <attribute name="title">
@@ -2158,14 +2158,14 @@ p, li { white-space: pre-wrap; }
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>-291</y>
+           <y>0</y>
            <width>1018</width>
            <height>870</height>
           </rect>
          </property>
          <layout class="QGridLayout" name="gridLayout">
           <item row="1" column="1">
-           <widget class="QTextEdit" name="actos_2">
+           <widget class="QTextEdit" name="iactos_2">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -2262,7 +2262,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QTextEdit" name="actos_1">
+           <widget class="QTextEdit" name="iactos_1">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -2332,7 +2332,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QTextEdit" name="actos_3">
+           <widget class="QTextEdit" name="iactos_3">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -2452,7 +2452,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QTextEdit" name="actos_4">
+           <widget class="QTextEdit" name="iactos_4">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -2512,7 +2512,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="4" column="1">
-           <widget class="QTextEdit" name="actos_5">
+           <widget class="QTextEdit" name="iactos_5">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -2565,7 +2565,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="8" column="1">
-           <widget class="QTextEdit" name="actos_9">
+           <widget class="QTextEdit" name="iactos_9">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -2581,7 +2581,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="7" column="1">
-           <widget class="QTextEdit" name="actos_8">
+           <widget class="QTextEdit" name="iactos_8">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -2671,7 +2671,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="5" column="1">
-           <widget class="QTextEdit" name="actos_6">
+           <widget class="QTextEdit" name="iactos_6">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -2745,7 +2745,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="6" column="1">
-           <widget class="QTextEdit" name="actos_7">
+           <widget class="QTextEdit" name="iactos_7">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -2895,7 +2895,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="9" column="1">
-           <widget class="QTextEdit" name="actos_10">
+           <widget class="QTextEdit" name="iactos_10">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -3008,7 +3008,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="10" column="1">
-           <widget class="QTextEdit" name="actos_11">
+           <widget class="QTextEdit" name="iactos_11">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -3082,7 +3082,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="11" column="1">
-           <widget class="QTextEdit" name="actos_12">
+           <widget class="QTextEdit" name="iactos_12">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -3181,7 +3181,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="12" column="1">
-           <widget class="QTextEdit" name="actos_13">
+           <widget class="QTextEdit" name="iactos_13">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -3255,7 +3255,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="13" column="1">
-           <widget class="QTextEdit" name="actos_14">
+           <widget class="QTextEdit" name="iactos_14">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -3384,7 +3384,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="14" column="1">
-           <widget class="QTextEdit" name="actos_15">
+           <widget class="QTextEdit" name="iactos_15">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
