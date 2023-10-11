@@ -764,33 +764,119 @@ def saveActs():
                 act = form.nactos_1.toPlainText().replace('/', '-')
                 print(act)
                 d = config_to_dict(last_form, '1')
-                if form.CheckBoxRD3.isChecked():
-                    myFile = f'{objFolder}\{act}(1РД2(ОСИ)).docx'
-                    shutil.copyfile('.\\Shablon\\1РД2(ОСИ).docx', myFile)
-                    changeDocx(myFile, d)
-
-                if form.CheckBoxVSN3.isChecked():
-                    myFile = f'{objFolder}\{act}(2ВСН(ОСИ)).docx'
-                    shutil.copyfile('.\\Shablon\\2ВСН(ОСИ).docx', myFile)
-                    changeDocx(myFile, d)
-
-                if form.CheckBoxSP3.isChecked():
-                    myFile = f'{objFolder}\{act}(3СП(ОСИ)).docx'
-                    shutil.copyfile('.\\Shablon\\3СП(ОСИ).docx', myFile)
-                    changeDocx(myFile, d)
-
-                if form.CheckBoxKAT3.isChecked():
-                    myFile = f'{objFolder}\{act}(Каталог координат осей).docx'
-                    shutil.copyfile('.\\Shablon\\Каталог координат закрепительных знаков осей.docx', myFile)
-                    changeDocx(myFile, d)
-
-                # changeDocx(myFile, last_form)
-                print('ОСИ OK')
+                makeActOsy(act, d)
+                print('ОСИ 1 OK')
+            if form.CheckBoxActOs_2.isChecked():
+                act = form.nactos_2.toPlainText().replace('/', '-')
+                print(act)
+                d = config_to_dict(last_form, '2')
+                makeActOsy(act, d)
+                print('ОСИ 2 OK')
+            if form.CheckBoxActOs_3.isChecked():
+                act = form.nactos_3.toPlainText().replace('/', '-')
+                print(act)
+                d = config_to_dict(last_form, '3')
+                makeActOsy(act, d)
+                print('ОСИ 3 OK')
+            if form.CheckBoxActOs_4.isChecked():
+                act = form.nactos_4.toPlainText().replace('/', '-')
+                print(act)
+                d = config_to_dict(last_form, '4')
+                makeActOsy(act, d)
+                print('ОСИ 4 OK')
+            if form.CheckBoxActOs_5.isChecked():
+                act = form.nactos_5.toPlainText().replace('/', '-')
+                print(act)
+                d = config_to_dict(last_form, '5')
+                makeActOsy(act, d)
+                print('ОСИ 5 OK')
+            if form.CheckBoxActOs_6.isChecked():
+                act = form.nactos_6.toPlainText().replace('/', '-')
+                print(act)
+                d = config_to_dict(last_form, '6')
+                makeActOsy(act, d)
+                print('ОСИ 6 OK')
+            if form.CheckBoxActOs_7.isChecked():
+                act = form.nactos_7.toPlainText().replace('/', '-')
+                print(act)
+                d = config_to_dict(last_form, '7')
+                makeActOsy(act, d)
+                print('ОСИ 7 OK')
+            if form.CheckBoxActOs_8.isChecked():
+                act = form.nactos_8.toPlainText().replace('/', '-')
+                print(act)
+                d = config_to_dict(last_form, '8')
+                makeActOsy(act, d)
+                print('ОСИ 8 OK')
+            if form.CheckBoxActOs_9.isChecked():
+                act = form.nactos_9.toPlainText().replace('/', '-')
+                print(act)
+                d = config_to_dict(last_form, '9')
+                makeActOsy(act, d)
+                print('ОСИ 9 OK')
+            if form.CheckBoxActOs_10.isChecked():
+                act = form.nactos_10.toPlainText().replace('/', '-')
+                print(act)
+                d = config_to_dict(last_form, '10')
+                makeActOsy(act, d)
+                print('ОСИ 10 OK')
+            if form.CheckBoxActOs_11.isChecked():
+                act = form.nactos_11.toPlainText().replace('/', '-')
+                print(act)
+                d = config_to_dict(last_form, '11')
+                makeActOsy(act, d)
+                print('ОСИ 11 OK')
+            if form.CheckBoxActOs_12.isChecked():
+                act = form.nactos_12.toPlainText().replace('/', '-')
+                print(act)
+                d = config_to_dict(last_form, '12')
+                makeActOsy(act, d)
+                print('ОСИ 12 OK')
+            if form.CheckBoxActOs_13.isChecked():
+                act = form.nactos_13.toPlainText().replace('/', '-')
+                print(act)
+                d = config_to_dict(last_form, '13')
+                makeActOsy(act, d)
+                print('ОСИ 13 OK')
+            if form.CheckBoxActOs_14.isChecked():
+                act = form.nactos_14.toPlainText().replace('/', '-')
+                print(act)
+                d = config_to_dict(last_form, '14')
+                makeActOsy(act, d)
+                print('ОСИ 14 OK')
+            if form.CheckBoxActOs_15.isChecked():
+                act = form.nactos_15.toPlainText().replace('/', '-')
+                print(act)
+                d = config_to_dict(last_form, '15')
+                makeActOsy(act, d)
+                print('ОСИ 15 OK')
         else:
             pass
     else:
         pass
 
+
+def makeActOsy(act, d):
+    objFolder = settings.value('objFolder')
+    if form.CheckBoxRD3.isChecked():
+        myFile = f'{objFolder}\{act}(1РД2(ОСИ)).docx'
+        shutil.copyfile('.\\Shablon\\1РД2(ОСИ).docx', myFile)
+        changeDocx(myFile, d)
+
+    if form.CheckBoxVSN3.isChecked():
+        myFile = f'{objFolder}\{act}(2ВСН(ОСИ)).docx'
+        shutil.copyfile('.\\Shablon\\2ВСН(ОСИ).docx', myFile)
+        changeDocx(myFile, d)
+
+    if form.CheckBoxSP3.isChecked():
+        myFile = f'{objFolder}\{act}(3СП(ОСИ)).docx'
+        shutil.copyfile('.\\Shablon\\3СП(ОСИ).docx', myFile)
+        changeDocx(myFile, d)
+
+    if form.CheckBoxKAT3.isChecked():
+        myFile = f'{objFolder}\{act}(Каталог координат осей).docx'
+        shutil.copyfile('.\\Shablon\\Каталог координат закрепительных знаков осей.docx', myFile)
+        changeDocx(myFile, d)
 
 def config_to_dict(file_path, rt):
     # form.QCheckBox('CheckBoxALLKAT').setChecked(True)
