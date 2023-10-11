@@ -267,6 +267,7 @@ def save_form():
             with open('./Config/ini_form.ini', 'w') as configfile2:
                 config2.write(configfile2)
             shutil.copyfile('./Config/ini_form.ini', file)
+            settings.setValue('last_form', file)
     else:
         form.tabWidget.setCurrentIndex(0)
         form.object.setFocus()
