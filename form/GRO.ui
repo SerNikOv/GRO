@@ -28,7 +28,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>6</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tabobj">
      <attribute name="title">
@@ -59,7 +59,7 @@
        <rect>
         <x>11</x>
         <y>11</y>
-        <width>155</width>
+        <width>191</width>
         <height>16</height>
        </rect>
       </property>
@@ -201,7 +201,7 @@
         <rect>
          <x>10</x>
          <y>65</y>
-         <width>77</width>
+         <width>91</width>
          <height>16</height>
         </rect>
        </property>
@@ -230,7 +230,7 @@
         <rect>
          <x>10</x>
          <y>126</y>
-         <width>138</width>
+         <width>191</width>
          <height>16</height>
         </rect>
        </property>
@@ -241,7 +241,7 @@
         </font>
        </property>
        <property name="text">
-        <string> (фамилия, инициалы))</string>
+        <string> (фамилия, инициалы)</string>
        </property>
       </widget>
       <widget class="QTextEdit" name="zakazchikfio">
@@ -269,7 +269,7 @@
         <rect>
          <x>10</x>
          <y>187</y>
-         <width>184</width>
+         <width>231</width>
          <height>16</height>
         </rect>
        </property>
@@ -311,7 +311,7 @@
         <rect>
          <x>10</x>
          <y>430</y>
-         <width>512</width>
+         <width>631</width>
          <height>16</height>
         </rect>
        </property>
@@ -330,7 +330,7 @@
         <rect>
          <x>10</x>
          <y>199</y>
-         <width>63</width>
+         <width>221</width>
          <height>16</height>
         </rect>
        </property>
@@ -354,7 +354,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QTextEdit" name="zakazchik">
+      <widget class="QTextEdit" name="zakazchiknaim">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -369,7 +369,7 @@
         <rect>
          <x>10</x>
          <y>89</y>
-         <width>90</width>
+         <width>191</width>
          <height>16</height>
         </rect>
        </property>
@@ -398,7 +398,7 @@
         <rect>
          <x>10</x>
          <y>310</y>
-         <width>322</width>
+         <width>451</width>
          <height>16</height>
         </rect>
        </property>
@@ -435,7 +435,7 @@
         <rect>
          <x>20</x>
          <y>89</y>
-         <width>90</width>
+         <width>161</width>
          <height>16</height>
         </rect>
        </property>
@@ -449,7 +449,7 @@
         <string>(наименование</string>
        </property>
       </widget>
-      <widget class="QTextEdit" name="SKrekviz">
+      <widget class="QTextEdit" name="skrekviz">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -459,7 +459,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QTextEdit" name="SKadres">
+      <widget class="QTextEdit" name="skadres">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -469,7 +469,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QTextEdit" name="SKrekviz1">
+      <widget class="QTextEdit" name="sknaim">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -487,7 +487,7 @@
         <rect>
          <x>20</x>
          <y>199</y>
-         <width>63</width>
+         <width>171</width>
          <height>16</height>
         </rect>
        </property>
@@ -506,7 +506,7 @@
         <rect>
          <x>20</x>
          <y>310</y>
-         <width>322</width>
+         <width>531</width>
          <height>16</height>
         </rect>
        </property>
@@ -533,7 +533,7 @@
       <property name="title">
        <string>ответственный представитель</string>
       </property>
-      <widget class="QTextEdit" name="SKfio">
+      <widget class="QTextEdit" name="skfio">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -543,7 +543,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QTextEdit" name="SKprikaz">
+      <widget class="QTextEdit" name="skprikaz">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -553,7 +553,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QTextEdit" name="SKdolzhnost">
+      <widget class="QTextEdit" name="skdolzhnost">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -568,7 +568,7 @@
         <rect>
          <x>10</x>
          <y>69</y>
-         <width>77</width>
+         <width>121</width>
          <height>16</height>
         </rect>
        </property>
@@ -587,7 +587,7 @@
         <rect>
          <x>10</x>
          <y>191</y>
-         <width>184</width>
+         <width>241</width>
          <height>16</height>
         </rect>
        </property>
@@ -606,7 +606,7 @@
         <rect>
          <x>10</x>
          <y>130</y>
-         <width>138</width>
+         <width>211</width>
          <height>16</height>
         </rect>
        </property>
@@ -617,7 +617,7 @@
         </font>
        </property>
        <property name="text">
-        <string> (фамилия, инициалы))</string>
+        <string> (фамилия, инициалы)</string>
        </property>
       </widget>
      </widget>
@@ -658,7 +658,7 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>65</y>
+           <y>60</y>
            <width>77</width>
            <height>16</height>
           </rect>
@@ -673,7 +673,7 @@
           <string>(lдолжность)</string>
          </property>
         </widget>
-        <widget class="QTextEdit" name="genpodryadchikSKprikaz">
+        <widget class="QTextEdit" name="genpodryadchikskprikaz">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -687,8 +687,8 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>126</y>
-           <width>138</width>
+           <y>120</y>
+           <width>171</width>
            <height>16</height>
           </rect>
          </property>
@@ -702,7 +702,7 @@
           <string> (фамилия, инициалы))</string>
          </property>
         </widget>
-        <widget class="QTextEdit" name="genpodryadchikSKfio">
+        <widget class="QTextEdit" name="genpodryadchikskfio">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -712,7 +712,7 @@
           </rect>
          </property>
         </widget>
-        <widget class="QTextEdit" name="genpodryadchikSKdolzhnost">
+        <widget class="QTextEdit" name="genpodryadchikskdolzhnost">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -726,8 +726,8 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>187</y>
-           <width>184</width>
+           <y>180</y>
+           <width>231</width>
            <height>16</height>
           </rect>
          </property>
@@ -745,8 +745,8 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>250</y>
-           <width>451</width>
+           <y>240</y>
+           <width>461</width>
            <height>16</height>
           </rect>
          </property>
@@ -760,7 +760,7 @@
           <string>(идентификационный номер в национальном реестре специалистов в области строительства )</string>
          </property>
         </widget>
-        <widget class="QTextEdit" name="genpodryadchikSKreestr">
+        <widget class="QTextEdit" name="genpodryadchikskreestr">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -798,7 +798,7 @@
           <rect>
            <x>180</x>
            <y>310</y>
-           <width>512</width>
+           <width>661</width>
            <height>16</height>
           </rect>
          </property>
@@ -817,7 +817,7 @@
           <rect>
            <x>390</x>
            <y>140</y>
-           <width>63</width>
+           <width>141</width>
            <height>16</height>
           </rect>
          </property>
@@ -841,7 +841,7 @@
           </rect>
          </property>
         </widget>
-        <widget class="QTextEdit" name="genpodryadchik">
+        <widget class="QTextEdit" name="genpodryadchiknaim">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -856,7 +856,7 @@
           <rect>
            <x>380</x>
            <y>70</y>
-           <width>90</width>
+           <width>161</width>
            <height>16</height>
           </rect>
          </property>
@@ -884,8 +884,8 @@
          <property name="geometry">
           <rect>
            <x>260</x>
-           <y>220</y>
-           <width>322</width>
+           <y>210</y>
+           <width>411</width>
            <height>16</height>
           </rect>
          </property>
@@ -916,8 +916,8 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>65</y>
-           <width>77</width>
+           <y>60</y>
+           <width>121</width>
            <height>16</height>
           </rect>
          </property>
@@ -945,8 +945,8 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>126</y>
-           <width>138</width>
+           <y>120</y>
+           <width>161</width>
            <height>16</height>
           </rect>
          </property>
@@ -957,7 +957,7 @@
           </font>
          </property>
          <property name="text">
-          <string> (фамилия, инициалы))</string>
+          <string> (фамилия, инициалы)</string>
          </property>
         </widget>
         <widget class="QTextEdit" name="genpodryadchikfio">
@@ -984,8 +984,8 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>187</y>
-           <width>184</width>
+           <y>180</y>
+           <width>251</width>
            <height>16</height>
           </rect>
          </property>
@@ -1032,7 +1032,7 @@
           <rect>
            <x>180</x>
            <y>310</y>
-           <width>512</width>
+           <width>611</width>
            <height>16</height>
           </rect>
          </property>
@@ -1051,7 +1051,7 @@
           <rect>
            <x>390</x>
            <y>140</y>
-           <width>63</width>
+           <width>131</width>
            <height>16</height>
           </rect>
          </property>
@@ -1075,7 +1075,7 @@
           </rect>
          </property>
         </widget>
-        <widget class="QTextEdit" name="stroitel">
+        <widget class="QTextEdit" name="stroitelnaim">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1090,7 +1090,7 @@
           <rect>
            <x>380</x>
            <y>70</y>
-           <width>90</width>
+           <width>121</width>
            <height>16</height>
           </rect>
          </property>
@@ -1118,8 +1118,8 @@
          <property name="geometry">
           <rect>
            <x>260</x>
-           <y>220</y>
-           <width>322</width>
+           <y>210</y>
+           <width>431</width>
            <height>16</height>
           </rect>
          </property>
@@ -1150,8 +1150,8 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>65</y>
-           <width>77</width>
+           <y>60</y>
+           <width>101</width>
            <height>16</height>
           </rect>
          </property>
@@ -1179,8 +1179,8 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>126</y>
-           <width>138</width>
+           <y>120</y>
+           <width>161</width>
            <height>16</height>
           </rect>
          </property>
@@ -1191,7 +1191,7 @@
           </font>
          </property>
          <property name="text">
-          <string> (фамилия, инициалы))</string>
+          <string> (фамилия, инициалы)</string>
          </property>
         </widget>
         <widget class="QTextEdit" name="stroitelfio">
@@ -1218,8 +1218,8 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>187</y>
-           <width>184</width>
+           <y>180</y>
+           <width>231</width>
            <height>16</height>
           </rect>
          </property>
@@ -1268,7 +1268,7 @@
         <rect>
          <x>180</x>
          <y>310</y>
-         <width>512</width>
+         <width>611</width>
          <height>16</height>
         </rect>
        </property>
@@ -1287,7 +1287,7 @@
         <rect>
          <x>390</x>
          <y>140</y>
-         <width>63</width>
+         <width>91</width>
          <height>16</height>
         </rect>
        </property>
@@ -1311,7 +1311,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QTextEdit" name="proekt">
+      <widget class="QTextEdit" name="proektnaim">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -1326,7 +1326,7 @@
         <rect>
          <x>380</x>
          <y>70</y>
-         <width>90</width>
+         <width>131</width>
          <height>16</height>
         </rect>
        </property>
@@ -1354,8 +1354,8 @@
        <property name="geometry">
         <rect>
          <x>260</x>
-         <y>220</y>
-         <width>322</width>
+         <y>210</y>
+         <width>401</width>
          <height>16</height>
         </rect>
        </property>
@@ -1386,8 +1386,8 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>65</y>
-         <width>77</width>
+         <y>60</y>
+         <width>121</width>
          <height>16</height>
         </rect>
        </property>
@@ -1415,8 +1415,8 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>126</y>
-         <width>138</width>
+         <y>120</y>
+         <width>171</width>
          <height>16</height>
         </rect>
        </property>
@@ -1427,7 +1427,7 @@
         </font>
        </property>
        <property name="text">
-        <string> (фамилия, инициалы))</string>
+        <string> (фамилия, инициалы)</string>
        </property>
       </widget>
       <widget class="QTextEdit" name="proektfio">
@@ -1454,8 +1454,8 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>187</y>
-         <width>184</width>
+         <y>180</y>
+         <width>241</width>
          <height>16</height>
         </rect>
        </property>
@@ -1470,7 +1470,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QTextEdit" name="GIP">
+     <widget class="QTextEdit" name="gip">
       <property name="geometry">
        <rect>
         <x>520</x>
@@ -1491,8 +1491,8 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>660</x>
-        <y>410</y>
-        <width>138</width>
+        <y>400</y>
+        <width>171</width>
         <height>16</height>
        </rect>
       </property>
@@ -1503,7 +1503,7 @@ p, li { white-space: pre-wrap; }
        </font>
       </property>
       <property name="text">
-       <string> (фамилия, инициалы))</string>
+       <string> (фамилия, инициалы)</string>
       </property>
      </widget>
     </widget>
@@ -1523,7 +1523,7 @@ p, li { white-space: pre-wrap; }
       <property name="title">
        <string>Представитель лица, выполнившего работы по созданию геодезической разбивочной основы</string>
       </property>
-      <widget class="QTextEdit" name="GROrekviz">
+      <widget class="QTextEdit" name="grorekviz">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -1538,7 +1538,7 @@ p, li { white-space: pre-wrap; }
         <rect>
          <x>390</x>
          <y>140</y>
-         <width>63</width>
+         <width>101</width>
          <height>16</height>
         </rect>
        </property>
@@ -1552,7 +1552,7 @@ p, li { white-space: pre-wrap; }
         <string>ОГРН, ИНН</string>
        </property>
       </widget>
-      <widget class="QTextEdit" name="GRO">
+      <widget class="QTextEdit" name="gronaim">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -1567,7 +1567,7 @@ p, li { white-space: pre-wrap; }
         <rect>
          <x>380</x>
          <y>70</y>
-         <width>90</width>
+         <width>131</width>
          <height>16</height>
         </rect>
        </property>
@@ -1581,7 +1581,7 @@ p, li { white-space: pre-wrap; }
         <string>(наименование</string>
        </property>
       </widget>
-      <widget class="QTextEdit" name="GROadres">
+      <widget class="QTextEdit" name="groadres">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -1595,8 +1595,8 @@ p, li { white-space: pre-wrap; }
        <property name="geometry">
         <rect>
          <x>260</x>
-         <y>220</y>
-         <width>322</width>
+         <y>210</y>
+         <width>441</width>
          <height>16</height>
         </rect>
        </property>
@@ -1627,8 +1627,8 @@ p, li { white-space: pre-wrap; }
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>65</y>
-         <width>77</width>
+         <y>60</y>
+         <width>121</width>
          <height>16</height>
         </rect>
        </property>
@@ -1642,7 +1642,7 @@ p, li { white-space: pre-wrap; }
         <string>(lдолжность)</string>
        </property>
       </widget>
-      <widget class="QTextEdit" name="GROprikaz">
+      <widget class="QTextEdit" name="groprikaz">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -1656,8 +1656,8 @@ p, li { white-space: pre-wrap; }
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>126</y>
-         <width>138</width>
+         <y>120</y>
+         <width>201</width>
          <height>16</height>
         </rect>
        </property>
@@ -1668,10 +1668,10 @@ p, li { white-space: pre-wrap; }
         </font>
        </property>
        <property name="text">
-        <string> (фамилия, инициалы))</string>
+        <string> (фамилия, инициалы)</string>
        </property>
       </widget>
-      <widget class="QTextEdit" name="GROfio">
+      <widget class="QTextEdit" name="grofio">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -1681,7 +1681,7 @@ p, li { white-space: pre-wrap; }
         </rect>
        </property>
       </widget>
-      <widget class="QTextEdit" name="GROdolzhn">
+      <widget class="QTextEdit" name="grodolzhn">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -1695,8 +1695,8 @@ p, li { white-space: pre-wrap; }
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>187</y>
-         <width>184</width>
+         <y>180</y>
+         <width>241</width>
          <height>16</height>
         </rect>
        </property>
@@ -1726,7 +1726,7 @@ p, li { white-space: pre-wrap; }
        </rect>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="ogs">
        <attribute name="title">
@@ -1798,7 +1798,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="nActOGS"/>
+          <widget class="QLineEdit" name="nactogs"/>
          </item>
         </layout>
        </widget>
@@ -1894,7 +1894,7 @@ p, li { white-space: pre-wrap; }
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="ShifrGP"/>
+            <widget class="QLineEdit" name="shifrgp"/>
            </item>
           </layout>
          </item>
@@ -1970,7 +1970,7 @@ p, li { white-space: pre-wrap; }
          <string>№ акта</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="nActOtvod">
+       <widget class="QLineEdit" name="nactotvod">
         <property name="geometry">
          <rect>
           <x>90</x>
@@ -2054,7 +2054,7 @@ p, li { white-space: pre-wrap; }
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="ShifrPPO"/>
+            <widget class="QLineEdit" name="shifrppo"/>
            </item>
           </layout>
          </item>
@@ -2165,7 +2165,7 @@ p, li { white-space: pre-wrap; }
          </property>
          <layout class="QGridLayout" name="gridLayout">
           <item row="1" column="1">
-           <widget class="QTextEdit" name="ActOs_2">
+           <widget class="QTextEdit" name="actos_2">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -2188,7 +2188,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="1" column="2">
-           <widget class="QTextEdit" name="nActOs_2">
+           <widget class="QTextEdit" name="nactos_2">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -2239,7 +2239,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="0" column="2">
-           <widget class="QTextEdit" name="nActOs_1">
+           <widget class="QTextEdit" name="nactos_1">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -2262,7 +2262,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QTextEdit" name="ActOs_1">
+           <widget class="QTextEdit" name="actos_1">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -2274,6 +2274,9 @@ p, li { white-space: pre-wrap; }
               <width>250</width>
               <height>50</height>
              </size>
+            </property>
+            <property name="lineWrapMode">
+             <enum>QTextEdit::WidgetWidth</enum>
             </property>
            </widget>
           </item>
@@ -2306,7 +2309,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="0" column="8">
-           <widget class="QTextEdit" name="ShifrRD_1">
+           <widget class="QTextEdit" name="shifrrd_1">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -2329,7 +2332,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QTextEdit" name="ActOs_3">
+           <widget class="QTextEdit" name="actos_3">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -2352,7 +2355,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="1" column="8">
-           <widget class="QTextEdit" name="ShifrRD_2">
+           <widget class="QTextEdit" name="shifrrd_2">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -2368,7 +2371,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="2" column="2">
-           <widget class="QTextEdit" name="nActOs_3">
+           <widget class="QTextEdit" name="nactos_3">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -2412,7 +2415,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="2" column="8">
-           <widget class="QTextEdit" name="ShifrRD_3">
+           <widget class="QTextEdit" name="shifrrd_3">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -2449,7 +2452,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QTextEdit" name="ActOs_4">
+           <widget class="QTextEdit" name="actos_4">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -2465,7 +2468,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="3" column="2">
-           <widget class="QTextEdit" name="nActOs_4">
+           <widget class="QTextEdit" name="nactos_4">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -2509,7 +2512,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="4" column="1">
-           <widget class="QTextEdit" name="ActOs_5">
+           <widget class="QTextEdit" name="actos_5">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -2532,7 +2535,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="3" column="8">
-           <widget class="QTextEdit" name="ShifrRD_4">
+           <widget class="QTextEdit" name="shifrrd_4">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -2562,7 +2565,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="8" column="1">
-           <widget class="QTextEdit" name="ActOs_9">
+           <widget class="QTextEdit" name="actos_9">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -2578,7 +2581,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="7" column="1">
-           <widget class="QTextEdit" name="ActOs_8">
+           <widget class="QTextEdit" name="actos_8">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -2601,7 +2604,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="4" column="2">
-           <widget class="QTextEdit" name="nActOs_5">
+           <widget class="QTextEdit" name="nactos_5">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -2631,7 +2634,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="4" column="8">
-           <widget class="QTextEdit" name="ShifrRD_5">
+           <widget class="QTextEdit" name="shifrrd_5">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -2668,7 +2671,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="5" column="1">
-           <widget class="QTextEdit" name="ActOs_6">
+           <widget class="QTextEdit" name="actos_6">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -2684,7 +2687,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="5" column="2">
-           <widget class="QTextEdit" name="nActOs_6">
+           <widget class="QTextEdit" name="nactos_6">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -2742,7 +2745,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="6" column="1">
-           <widget class="QTextEdit" name="ActOs_7">
+           <widget class="QTextEdit" name="actos_7">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -2758,7 +2761,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="5" column="8">
-           <widget class="QTextEdit" name="ShifrRD_6">
+           <widget class="QTextEdit" name="shifrrd_6">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -2781,7 +2784,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="6" column="2">
-           <widget class="QTextEdit" name="nActOs_7">
+           <widget class="QTextEdit" name="nactos_7">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -2818,7 +2821,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="6" column="8">
-           <widget class="QTextEdit" name="ShifrRD_7">
+           <widget class="QTextEdit" name="shifrrd_7">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -2841,7 +2844,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="8" column="2">
-           <widget class="QTextEdit" name="nActOs_9">
+           <widget class="QTextEdit" name="nactos_9">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -2892,7 +2895,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="9" column="1">
-           <widget class="QTextEdit" name="ActOs_10">
+           <widget class="QTextEdit" name="actos_10">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -2908,7 +2911,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="8" column="8">
-           <widget class="QTextEdit" name="ShifrRD_9">
+           <widget class="QTextEdit" name="shifrrd_9">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -2945,7 +2948,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="9" column="2">
-           <widget class="QTextEdit" name="nActOs_10">
+           <widget class="QTextEdit" name="nactos_10">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -2975,7 +2978,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="9" column="8">
-           <widget class="QTextEdit" name="ShifrRD_10">
+           <widget class="QTextEdit" name="shifrrd_10">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -3005,7 +3008,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="10" column="1">
-           <widget class="QTextEdit" name="ActOs_11">
+           <widget class="QTextEdit" name="actos_11">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -3021,7 +3024,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="10" column="2">
-           <widget class="QTextEdit" name="nActOs_11">
+           <widget class="QTextEdit" name="nactos_11">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -3079,7 +3082,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="11" column="1">
-           <widget class="QTextEdit" name="ActOs_12">
+           <widget class="QTextEdit" name="actos_12">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -3095,7 +3098,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="10" column="8">
-           <widget class="QTextEdit" name="ShifrRD_11">
+           <widget class="QTextEdit" name="shifrrd_11">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -3118,7 +3121,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="11" column="2">
-           <widget class="QTextEdit" name="nActOs_12">
+           <widget class="QTextEdit" name="nactos_12">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -3148,7 +3151,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="11" column="8">
-           <widget class="QTextEdit" name="ShifrRD_12">
+           <widget class="QTextEdit" name="shifrrd_12">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -3178,7 +3181,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="12" column="1">
-           <widget class="QTextEdit" name="ActOs_13">
+           <widget class="QTextEdit" name="actos_13">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -3201,7 +3204,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="12" column="2">
-           <widget class="QTextEdit" name="nActOs_13">
+           <widget class="QTextEdit" name="nactos_13">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -3252,7 +3255,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="13" column="1">
-           <widget class="QTextEdit" name="ActOs_14">
+           <widget class="QTextEdit" name="actos_14">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -3268,7 +3271,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="12" column="8">
-           <widget class="QTextEdit" name="ShifrRD_13">
+           <widget class="QTextEdit" name="shifrrd_13">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -3298,7 +3301,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="13" column="2">
-           <widget class="QTextEdit" name="nActOs_14">
+           <widget class="QTextEdit" name="nactos_14">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -3321,7 +3324,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="13" column="8">
-           <widget class="QTextEdit" name="ShifrRD_14">
+           <widget class="QTextEdit" name="shifrrd_14">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -3365,7 +3368,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="14" column="2">
-           <widget class="QTextEdit" name="nActOs_15">
+           <widget class="QTextEdit" name="nactos_15">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -3381,7 +3384,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="14" column="1">
-           <widget class="QTextEdit" name="ActOs_15">
+           <widget class="QTextEdit" name="actos_15">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>4</horstretch>
@@ -3432,7 +3435,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="14" column="8">
-           <widget class="QTextEdit" name="ShifrRD_15">
+           <widget class="QTextEdit" name="shifrrd_15">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -3448,7 +3451,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="7" column="2">
-           <widget class="QTextEdit" name="nActOs_8">
+           <widget class="QTextEdit" name="nactos_8">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -3499,7 +3502,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="7" column="8">
-           <widget class="QTextEdit" name="ShifrRD_8">
+           <widget class="QTextEdit" name="shifrrd_8">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -3689,6 +3692,19 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="text">
      <string>Скопировать</string>
+    </property>
+   </widget>
+   <widget class="QProgressBar" name="progressBar">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>760</y>
+      <width>411</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="value">
+     <number>0</number>
     </property>
    </widget>
   </widget>

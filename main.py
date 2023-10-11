@@ -1,12 +1,13 @@
-import re
-from builtins import print
-from PyQt5.QtWidgets import QApplication, QFileDialog
+# import re
+# from builtins import print
+from PyQt5.QtWidgets import QApplication, QFileDialog, QButtonGroup, QAbstractButton
 from PyQt5 import uic
 from PyQt5.Qt import QApplication, QSettings, QMainWindow, QLineEdit, QCheckBox, QVBoxLayout, QWidget
 import configparser
 from pathlib import Path, PurePath, PurePosixPath
 from os.path import abspath, dirname, exists
 import shutil
+from change_docx import changeDocx1, changeDocx
 
 defoult_form = './Config/defoult_form.ini'
 # last_form = './Config/ini_form.ini'
@@ -32,6 +33,7 @@ def save_form():
     objFolder = settings.value('objFolder')
     objectName = form.object.toPlainText()
     if objectName != '':
+        settings.setValue("objectName", objectName)
         if objFolder != '':
             file = objFolder + '/Карточка объекта - ' + objectName + '.gro'
         else:
@@ -42,292 +44,232 @@ def save_form():
             settings.setValue("objFolder", objFolder)
             window.statusBar().showMessage(objFolder)
         if file != '':
-            my_file = open(file, "w+")
-            my_file.close()
+            # my_file = open(file, "w+")
+            # my_file.close()
             # save_form(file)
-        config2 = configparser.ConfigParser()
-        config2.read_file(open(file))
-        # Объект
-        if not config2.has_section('Объект'):
-            config2.add_section('Объект')
-        config2.set('Объект', 'object', form.object.toPlainText())
-        config2.set('Объект', 'msk', form.msk.text())
-        config2.set('Объект', 'naimobj', form.naimobj.toPlainText())
-        config2.set('Объект', 'uchastok', form.uchastok.toPlainText())
-        config2.set('Объект', 'kodstr', form.kodstr.text())
-        config2.set('Объект', 'adres', form.adres.toPlainText())
-        # Заказчик
-        if not config2.has_section('Заказчик'):
-            config2.add_section('Заказчик')
-        config2.set('Заказчик', 'zakazchik', form.zakazchik.toPlainText())
-        config2.set('Заказчик', 'zakazchikrekviz', form.zakazchikrekviz.toPlainText())
-        config2.set('Заказчик', 'zakazchikadres', form.zakazchikadres.toPlainText())
-        config2.set('Заказчик', 'zakazchiksro', form.zakazchiksro.toPlainText())
-        config2.set('Заказчик', 'zakazchikdolzhn', form.zakazchikdolzhn.toPlainText())
-        config2.set('Заказчик', 'zakazchikfio', form.zakazchikfio.toPlainText())
-        config2.set('Заказчик', 'zakazchikprikaz', form.zakazchikprikaz.toPlainText())
-        # Стройконтроль
-        if not config2.has_section('Стройконтроль'):
-            config2.add_section('Стройконтроль')
-        config2.set('Стройконтроль', 'SKrekviz', form.SKrekviz.toPlainText())
-        config2.set('Стройконтроль', 'SKadres', form.SKadres.toPlainText())
-        config2.set('Стройконтроль', 'SKdolzhnost', form.SKdolzhnost.toPlainText())
-        config2.set('Стройконтроль', 'SKfio', form.SKfio.toPlainText())
-        config2.set('Стройконтроль', 'SKprikaz', form.SKprikaz.toPlainText())
+            config2 = configparser.ConfigParser()
+            config2.read_file(open('./Config/ini_form.ini'))
+            # Объект
+            if not config2.has_section('Объект'):
+                config2.add_section('Объект')
+            config2.set('Объект', 'object', form.object.toPlainText())
+            config2.set('Объект', 'msk', form.msk.text())
+            config2.set('Объект', 'naimobj', form.naimobj.toPlainText())
+            config2.set('Объект', 'uchastok', form.uchastok.toPlainText())
+            config2.set('Объект', 'kodstr', form.kodstr.text())
+            config2.set('Объект', 'adres', form.adres.toPlainText())
+            # Заказчик
+            if not config2.has_section('Заказчик'):
+                config2.add_section('Заказчик')
+            config2.set('Заказчик', 'zakazchiknaim', form.zakazchiknaim.toPlainText())
+            config2.set('Заказчик', 'zakazchikrekviz', form.zakazchikrekviz.toPlainText())
+            config2.set('Заказчик', 'zakazchikadres', form.zakazchikadres.toPlainText())
+            config2.set('Заказчик', 'zakazchiksro', form.zakazchiksro.toPlainText())
+            config2.set('Заказчик', 'zakazchikdolzhn', form.zakazchikdolzhn.toPlainText())
+            config2.set('Заказчик', 'zakazchikfio', form.zakazchikfio.toPlainText())
+            config2.set('Заказчик', 'zakazchikprikaz', form.zakazchikprikaz.toPlainText())
+            # Стройконтроль
+            if not config2.has_section('Стройконтроль'):
+                config2.add_section('Стройконтроль')
+            config2.set('Стройконтроль', 'skrekviz', form.skrekviz.toPlainText())
+            config2.set('Стройконтроль', 'skadres', form.skadres.toPlainText())
+            config2.set('Стройконтроль', 'skdolzhnost', form.skdolzhnost.toPlainText())
+            config2.set('Стройконтроль', 'skfio', form.skfio.toPlainText())
+            config2.set('Стройконтроль', 'skprikaz', form.skprikaz.toPlainText())
 
-        # Генподрядчик
-        if not config2.has_section('Генподрядчик'):
-            config2.add_section('Генподрядчик')
-        config2.set('Генподрядчик', 'genpodryadchik', form.genpodryadchik.toPlainText())
-        config2.set('Генподрядчик', 'genpodryadchikrekviz', form.genpodryadchikrekviz.toPlainText())
-        config2.set('Генподрядчик', 'genpodryadchikadres', form.genpodryadchikadres.toPlainText())
-        config2.set('Генподрядчик', 'genpodryadchiksro', form.genpodryadchiksro.toPlainText())
-        config2.set('Генподрядчик', 'genpodryadchikdolzhn', form.genpodryadchikdolzhn.toPlainText())
-        config2.set('Генподрядчик', 'genpodryadchikfio', form.genpodryadchikfio.toPlainText())
-        config2.set('Генподрядчик', 'genpodryadchikprikaz', form.genpodryadchikprikaz.toPlainText())
-        config2.set('Генподрядчик', 'genpodryadchikSKdolzhnost', form.genpodryadchikSKdolzhnost.toPlainText())
-        config2.set('Генподрядчик', 'genpodryadchikSKfio', form.genpodryadchikSKfio.toPlainText())
-        config2.set('Генподрядчик', 'genpodryadchikSKprikaz', form.genpodryadchikSKprikaz.toPlainText())
-        config2.set('Генподрядчик', 'genpodryadchikSKreestr', form.genpodryadchikSKreestr.toPlainText())
-        # Субподрядчик
-        if not config2.has_section('Субподрядчик'):
-            config2.add_section('Субподрядчик')
-        config2.set('Субподрядчик', 'stroitel', form.stroitel.toPlainText())
-        config2.set('Субподрядчик', 'stroiteldolzhn', form.stroiteldolzhn.toPlainText())
-        config2.set('Субподрядчик', 'stroitelfio', form.stroitelfio.toPlainText())
-        config2.set('Субподрядчик', 'stroitelprikaz', form.stroitelprikaz.toPlainText())
-        # АН
-        if not config2.has_section('АН'):
-            config2.add_section('АН')
-        config2.set('АН', 'proekt', form.proekt.toPlainText())
-        config2.set('АН', 'proektrekviz', form.proektrekviz.toPlainText())
-        config2.set('АН', 'proektadres', form.proektadres.toPlainText())
-        config2.set('АН', 'proektsro', form.proektsro.toPlainText())
-        config2.set('АН', 'GIP', form.GIP.toPlainText())
-        config2.set('АН', 'proektdolzhn', form.proektdolzhn.toPlainText())
-        config2.set('АН', 'proektfio', form.proektfio.toPlainText())
-        config2.set('АН', 'proektprikaz', form.proektprikaz.toPlainText())
-        # ГРО
-        if not config2.has_section('ГРО'):
-            config2.add_section('ГРО')
-        config2.set('ГРО', 'GRO', form.GRO.toPlainText())
-        config2.set('ГРО', 'GROrekviz', form.GROrekviz.toPlainText())
-        config2.set('ГРО', 'GROadres', form.GROadres.toPlainText())
-        config2.set('ГРО', 'GROdolzhn', form.GROdolzhn.toPlainText())
-        config2.set('ГРО', 'GROfio', form.GROfio.toPlainText())
-        config2.set('ГРО', 'GROprikaz', form.GROprikaz.toPlainText())
+            # Генподрядчик
+            if not config2.has_section('Генподрядчик'):
+                config2.add_section('Генподрядчик')
+            config2.set('Генподрядчик', 'genpodryadchiknaim', form.genpodryadchiknaim.toPlainText())
+            config2.set('Генподрядчик', 'genpodryadchikrekviz', form.genpodryadchikrekviz.toPlainText())
+            config2.set('Генподрядчик', 'genpodryadchikadres', form.genpodryadchikadres.toPlainText())
+            config2.set('Генподрядчик', 'genpodryadchiksro', form.genpodryadchiksro.toPlainText())
+            config2.set('Генподрядчик', 'genpodryadchikdolzhn', form.genpodryadchikdolzhn.toPlainText())
+            config2.set('Генподрядчик', 'genpodryadchikfio', form.genpodryadchikfio.toPlainText())
+            config2.set('Генподрядчик', 'genpodryadchikprikaz', form.genpodryadchikprikaz.toPlainText())
+            config2.set('Генподрядчик', 'genpodryadchikskdolzhnost', form.genpodryadchikskdolzhnost.toPlainText())
+            config2.set('Генподрядчик', 'genpodryadchikskfio', form.genpodryadchikskfio.toPlainText())
+            config2.set('Генподрядчик', 'genpodryadchikskprikaz', form.genpodryadchikskprikaz.toPlainText())
+            config2.set('Генподрядчик', 'genpodryadchikskreestr', form.genpodryadchikskreestr.toPlainText())
+            # Субподрядчик
+            if not config2.has_section('Субподрядчик'):
+                config2.add_section('Субподрядчик')
+            config2.set('Субподрядчик', 'stroitelnaim', form.stroitelnaim.toPlainText())
+            config2.set('Субподрядчик', 'stroiteldolzhn', form.stroiteldolzhn.toPlainText())
+            config2.set('Субподрядчик', 'stroitelfio', form.stroitelfio.toPlainText())
+            config2.set('Субподрядчик', 'stroitelprikaz', form.stroitelprikaz.toPlainText())
+            # АН
+            if not config2.has_section('АН'):
+                config2.add_section('АН')
+            config2.set('АН', 'proektnaim', form.proektnaim.toPlainText())
+            config2.set('АН', 'proektrekviz', form.proektrekviz.toPlainText())
+            config2.set('АН', 'proektadres', form.proektadres.toPlainText())
+            config2.set('АН', 'proektsro', form.proektsro.toPlainText())
+            config2.set('АН', 'gip', form.gip.toPlainText())
+            config2.set('АН', 'proektdolzhn', form.proektdolzhn.toPlainText())
+            config2.set('АН', 'proektfio', form.proektfio.toPlainText())
+            config2.set('АН', 'proektprikaz', form.proektprikaz.toPlainText())
+            # ГРО
+            if not config2.has_section('ГРО'):
+                config2.add_section('ГРО')
+            config2.set('ГРО', 'gronaim', form.gronaim.toPlainText())
+            config2.set('ГРО', 'grorekviz', form.grorekviz.toPlainText())
+            config2.set('ГРО', 'groadres', form.groadres.toPlainText())
+            config2.set('ГРО', 'grodolzhn', form.grodolzhn.toPlainText())
+            config2.set('ГРО', 'grofio', form.grofio.toPlainText())
+            config2.set('ГРО', 'groprikaz', form.groprikaz.toPlainText())
 
-        # Акты
-        if not config2.has_section('Акты'):
-            config2.add_section('Акты')
-        config2.set('Акты', 'nActOGS', form.nActOGS.text())
-        config2.set('Акты', 'nActOtvod', form.nActOtvod.text())
-        config2.set('Акты', 'allrp', str(form.allrp.value()))
-        config2.set('Акты', 'allnr', str(form.allnr.value()))
-        config2.set('Акты', 'l_shem_ogs', str(form.l_shem_ogs.value()))
-        config2.set('Акты', 'l_kat_ogs', str(form.l_kat_ogs.value()))
-        config2.set('Акты', 'ShifrGP', form.ShifrGP.text())
-        config2.set('Акты', 'tchk_otvod', str(form.tchk_otvod.value()))
-        config2.set('Акты', 'l_shem_otvod', str(form.l_shem_otvod.value()))
-        config2.set('Акты', 'l_kat_otvod', str(form.l_kat_otvod.value()))
-        config2.set('Акты', 'ShifrPPO', form.ShifrPPO.text())
-        config2.set('Акты', 'ActOs_1', form.ActOs_1.toPlainText())
-        config2.set('Акты', 'ActOs_2', form.ActOs_2.toPlainText())
-        config2.set('Акты', 'ActOs_3', form.ActOs_3.toPlainText())
-        config2.set('Акты', 'ActOs_4', form.ActOs_4.toPlainText())
-        config2.set('Акты', 'ActOs_5', form.ActOs_5.toPlainText())
-        config2.set('Акты', 'ActOs_6', form.ActOs_6.toPlainText())
-        config2.set('Акты', 'ActOs_7', form.ActOs_7.toPlainText())
-        config2.set('Акты', 'ActOs_8', form.ActOs_8.toPlainText())
-        config2.set('Акты', 'ActOs_9', form.ActOs_9.toPlainText())
-        config2.set('Акты', 'ActOs_10', form.ActOs_10.toPlainText())
-        config2.set('Акты', 'ActOs_11', form.ActOs_11.toPlainText())
-        config2.set('Акты', 'ActOs_12', form.ActOs_12.toPlainText())
-        config2.set('Акты', 'ActOs_13', form.ActOs_13.toPlainText())
-        config2.set('Акты', 'ActOs_14', form.ActOs_14.toPlainText())
-        config2.set('Акты', 'ActOs_15', form.ActOs_15.toPlainText())
+            # Акты
+            if not config2.has_section('Акты'):
+                config2.add_section('Акты')
+            config2.set('Акты', 'nactogs', form.nactogs.text())
+            config2.set('Акты', 'nactotvod', form.nactotvod.text())
+            config2.set('Акты', 'allrp', str(form.allrp.value()))
+            config2.set('Акты', 'allnr', str(form.allnr.value()))
+            config2.set('Акты', 'l_shem_ogs', str(form.l_shem_ogs.value()))
+            config2.set('Акты', 'l_kat_ogs', str(form.l_kat_ogs.value()))
+            config2.set('Акты', 'shifrgp', form.shifrgp.text())
+            config2.set('Акты', 'tchk_otvod', str(form.tchk_otvod.value()))
+            config2.set('Акты', 'l_shem_otvod', str(form.l_shem_otvod.value()))
+            config2.set('Акты', 'l_kat_otvod', str(form.l_kat_otvod.value()))
+            config2.set('Акты', 'shifrppo', form.shifrppo.text())
+            #ОСИ
+            if not config2.has_section('ОСИ'):
+                config2.add_section('ОСИ')
+            config2.set('ОСИ', 'actos_1', form.actos_1.toPlainText())
+            config2.set('ОСИ', 'actos_2', form.actos_2.toPlainText())
+            config2.set('ОСИ', 'actos_3', form.actos_3.toPlainText())
+            config2.set('ОСИ', 'actos_4', form.actos_4.toPlainText())
+            config2.set('ОСИ', 'actos_5', form.actos_5.toPlainText())
+            config2.set('ОСИ', 'actos_6', form.actos_6.toPlainText())
+            config2.set('ОСИ', 'actos_7', form.actos_7.toPlainText())
+            config2.set('ОСИ', 'actos_8', form.actos_8.toPlainText())
+            config2.set('ОСИ', 'actos_9', form.actos_9.toPlainText())
+            config2.set('ОСИ', 'actos_10', form.actos_10.toPlainText())
+            config2.set('ОСИ', 'actos_11', form.actos_11.toPlainText())
+            config2.set('ОСИ', 'actos_12', form.actos_12.toPlainText())
+            config2.set('ОСИ', 'actos_13', form.actos_13.toPlainText())
+            config2.set('ОСИ', 'actos_14', form.actos_14.toPlainText())
+            config2.set('ОСИ', 'actos_15', form.actos_15.toPlainText())
 
-        config2.set('Акты', 'nActOs_1', form.nActOs_1.toPlainText())
-        config2.set('Акты', 'nActOs_2', form.nActOs_2.toPlainText())
-        config2.set('Акты', 'nActOs_3', form.nActOs_3.toPlainText())
-        config2.set('Акты', 'nActOs_4', form.nActOs_4.toPlainText())
-        config2.set('Акты', 'nActOs_5', form.nActOs_5.toPlainText())
-        config2.set('Акты', 'nActOs_6', form.nActOs_6.toPlainText())
-        config2.set('Акты', 'nActOs_7', form.nActOs_7.toPlainText())
-        config2.set('Акты', 'nActOs_8', form.nActOs_8.toPlainText())
-        config2.set('Акты', 'nActOs_9', form.nActOs_9.toPlainText())
-        config2.set('Акты', 'nActOs_10', form.nActOs_10.toPlainText())
-        config2.set('Акты', 'nActOs_11', form.nActOs_11.toPlainText())
-        config2.set('Акты', 'nActOs_12', form.nActOs_12.toPlainText())
-        config2.set('Акты', 'nActOs_13', form.nActOs_13.toPlainText())
-        config2.set('Акты', 'nActOs_14', form.nActOs_14.toPlainText())
-        config2.set('Акты', 'nActOs_15', form.nActOs_15.toPlainText())
+            config2.set('ОСИ', 'nactos_1', form.nactos_1.toPlainText())
+            config2.set('ОСИ', 'nactos_2', form.nactos_2.toPlainText())
+            config2.set('ОСИ', 'nactos_3', form.nactos_3.toPlainText())
+            config2.set('ОСИ', 'nactos_4', form.nactos_4.toPlainText())
+            config2.set('ОСИ', 'nactos_5', form.nactos_5.toPlainText())
+            config2.set('ОСИ', 'nactos_6', form.nactos_6.toPlainText())
+            config2.set('ОСИ', 'nactos_7', form.nactos_7.toPlainText())
+            config2.set('ОСИ', 'nactos_8', form.nactos_8.toPlainText())
+            config2.set('ОСИ', 'nactos_9', form.nactos_9.toPlainText())
+            config2.set('ОСИ', 'nactos_10', form.nactos_10.toPlainText())
+            config2.set('ОСИ', 'nactos_11', form.nactos_11.toPlainText())
+            config2.set('ОСИ', 'nactos_12', form.nactos_12.toPlainText())
+            config2.set('ОСИ', 'nactos_13', form.nactos_13.toPlainText())
+            config2.set('ОСИ', 'nactos_14', form.nactos_14.toPlainText())
+            config2.set('ОСИ', 'nactos_15', form.nactos_15.toPlainText())
 
-        config2.set('Акты', 'rp_1', str(form.rp_1.value()))
-        config2.set('Акты', 'rp_2', str(form.rp_2.value()))
-        config2.set('Акты', 'rp_3', str(form.rp_3.value()))
-        config2.set('Акты', 'rp_4', str(form.rp_4.value()))
-        config2.set('Акты', 'rp_5', str(form.rp_5.value()))
-        config2.set('Акты', 'rp_6', str(form.rp_6.value()))
-        config2.set('Акты', 'rp_7', str(form.rp_7.value()))
-        config2.set('Акты', 'rp_8', str(form.rp_8.value()))
-        config2.set('Акты', 'rp_9', str(form.rp_9.value()))
-        config2.set('Акты', 'rp_10', str(form.rp_10.value()))
-        config2.set('Акты', 'rp_11', str(form.rp_11.value()))
-        config2.set('Акты', 'rp_12', str(form.rp_12.value()))
-        config2.set('Акты', 'rp_13', str(form.rp_13.value()))
-        config2.set('Акты', 'rp_14', str(form.rp_14.value()))
-        config2.set('Акты', 'rp_15', str(form.rp_15.value()))
+            config2.set('ОСИ', 'rp_1', str(form.rp_1.value()))
+            config2.set('ОСИ', 'rp_2', str(form.rp_2.value()))
+            config2.set('ОСИ', 'rp_3', str(form.rp_3.value()))
+            config2.set('ОСИ', 'rp_4', str(form.rp_4.value()))
+            config2.set('ОСИ', 'rp_5', str(form.rp_5.value()))
+            config2.set('ОСИ', 'rp_6', str(form.rp_6.value()))
+            config2.set('ОСИ', 'rp_7', str(form.rp_7.value()))
+            config2.set('ОСИ', 'rp_8', str(form.rp_8.value()))
+            config2.set('ОСИ', 'rp_9', str(form.rp_9.value()))
+            config2.set('ОСИ', 'rp_10', str(form.rp_10.value()))
+            config2.set('ОСИ', 'rp_11', str(form.rp_11.value()))
+            config2.set('ОСИ', 'rp_12', str(form.rp_12.value()))
+            config2.set('ОСИ', 'rp_13', str(form.rp_13.value()))
+            config2.set('ОСИ', 'rp_14', str(form.rp_14.value()))
+            config2.set('ОСИ', 'rp_15', str(form.rp_15.value()))
 
-        config2.set('Акты', 'nr_1', str(form.nr_1.value()))
-        config2.set('Акты', 'nr_2', str(form.nr_2.value()))
-        config2.set('Акты', 'nr_3', str(form.nr_3.value()))
-        config2.set('Акты', 'nr_4', str(form.nr_4.value()))
-        config2.set('Акты', 'nr_5', str(form.nr_5.value()))
-        config2.set('Акты', 'nr_6', str(form.nr_6.value()))
-        config2.set('Акты', 'nr_7', str(form.nr_7.value()))
-        config2.set('Акты', 'nr_8', str(form.nr_8.value()))
-        config2.set('Акты', 'nr_9', str(form.nr_9.value()))
-        config2.set('Акты', 'nr_10', str(form.nr_10.value()))
-        config2.set('Акты', 'nr_11', str(form.nr_11.value()))
-        config2.set('Акты', 'nr_12', str(form.nr_12.value()))
-        config2.set('Акты', 'nr_13', str(form.nr_13.value()))
-        config2.set('Акты', 'nr_14', str(form.nr_14.value()))
-        config2.set('Акты', 'nr_15', str(form.nr_15.value()))
+            config2.set('ОСИ', 'nr_1', str(form.nr_1.value()))
+            config2.set('ОСИ', 'nr_2', str(form.nr_2.value()))
+            config2.set('ОСИ', 'nr_3', str(form.nr_3.value()))
+            config2.set('ОСИ', 'nr_4', str(form.nr_4.value()))
+            config2.set('ОСИ', 'nr_5', str(form.nr_5.value()))
+            config2.set('ОСИ', 'nr_6', str(form.nr_6.value()))
+            config2.set('ОСИ', 'nr_7', str(form.nr_7.value()))
+            config2.set('ОСИ', 'nr_8', str(form.nr_8.value()))
+            config2.set('ОСИ', 'nr_9', str(form.nr_9.value()))
+            config2.set('ОСИ', 'nr_10', str(form.nr_10.value()))
+            config2.set('ОСИ', 'nr_11', str(form.nr_11.value()))
+            config2.set('ОСИ', 'nr_12', str(form.nr_12.value()))
+            config2.set('ОСИ', 'nr_13', str(form.nr_13.value()))
+            config2.set('ОСИ', 'nr_14', str(form.nr_14.value()))
+            config2.set('ОСИ', 'nr_15', str(form.nr_15.value()))
 
-        config2.set('Акты', 'tos_1', str(form.tos_1.value()))
-        config2.set('Акты', 'tos_2', str(form.tos_2.value()))
-        config2.set('Акты', 'tos_3', str(form.tos_3.value()))
-        config2.set('Акты', 'tos_4', str(form.tos_4.value()))
-        config2.set('Акты', 'tos_5', str(form.tos_5.value()))
-        config2.set('Акты', 'tos_6', str(form.tos_6.value()))
-        config2.set('Акты', 'tos_7', str(form.tos_7.value()))
-        config2.set('Акты', 'tos_8', str(form.tos_8.value()))
-        config2.set('Акты', 'tos_9', str(form.tos_9.value()))
-        config2.set('Акты', 'tos_10', str(form.tos_10.value()))
-        config2.set('Акты', 'tos_11', str(form.tos_11.value()))
-        config2.set('Акты', 'tos_12', str(form.tos_12.value()))
-        config2.set('Акты', 'tos_13', str(form.tos_13.value()))
-        config2.set('Акты', 'tos_14', str(form.tos_14.value()))
-        config2.set('Акты', 'tos_15', str(form.tos_15.value()))
+            config2.set('ОСИ', 'tos_1', str(form.tos_1.value()))
+            config2.set('ОСИ', 'tos_2', str(form.tos_2.value()))
+            config2.set('ОСИ', 'tos_3', str(form.tos_3.value()))
+            config2.set('ОСИ', 'tos_4', str(form.tos_4.value()))
+            config2.set('ОСИ', 'tos_5', str(form.tos_5.value()))
+            config2.set('ОСИ', 'tos_6', str(form.tos_6.value()))
+            config2.set('ОСИ', 'tos_7', str(form.tos_7.value()))
+            config2.set('ОСИ', 'tos_8', str(form.tos_8.value()))
+            config2.set('ОСИ', 'tos_9', str(form.tos_9.value()))
+            config2.set('ОСИ', 'tos_10', str(form.tos_10.value()))
+            config2.set('ОСИ', 'tos_11', str(form.tos_11.value()))
+            config2.set('ОСИ', 'tos_12', str(form.tos_12.value()))
+            config2.set('ОСИ', 'tos_13', str(form.tos_13.value()))
+            config2.set('ОСИ', 'tos_14', str(form.tos_14.value()))
+            config2.set('ОСИ', 'tos_15', str(form.tos_15.value()))
 
-        config2.set('Акты', 'lshem_1', str(form.lshem_1.value()))
-        config2.set('Акты', 'lshem_2', str(form.lshem_2.value()))
-        config2.set('Акты', 'lshem_3', str(form.lshem_3.value()))
-        config2.set('Акты', 'lshem_4', str(form.lshem_4.value()))
-        config2.set('Акты', 'lshem_5', str(form.lshem_5.value()))
-        config2.set('Акты', 'lshem_6', str(form.lshem_6.value()))
-        config2.set('Акты', 'lshem_7', str(form.lshem_7.value()))
-        config2.set('Акты', 'lshem_8', str(form.lshem_8.value()))
-        config2.set('Акты', 'lshem_9', str(form.lshem_9.value()))
-        config2.set('Акты', 'lshem_10', str(form.lshem_10.value()))
-        config2.set('Акты', 'lshem_11', str(form.lshem_11.value()))
-        config2.set('Акты', 'lshem_12', str(form.lshem_12.value()))
-        config2.set('Акты', 'lshem_13', str(form.lshem_13.value()))
-        config2.set('Акты', 'lshem_14', str(form.lshem_14.value()))
-        config2.set('Акты', 'lshem_15', str(form.lshem_15.value()))
+            config2.set('ОСИ', 'lshem_1', str(form.lshem_1.value()))
+            config2.set('ОСИ', 'lshem_2', str(form.lshem_2.value()))
+            config2.set('ОСИ', 'lshem_3', str(form.lshem_3.value()))
+            config2.set('ОСИ', 'lshem_4', str(form.lshem_4.value()))
+            config2.set('ОСИ', 'lshem_5', str(form.lshem_5.value()))
+            config2.set('ОСИ', 'lshem_6', str(form.lshem_6.value()))
+            config2.set('ОСИ', 'lshem_7', str(form.lshem_7.value()))
+            config2.set('ОСИ', 'lshem_8', str(form.lshem_8.value()))
+            config2.set('ОСИ', 'lshem_9', str(form.lshem_9.value()))
+            config2.set('ОСИ', 'lshem_10', str(form.lshem_10.value()))
+            config2.set('ОСИ', 'lshem_11', str(form.lshem_11.value()))
+            config2.set('ОСИ', 'lshem_12', str(form.lshem_12.value()))
+            config2.set('ОСИ', 'lshem_13', str(form.lshem_13.value()))
+            config2.set('ОСИ', 'lshem_14', str(form.lshem_14.value()))
+            config2.set('ОСИ', 'lshem_15', str(form.lshem_15.value()))
 
-        config2.set('Акты', 'lkat_1', str(form.lkat_1.value()))
-        config2.set('Акты', 'lkat_2', str(form.lkat_2.value()))
-        config2.set('Акты', 'lkat_3', str(form.lkat_3.value()))
-        config2.set('Акты', 'lkat_4', str(form.lkat_4.value()))
-        config2.set('Акты', 'lkat_5', str(form.lkat_5.value()))
-        config2.set('Акты', 'lkat_6', str(form.lkat_6.value()))
-        config2.set('Акты', 'lkat_7', str(form.lkat_7.value()))
-        config2.set('Акты', 'lkat_8', str(form.lkat_8.value()))
-        config2.set('Акты', 'lkat_9', str(form.lkat_9.value()))
-        config2.set('Акты', 'lkat_10', str(form.lkat_10.value()))
-        config2.set('Акты', 'lkat_11', str(form.lkat_11.value()))
-        config2.set('Акты', 'lkat_12', str(form.lkat_12.value()))
-        config2.set('Акты', 'lkat_13', str(form.lkat_13.value()))
-        config2.set('Акты', 'lkat_14', str(form.lkat_14.value()))
-        config2.set('Акты', 'lkat_15', str(form.lkat_15.value()))
+            config2.set('ОСИ', 'lkat_1', str(form.lkat_1.value()))
+            config2.set('ОСИ', 'lkat_2', str(form.lkat_2.value()))
+            config2.set('ОСИ', 'lkat_3', str(form.lkat_3.value()))
+            config2.set('ОСИ', 'lkat_4', str(form.lkat_4.value()))
+            config2.set('ОСИ', 'lkat_5', str(form.lkat_5.value()))
+            config2.set('ОСИ', 'lkat_6', str(form.lkat_6.value()))
+            config2.set('ОСИ', 'lkat_7', str(form.lkat_7.value()))
+            config2.set('ОСИ', 'lkat_8', str(form.lkat_8.value()))
+            config2.set('ОСИ', 'lkat_9', str(form.lkat_9.value()))
+            config2.set('ОСИ', 'lkat_10', str(form.lkat_10.value()))
+            config2.set('ОСИ', 'lkat_11', str(form.lkat_11.value()))
+            config2.set('ОСИ', 'lkat_12', str(form.lkat_12.value()))
+            config2.set('ОСИ', 'lkat_13', str(form.lkat_13.value()))
+            config2.set('ОСИ', 'lkat_14', str(form.lkat_14.value()))
+            config2.set('ОСИ', 'lkat_15', str(form.lkat_15.value()))
 
-        config2.set('Акты', 'ShifrRD_1', form.ShifrRD_1.toPlainText())
-        config2.set('Акты', 'ShifrRD_2', form.ShifrRD_2.toPlainText())
-        config2.set('Акты', 'ShifrRD_3', form.ShifrRD_3.toPlainText())
-        config2.set('Акты', 'ShifrRD_4', form.ShifrRD_4.toPlainText())
-        config2.set('Акты', 'ShifrRD_5', form.ShifrRD_5.toPlainText())
-        config2.set('Акты', 'ShifrRD_6', form.ShifrRD_6.toPlainText())
-        config2.set('Акты', 'ShifrRD_7', form.ShifrRD_7.toPlainText())
-        config2.set('Акты', 'ShifrRD_8', form.ShifrRD_8.toPlainText())
-        config2.set('Акты', 'ShifrRD_9', form.ShifrRD_9.toPlainText())
-        config2.set('Акты', 'ShifrRD_10', form.ShifrRD_10.toPlainText())
-        config2.set('Акты', 'ShifrRD_11', form.ShifrRD_11.toPlainText())
-        config2.set('Акты', 'ShifrRD_12', form.ShifrRD_12.toPlainText())
-        config2.set('Акты', 'ShifrRD_13', form.ShifrRD_13.toPlainText())
-        config2.set('Акты', 'ShifrRD_14', form.ShifrRD_14.toPlainText())
-        config2.set('Акты', 'ShifrRD_15', form.ShifrRD_15.toPlainText())
+            config2.set('ОСИ', 'shifrrd_1', form.shifrrd_1.toPlainText())
+            config2.set('ОСИ', 'shifrrd_2', form.shifrrd_2.toPlainText())
+            config2.set('ОСИ', 'shifrrd_3', form.shifrrd_3.toPlainText())
+            config2.set('ОСИ', 'shifrrd_4', form.shifrrd_4.toPlainText())
+            config2.set('ОСИ', 'shifrrd_5', form.shifrrd_5.toPlainText())
+            config2.set('ОСИ', 'shifrrd_6', form.shifrrd_6.toPlainText())
+            config2.set('ОСИ', 'shifrrd_7', form.shifrrd_7.toPlainText())
+            config2.set('ОСИ', 'shifrrd_8', form.shifrrd_8.toPlainText())
+            config2.set('ОСИ', 'shifrrd_9', form.shifrrd_9.toPlainText())
+            config2.set('ОСИ', 'shifrrd_10', form.shifrrd_10.toPlainText())
+            config2.set('ОСИ', 'shifrrd_11', form.shifrrd_11.toPlainText())
+            config2.set('ОСИ', 'shifrrd_12', form.shifrrd_12.toPlainText())
+            config2.set('ОСИ', 'shifrrd_13', form.shifrrd_13.toPlainText())
+            config2.set('ОСИ', 'shifrrd_14', form.shifrrd_14.toPlainText())
+            config2.set('ОСИ', 'shifrrd_15', form.shifrrd_15.toPlainText())
 
-        with open(file, 'w+') as configfile2:
-            config2.write(configfile2)
+            with open('./Config/ini_form.ini', 'w') as configfile2:
+                config2.write(configfile2)
+            shutil.copyfile('./Config/ini_form.ini', file)
     else:
         form.tabWidget.setCurrentIndex(0)
         form.object.setFocus()
-
-
-#     ini_form_cfg.setValue('ON_Bybit', int(form.ON_Bybit.isChecked()))
-#     ini_form_cfg.setValue('Hedge', int(form.Hedge.isChecked()))
-#     ini_form_cfg.setValue('leverage', int(form.leverage.value()))
-#     ini_form_cfg.setValue('percent_margin', float(form.percent_margin.value()))
-#     ini_form_cfg.setValue('fix_margin', int(form.fix_margin.value()))
-#
-#     ini_form_cfg.setValue('max_margin', int(form.max_margin.value()))
-#     ini_form_cfg.setValue('panicsell', int(form.panicsell.value()))
-#     ini_form_cfg.setValue('rb_set_percent', int(form.rb_set_percent.isChecked()))
-#     ini_form_cfg.setValue('rb_set_margin', int(form.rb_set_margin.isChecked()))
-#
-#     ini_form_cfg.setValue('poluorder', int(form.poluorder.value()))
-#     ini_form_cfg.setValue('LMT_1st', int(form.LMT_1st.value()))
-#     ini_form_cfg.setValue('LMT_2nd', int(form.LMT_2nd.value()))
-#
-#     ini_form_cfg.setValue('TP_1st', int(form.TP_1st.value()))
-#     ini_form_cfg.setValue('TP_2nd', int(form.TP_2nd.value()))
-#
-#     ini_form_cfg.setValue('VIP1', int(form.VIP1.isChecked()))
-#     ini_form_cfg.setValue('VIP2', int(form.VIP2.isChecked()))
-#     ini_form_cfg.setValue('VIP3', int(form.VIP3.isChecked()))
-#     ini_form_cfg.setValue('VIP4', int(form.VIP4.isChecked()))
-#     ini_form_cfg.setValue('VIP5', int(form.VIP5.isChecked()))
-#     ini_form_cfg.setValue('VIP6', int(form.VIP6.isChecked()))
-#     ini_form_cfg.setValue('VIP7', int(form.VIP7.isChecked()))
-#     ini_form_cfg.setValue('no_vip', int(form.no_vip.isChecked()))
-#     ini_form_cfg.setValue('test_ch', int(form.test_ch.isChecked()))
-#
-#     if not config.has_section('Telegram'):
-#         config.add_section('Telegram')
-#     if not config.has_section('Bybit'):
-#         config.add_section('Bybit')
-#         config.set('Bybit', 'endpoint', 'https://api.bybit.com')
-#     if not config.has_section('Binance'):
-#         config.add_section('Binance')
-#     if not config.has_section('Criptonec'):
-#         config.add_section('Criptonec')
-#         config.set('Criptonec', 'id_vip_1', '-1001475114696')
-#         config.set('Criptonec', 'id_vip_2', '-1001632167278')
-#         config.set('Criptonec', 'id_vip_3', '-1001528138841')
-#         config.set('Criptonec', 'id_vip_4', '-1001630776206')
-#         config.set('Criptonec', 'id_vip_5', '-1001674027602')
-#         config.set('Criptonec', 'id_vip_6', '-1001650167630')
-#         config.set('Criptonec', 'id_vip_7', '-1001707100944')
-#         config.set('Criptonec', 'indicator_by_cryptonec', '-1001266391544')
-#     if not config.has_section('MY_CHANNEL'):
-#         config.add_section('MY_CHANNEL')
-#
-#     if form.checkApi_Bybit.isChecked():
-#         config.set('Bybit', 'api_key_bybit', form.API_KEY_Bybit.text())
-#         config.set('Bybit', 'api_secret_bybit', form.API_SECRET_Bybit.text())
-#
-#     config.set('MY_CHANNEL', 'my_channel', form.MY_CHANNEL.text())
-#     config.set('MY_CHANNEL', 'test_ch', form.MY_CHANNEL_2.text())
-#
-#     config.set('Telegram', 'api_token', form.api_token.text())
-#     config.set('Telegram', 'api_id', form.api_id.text())
-#     config.set('Telegram', 'api_hash', form.api_hash.text())
-#     config.set('Telegram', 'session_string', form.session_string.text())
-#     with open(file_config, 'w') as configfile:
-#         config.write(configfile)
-#     print('save complited')
 
 
 def ini_form(file=None):
@@ -357,8 +299,7 @@ def ini_form(file=None):
             form.kodstr.setText(config.get('Объект', 'kodstr'))
             form.adres.setText(config.get('Объект', 'adres'))
             # Заказчик
-            form.zakazchik.setText(config.get('Заказчик', 'zakazchik'))
-            # form.zakazchik2.setText(config.get('Заказчик', 'zakazchik2'))
+            form.zakazchiknaim.setText(config.get('Заказчик', 'zakazchiknaim'))
             form.zakazchikrekviz.setText(config.get('Заказчик', 'zakazchikrekviz'))
             form.zakazchikadres.setText(config.get('Заказчик', 'zakazchikadres'))
             form.zakazchiksro.setText(config.get('Заказчик', 'zakazchiksro'))
@@ -366,268 +307,194 @@ def ini_form(file=None):
             form.zakazchikfio.setText(config.get('Заказчик', 'zakazchikfio'))
             form.zakazchikprikaz.setText(config.get('Заказчик', 'zakazchikprikaz'))
             # Стройконтроль
-            form.SKrekviz.setText(config.get('Стройконтроль', 'SKrekviz'))
-            form.SKadres.setText(config.get('Стройконтроль', 'SKadres'))
-            form.SKdolzhnost.setText(config.get('Стройконтроль', 'SKdolzhnost'))
-            form.SKfio.setText(config.get('Стройконтроль', 'SKfio'))
-            form.SKprikaz.setText(config.get('Стройконтроль', 'SKprikaz'))
-            # form.SKreestr.setText(config.get('General', 'SKreestr'))
+            form.skrekviz.setText(config.get('Стройконтроль', 'skrekviz'))
+            form.skadres.setText(config.get('Стройконтроль', 'skadres'))
+            form.skdolzhnost.setText(config.get('Стройконтроль', 'skdolzhnost'))
+            form.skfio.setText(config.get('Стройконтроль', 'skfio'))
+            form.skprikaz.setText(config.get('Стройконтроль', 'skprikaz'))
+            # form.skreestr.setText(config.get('Стройконтроль', 'skreestr'))
             # Генподрядчик
-            form.genpodryadchik.setText(config.get('Генподрядчик', 'genpodryadchik'))
+            form.genpodryadchiknaim.setText(config.get('Генподрядчик', 'genpodryadchiknaim'))
             form.genpodryadchikrekviz.setText(config.get('Генподрядчик', 'genpodryadchikrekviz'))
             form.genpodryadchikadres.setText(config.get('Генподрядчик', 'genpodryadchikadres'))
             form.genpodryadchiksro.setText(config.get('Генподрядчик', 'genpodryadchiksro'))
             form.genpodryadchikdolzhn.setText(config.get('Генподрядчик', 'genpodryadchikdolzhn'))
             form.genpodryadchikfio.setText(config.get('Генподрядчик', 'genpodryadchikfio'))
             form.genpodryadchikprikaz.setText(config.get('Генподрядчик', 'genpodryadchikprikaz'))
-            form.genpodryadchikSKdolzhnost.setText(config.get('Генподрядчик', 'genpodryadchikSKdolzhnost'))
-            form.genpodryadchikSKfio.setText(config.get('Генподрядчик', 'genpodryadchikSKfio'))
-            form.genpodryadchikSKprikaz.setText(config.get('Генподрядчик', 'genpodryadchikSKprikaz'))
-            form.genpodryadchikSKreestr.setText(config.get('Генподрядчик', 'genpodryadchikSKreestr'))
+            form.genpodryadchikskdolzhnost.setText(config.get('Генподрядчик', 'genpodryadchikskdolzhnost'))
+            form.genpodryadchikskfio.setText(config.get('Генподрядчик', 'genpodryadchikskfio'))
+            form.genpodryadchikskprikaz.setText(config.get('Генподрядчик', 'genpodryadchikskprikaz'))
+            form.genpodryadchikskreestr.setText(config.get('Генподрядчик', 'genpodryadchikskreestr'))
             # Субподрядчик
-            form.stroitel.setText(config.get('Субподрядчик', 'stroitel'))
+            form.stroitelnaim.setText(config.get('Субподрядчик', 'stroitelnaim'))
             form.stroiteldolzhn.setText(config.get('Субподрядчик', 'stroiteldolzhn'))
             form.stroitelfio.setText(config.get('Субподрядчик', 'stroitelfio'))
             form.stroitelprikaz.setText(config.get('Субподрядчик', 'stroitelprikaz'))
             # АН
-            form.proekt.setText(config.get('АН', 'proekt'))
+            form.proektnaim.setText(config.get('АН', 'proektnaim'))
             form.proektrekviz.setText(config.get('АН', 'proektrekviz'))
             form.proektadres.setText(config.get('АН', 'proektadres'))
             form.proektsro.setText(config.get('АН', 'proektsro'))
-            form.GIP.setText(config.get('АН', 'GIP'))
+            form.gip.setText(config.get('АН', 'gip'))
             form.proektdolzhn.setText(config.get('АН', 'proektdolzhn'))
             form.proektfio.setText(config.get('АН', 'proektfio'))
             form.proektprikaz.setText(config.get('АН', 'proektprikaz'))
             # ГРО
-            form.GRO.setText(config.get('ГРО', 'GRO'))
-            form.GROrekviz.setText(config.get('ГРО', 'GROrekviz'))
-            form.GROadres.setText(config.get('ГРО', 'GROadres'))
-            form.GROdolzhn.setText(config.get('ГРО', 'GROdolzhn'))
-            form.GROfio.setText(config.get('ГРО', 'GROfio'))
-            form.GROprikaz.setText(config.get('ГРО', 'GROprikaz'))
+            form.gronaim.setText(config.get('ГРО', 'gronaim'))
+            form.grorekviz.setText(config.get('ГРО', 'grorekviz'))
+            form.groadres.setText(config.get('ГРО', 'groadres'))
+            form.grodolzhn.setText(config.get('ГРО', 'grodolzhn'))
+            form.grofio.setText(config.get('ГРО', 'grofio'))
+            form.groprikaz.setText(config.get('ГРО', 'groprikaz'))
             # Акты
-            form.nActOGS.setText(config.get('Акты', 'nActOGS'))
-            form.nActOtvod.setText(config.get('Акты', 'nActOtvod'))
+            form.nactogs.setText(config.get('Акты', 'nactogs'))
+            form.nactotvod.setText(config.get('Акты', 'nactotvod'))
             form.allrp.setValue(int(config.get('Акты', 'allrp')))
             form.allnr.setValue(int(config.get('Акты', 'allnr')))
             form.l_shem_ogs.setValue(int(config.get('Акты', 'l_shem_ogs')))
             form.l_kat_ogs.setValue(int(config.get('Акты', 'l_kat_ogs')))
-            form.ShifrGP.setText(config.get('Акты', 'ShifrGP'))
+            form.shifrgp.setText(config.get('Акты', 'shifrgp'))
             form.tchk_otvod.setValue(int(config.get('Акты', 'tchk_otvod')))
             form.l_shem_otvod.setValue(int(config.get('Акты', 'l_shem_otvod')))
             form.l_kat_otvod.setValue(int(config.get('Акты', 'l_kat_otvod')))
-            form.ShifrPPO.setText(config.get('Акты', 'ShifrPPO'))
-            form.ActOs_1.setText(config.get('Акты', 'ActOs_1'))
-            form.ActOs_2.setText(config.get('Акты', 'ActOs_2'))
-            form.ActOs_3.setText(config.get('Акты', 'ActOs_3'))
-            form.ActOs_4.setText(config.get('Акты', 'ActOs_4'))
-            form.ActOs_5.setText(config.get('Акты', 'ActOs_5'))
-            form.ActOs_6.setText(config.get('Акты', 'ActOs_6'))
-            form.ActOs_7.setText(config.get('Акты', 'ActOs_7'))
-            form.ActOs_8.setText(config.get('Акты', 'ActOs_8'))
-            form.ActOs_9.setText(config.get('Акты', 'ActOs_9'))
-            form.ActOs_10.setText(config.get('Акты', 'ActOs_10'))
-            form.ActOs_11.setText(config.get('Акты', 'ActOs_11'))
-            form.ActOs_12.setText(config.get('Акты', 'ActOs_12'))
-            form.ActOs_13.setText(config.get('Акты', 'ActOs_13'))
-            form.ActOs_14.setText(config.get('Акты', 'ActOs_14'))
-            form.ActOs_15.setText(config.get('Акты', 'ActOs_15'))
+            form.shifrppo.setText(config.get('Акты', 'shifrppo'))
+            # ОСИ
+            form.actos_1.setText(config.get('ОСИ', 'actos_1'))
+            form.actos_2.setText(config.get('ОСИ', 'actos_2'))
+            form.actos_3.setText(config.get('ОСИ', 'actos_3'))
+            form.actos_4.setText(config.get('ОСИ', 'actos_4'))
+            form.actos_5.setText(config.get('ОСИ', 'actos_5'))
+            form.actos_6.setText(config.get('ОСИ', 'actos_6'))
+            form.actos_7.setText(config.get('ОСИ', 'actos_7'))
+            form.actos_8.setText(config.get('ОСИ', 'actos_8'))
+            form.actos_9.setText(config.get('ОСИ', 'actos_9'))
+            form.actos_10.setText(config.get('ОСИ', 'actos_10'))
+            form.actos_11.setText(config.get('ОСИ', 'actos_11'))
+            form.actos_12.setText(config.get('ОСИ', 'actos_12'))
+            form.actos_13.setText(config.get('ОСИ', 'actos_13'))
+            form.actos_14.setText(config.get('ОСИ', 'actos_14'))
+            form.actos_15.setText(config.get('ОСИ', 'actos_15'))
 
-            form.nActOs_1.setText(config.get('Акты', 'nActOs_1'))
-            form.nActOs_2.setText(config.get('Акты', 'nActOs_2'))
-            form.nActOs_3.setText(config.get('Акты', 'nActOs_3'))
-            form.nActOs_4.setText(config.get('Акты', 'nActOs_4'))
-            form.nActOs_5.setText(config.get('Акты', 'nActOs_5'))
-            form.nActOs_6.setText(config.get('Акты', 'nActOs_6'))
-            form.nActOs_7.setText(config.get('Акты', 'nActOs_7'))
-            form.nActOs_8.setText(config.get('Акты', 'nActOs_8'))
-            form.nActOs_9.setText(config.get('Акты', 'nActOs_9'))
-            form.nActOs_10.setText(config.get('Акты', 'nActOs_10'))
-            form.nActOs_11.setText(config.get('Акты', 'nActOs_11'))
-            form.nActOs_12.setText(config.get('Акты', 'nActOs_12'))
-            form.nActOs_13.setText(config.get('Акты', 'nActOs_13'))
-            form.nActOs_14.setText(config.get('Акты', 'nActOs_14'))
-            form.nActOs_15.setText(config.get('Акты', 'nActOs_15'))
+            form.nactos_1.setText(config.get('ОСИ', 'nactos_1'))
+            form.nactos_2.setText(config.get('ОСИ', 'nactos_2'))
+            form.nactos_3.setText(config.get('ОСИ', 'nactos_3'))
+            form.nactos_4.setText(config.get('ОСИ', 'nactos_4'))
+            form.nactos_5.setText(config.get('ОСИ', 'nactos_5'))
+            form.nactos_6.setText(config.get('ОСИ', 'nactos_6'))
+            form.nactos_7.setText(config.get('ОСИ', 'nactos_7'))
+            form.nactos_8.setText(config.get('ОСИ', 'nactos_8'))
+            form.nactos_9.setText(config.get('ОСИ', 'nactos_9'))
+            form.nactos_10.setText(config.get('ОСИ', 'nactos_10'))
+            form.nactos_11.setText(config.get('ОСИ', 'nactos_11'))
+            form.nactos_12.setText(config.get('ОСИ', 'nactos_12'))
+            form.nactos_13.setText(config.get('ОСИ', 'nactos_13'))
+            form.nactos_14.setText(config.get('ОСИ', 'nactos_14'))
+            form.nactos_15.setText(config.get('ОСИ', 'nactos_15'))
 
-            form.rp_1.setValue(int(config.get('Акты', 'rp_1')))
-            form.rp_2.setValue(int(config.get('Акты', 'rp_2')))
-            form.rp_3.setValue(int(config.get('Акты', 'rp_3')))
-            form.rp_4.setValue(int(config.get('Акты', 'rp_4')))
-            form.rp_5.setValue(int(config.get('Акты', 'rp_5')))
-            form.rp_6.setValue(int(config.get('Акты', 'rp_6')))
-            form.rp_7.setValue(int(config.get('Акты', 'rp_7')))
-            form.rp_8.setValue(int(config.get('Акты', 'rp_8')))
-            form.rp_9.setValue(int(config.get('Акты', 'rp_9')))
-            form.rp_10.setValue(int(config.get('Акты', 'rp_10')))
-            form.rp_11.setValue(int(config.get('Акты', 'rp_11')))
-            form.rp_12.setValue(int(config.get('Акты', 'rp_12')))
-            form.rp_13.setValue(int(config.get('Акты', 'rp_13')))
-            form.rp_14.setValue(int(config.get('Акты', 'rp_14')))
-            form.rp_15.setValue(int(config.get('Акты', 'rp_15')))
+            form.rp_1.setValue(int(config.get('ОСИ', 'rp_1')))
+            form.rp_2.setValue(int(config.get('ОСИ', 'rp_2')))
+            form.rp_3.setValue(int(config.get('ОСИ', 'rp_3')))
+            form.rp_4.setValue(int(config.get('ОСИ', 'rp_4')))
+            form.rp_5.setValue(int(config.get('ОСИ', 'rp_5')))
+            form.rp_6.setValue(int(config.get('ОСИ', 'rp_6')))
+            form.rp_7.setValue(int(config.get('ОСИ', 'rp_7')))
+            form.rp_8.setValue(int(config.get('ОСИ', 'rp_8')))
+            form.rp_9.setValue(int(config.get('ОСИ', 'rp_9')))
+            form.rp_10.setValue(int(config.get('ОСИ', 'rp_10')))
+            form.rp_11.setValue(int(config.get('ОСИ', 'rp_11')))
+            form.rp_12.setValue(int(config.get('ОСИ', 'rp_12')))
+            form.rp_13.setValue(int(config.get('ОСИ', 'rp_13')))
+            form.rp_14.setValue(int(config.get('ОСИ', 'rp_14')))
+            form.rp_15.setValue(int(config.get('ОСИ', 'rp_15')))
 
-            form.nr_1.setValue(int(config.get('Акты', 'nr_1')))
-            form.nr_2.setValue(int(config.get('Акты', 'nr_2')))
-            form.nr_3.setValue(int(config.get('Акты', 'nr_3')))
-            form.nr_4.setValue(int(config.get('Акты', 'nr_4')))
-            form.nr_5.setValue(int(config.get('Акты', 'nr_5')))
-            form.nr_6.setValue(int(config.get('Акты', 'nr_6')))
-            form.nr_7.setValue(int(config.get('Акты', 'nr_7')))
-            form.nr_8.setValue(int(config.get('Акты', 'nr_8')))
-            form.nr_9.setValue(int(config.get('Акты', 'nr_9')))
-            form.nr_10.setValue(int(config.get('Акты', 'nr_10')))
-            form.nr_11.setValue(int(config.get('Акты', 'nr_11')))
-            form.nr_12.setValue(int(config.get('Акты', 'nr_12')))
-            form.nr_13.setValue(int(config.get('Акты', 'nr_13')))
-            form.nr_14.setValue(int(config.get('Акты', 'nr_14')))
-            form.nr_15.setValue(int(config.get('Акты', 'nr_15')))
+            form.nr_1.setValue(int(config.get('ОСИ', 'nr_1')))
+            form.nr_2.setValue(int(config.get('ОСИ', 'nr_2')))
+            form.nr_3.setValue(int(config.get('ОСИ', 'nr_3')))
+            form.nr_4.setValue(int(config.get('ОСИ', 'nr_4')))
+            form.nr_5.setValue(int(config.get('ОСИ', 'nr_5')))
+            form.nr_6.setValue(int(config.get('ОСИ', 'nr_6')))
+            form.nr_7.setValue(int(config.get('ОСИ', 'nr_7')))
+            form.nr_8.setValue(int(config.get('ОСИ', 'nr_8')))
+            form.nr_9.setValue(int(config.get('ОСИ', 'nr_9')))
+            form.nr_10.setValue(int(config.get('ОСИ', 'nr_10')))
+            form.nr_11.setValue(int(config.get('ОСИ', 'nr_11')))
+            form.nr_12.setValue(int(config.get('ОСИ', 'nr_12')))
+            form.nr_13.setValue(int(config.get('ОСИ', 'nr_13')))
+            form.nr_14.setValue(int(config.get('ОСИ', 'nr_14')))
+            form.nr_15.setValue(int(config.get('ОСИ', 'nr_15')))
 
-            form.tos_1.setValue(int(config.get('Акты', 'tos_1')))
-            form.tos_2.setValue(int(config.get('Акты', 'tos_2')))
-            form.tos_3.setValue(int(config.get('Акты', 'tos_3')))
-            form.tos_4.setValue(int(config.get('Акты', 'tos_4')))
-            form.tos_5.setValue(int(config.get('Акты', 'tos_5')))
-            form.tos_6.setValue(int(config.get('Акты', 'tos_6')))
-            form.tos_7.setValue(int(config.get('Акты', 'tos_7')))
-            form.tos_8.setValue(int(config.get('Акты', 'tos_8')))
-            form.tos_9.setValue(int(config.get('Акты', 'tos_9')))
-            form.tos_10.setValue(int(config.get('Акты', 'tos_10')))
-            form.tos_11.setValue(int(config.get('Акты', 'tos_11')))
-            form.tos_12.setValue(int(config.get('Акты', 'tos_12')))
-            form.tos_13.setValue(int(config.get('Акты', 'tos_13')))
-            form.tos_14.setValue(int(config.get('Акты', 'tos_14')))
-            form.tos_15.setValue(int(config.get('Акты', 'tos_15')))
+            form.tos_1.setValue(int(config.get('ОСИ', 'tos_1')))
+            form.tos_2.setValue(int(config.get('ОСИ', 'tos_2')))
+            form.tos_3.setValue(int(config.get('ОСИ', 'tos_3')))
+            form.tos_4.setValue(int(config.get('ОСИ', 'tos_4')))
+            form.tos_5.setValue(int(config.get('ОСИ', 'tos_5')))
+            form.tos_6.setValue(int(config.get('ОСИ', 'tos_6')))
+            form.tos_7.setValue(int(config.get('ОСИ', 'tos_7')))
+            form.tos_8.setValue(int(config.get('ОСИ', 'tos_8')))
+            form.tos_9.setValue(int(config.get('ОСИ', 'tos_9')))
+            form.tos_10.setValue(int(config.get('ОСИ', 'tos_10')))
+            form.tos_11.setValue(int(config.get('ОСИ', 'tos_11')))
+            form.tos_12.setValue(int(config.get('ОСИ', 'tos_12')))
+            form.tos_13.setValue(int(config.get('ОСИ', 'tos_13')))
+            form.tos_14.setValue(int(config.get('ОСИ', 'tos_14')))
+            form.tos_15.setValue(int(config.get('ОСИ', 'tos_15')))
 
-            form.lshem_1.setValue(int(config.get('Акты', 'lshem_1')))
-            form.lshem_2.setValue(int(config.get('Акты', 'lshem_2')))
-            form.lshem_3.setValue(int(config.get('Акты', 'lshem_3')))
-            form.lshem_4.setValue(int(config.get('Акты', 'lshem_4')))
-            form.lshem_5.setValue(int(config.get('Акты', 'lshem_5')))
-            form.lshem_6.setValue(int(config.get('Акты', 'lshem_6')))
-            form.lshem_7.setValue(int(config.get('Акты', 'lshem_7')))
-            form.lshem_8.setValue(int(config.get('Акты', 'lshem_8')))
-            form.lshem_9.setValue(int(config.get('Акты', 'lshem_9')))
-            form.lshem_10.setValue(int(config.get('Акты', 'lshem_10')))
-            form.lshem_11.setValue(int(config.get('Акты', 'lshem_11')))
-            form.lshem_12.setValue(int(config.get('Акты', 'lshem_12')))
-            form.lshem_13.setValue(int(config.get('Акты', 'lshem_13')))
-            form.lshem_14.setValue(int(config.get('Акты', 'lshem_14')))
-            form.lshem_15.setValue(int(config.get('Акты', 'lshem_15')))
+            form.lshem_1.setValue(int(config.get('ОСИ', 'lshem_1')))
+            form.lshem_2.setValue(int(config.get('ОСИ', 'lshem_2')))
+            form.lshem_3.setValue(int(config.get('ОСИ', 'lshem_3')))
+            form.lshem_4.setValue(int(config.get('ОСИ', 'lshem_4')))
+            form.lshem_5.setValue(int(config.get('ОСИ', 'lshem_5')))
+            form.lshem_6.setValue(int(config.get('ОСИ', 'lshem_6')))
+            form.lshem_7.setValue(int(config.get('ОСИ', 'lshem_7')))
+            form.lshem_8.setValue(int(config.get('ОСИ', 'lshem_8')))
+            form.lshem_9.setValue(int(config.get('ОСИ', 'lshem_9')))
+            form.lshem_10.setValue(int(config.get('ОСИ', 'lshem_10')))
+            form.lshem_11.setValue(int(config.get('ОСИ', 'lshem_11')))
+            form.lshem_12.setValue(int(config.get('ОСИ', 'lshem_12')))
+            form.lshem_13.setValue(int(config.get('ОСИ', 'lshem_13')))
+            form.lshem_14.setValue(int(config.get('ОСИ', 'lshem_14')))
+            form.lshem_15.setValue(int(config.get('ОСИ', 'lshem_15')))
 
-            form.lkat_1.setValue(int(config.get('Акты', 'lkat_1')))
-            form.lkat_2.setValue(int(config.get('Акты', 'lkat_2')))
-            form.lkat_3.setValue(int(config.get('Акты', 'lkat_3')))
-            form.lkat_4.setValue(int(config.get('Акты', 'lkat_4')))
-            form.lkat_5.setValue(int(config.get('Акты', 'lkat_5')))
-            form.lkat_6.setValue(int(config.get('Акты', 'lkat_6')))
-            form.lkat_7.setValue(int(config.get('Акты', 'lkat_7')))
-            form.lkat_8.setValue(int(config.get('Акты', 'lkat_8')))
-            form.lkat_9.setValue(int(config.get('Акты', 'lkat_9')))
-            form.lkat_10.setValue(int(config.get('Акты', 'lkat_10')))
-            form.lkat_11.setValue(int(config.get('Акты', 'lkat_11')))
-            form.lkat_12.setValue(int(config.get('Акты', 'lkat_12')))
-            form.lkat_13.setValue(int(config.get('Акты', 'lkat_13')))
-            form.lkat_14.setValue(int(config.get('Акты', 'lkat_14')))
-            form.lkat_15.setValue(int(config.get('Акты', 'lkat_15')))
+            form.lkat_1.setValue(int(config.get('ОСИ', 'lkat_1')))
+            form.lkat_2.setValue(int(config.get('ОСИ', 'lkat_2')))
+            form.lkat_3.setValue(int(config.get('ОСИ', 'lkat_3')))
+            form.lkat_4.setValue(int(config.get('ОСИ', 'lkat_4')))
+            form.lkat_5.setValue(int(config.get('ОСИ', 'lkat_5')))
+            form.lkat_6.setValue(int(config.get('ОСИ', 'lkat_6')))
+            form.lkat_7.setValue(int(config.get('ОСИ', 'lkat_7')))
+            form.lkat_8.setValue(int(config.get('ОСИ', 'lkat_8')))
+            form.lkat_9.setValue(int(config.get('ОСИ', 'lkat_9')))
+            form.lkat_10.setValue(int(config.get('ОСИ', 'lkat_10')))
+            form.lkat_11.setValue(int(config.get('ОСИ', 'lkat_11')))
+            form.lkat_12.setValue(int(config.get('ОСИ', 'lkat_12')))
+            form.lkat_13.setValue(int(config.get('ОСИ', 'lkat_13')))
+            form.lkat_14.setValue(int(config.get('ОСИ', 'lkat_14')))
+            form.lkat_15.setValue(int(config.get('ОСИ', 'lkat_15')))
 
-            form.ShifrRD_1.setText(config.get('Акты', 'ShifrRD_1'))
-            form.ShifrRD_2.setText(config.get('Акты', 'ShifrRD_2'))
-            form.ShifrRD_3.setText(config.get('Акты', 'ShifrRD_3'))
-            form.ShifrRD_4.setText(config.get('Акты', 'ShifrRD_4'))
-            form.ShifrRD_5.setText(config.get('Акты', 'ShifrRD_5'))
-            form.ShifrRD_6.setText(config.get('Акты', 'ShifrRD_6'))
-            form.ShifrRD_7.setText(config.get('Акты', 'ShifrRD_7'))
-            form.ShifrRD_8.setText(config.get('Акты', 'ShifrRD_8'))
-            form.ShifrRD_9.setText(config.get('Акты', 'ShifrRD_9'))
-            form.ShifrRD_10.setText(config.get('Акты', 'ShifrRD_10'))
-            form.ShifrRD_11.setText(config.get('Акты', 'ShifrRD_11'))
-            form.ShifrRD_12.setText(config.get('Акты', 'ShifrRD_12'))
-            form.ShifrRD_13.setText(config.get('Акты', 'ShifrRD_13'))
-            form.ShifrRD_14.setText(config.get('Акты', 'ShifrRD_14'))
-            form.ShifrRD_15.setText(config.get('Акты', 'ShifrRD_15'))
+            form.shifrrd_1.setText(config.get('ОСИ', 'shifrrd_1'))
+            form.shifrrd_2.setText(config.get('ОСИ', 'shifrrd_2'))
+            form.shifrrd_3.setText(config.get('ОСИ', 'shifrrd_3'))
+            form.shifrrd_4.setText(config.get('ОСИ', 'shifrrd_4'))
+            form.shifrrd_5.setText(config.get('ОСИ', 'shifrrd_5'))
+            form.shifrrd_6.setText(config.get('ОСИ', 'shifrrd_6'))
+            form.shifrrd_7.setText(config.get('ОСИ', 'shifrrd_7'))
+            form.shifrrd_8.setText(config.get('ОСИ', 'shifrrd_8'))
+            form.shifrrd_9.setText(config.get('ОСИ', 'shifrrd_9'))
+            form.shifrrd_10.setText(config.get('ОСИ', 'shifrrd_10'))
+            form.shifrrd_11.setText(config.get('ОСИ', 'shifrrd_11'))
+            form.shifrrd_12.setText(config.get('ОСИ', 'shifrrd_12'))
+            form.shifrrd_13.setText(config.get('ОСИ', 'shifrrd_13'))
+            form.shifrrd_14.setText(config.get('ОСИ', 'shifrrd_14'))
+            form.shifrrd_15.setText(config.get('ОСИ', 'shifrrd_15'))
 
-        # form.ON_Bybit.setChecked(bool(int(ini_form_cfg.value('ON_Bybit', 0))))
+            # form.ON_Bybit.setChecked(bool(int(ini_form_cfg.value('ON_Bybit', 0))))
         # if form.ON_Bybit.isChecked():
         #     form.ON_Bybit.setText('ВКЛ')
         #     form.ON_Bybit.setStyleSheet("color: Green;")
-        # else:
-        #     form.ON_Bybit.setText('ВЫКЛ')
-        #     form.ON_Bybit.setStyleSheet("color: Red;")
-        # form.Hedge.setChecked(bool(int(ini_form_cfg.value('Hedge', 0))))
-        # if form.Hedge.isChecked():
-        #     form.Hedge.setText('Режим хэджирования включен')
-        #     form.Hedge.setStyleSheet("color: Green;")
-        # else:
-        #     form.Hedge.setText('Установлен односторонний режим')
-        #     form.Hedge.setStyleSheet("color: Red;")
-        # form.leverage.setValue(int(ini_form_cfg.value('leverage')))
-        # form.percent_margin.setValue(float(ini_form_cfg.value('percent_margin')))
-        # form.fix_margin.setValue(int(ini_form_cfg.value('fix_margin')))
-        # form.rb_set_percent.setChecked(bool(int(ini_form_cfg.value('rb_set_percent', 0))))
-        # form.rb_set_margin.setChecked(bool(int(ini_form_cfg.value('rb_set_margin', 0))))
-        # form.margin_Bybit.setText(strategy_config.value('margin'))
-        #
-        # form.max_margin.setValue(int(ini_form_cfg.value('max_margin')))
-        # form.panicsell.setValue(int(ini_form_cfg.value('panicsell')))
-        #
-        # form.poluorder.setValue(int(ini_form_cfg.value('poluorder')))
-        # form.LMT_1st.setValue(int(ini_form_cfg.value('LMT_1st')))
-        # form.LMT_2nd.setValue(int(ini_form_cfg.value('LMT_2nd')))
-        # #
-        # form.TP_1st.setValue(int(ini_form_cfg.value('TP_1st')))
-        # form.TP_2nd.setValue(int(ini_form_cfg.value('TP_2nd')))
-        #
-        # form.MY_CHANNEL.setText(config.get('MY_CHANNEL', 'my_channel'))
-        # form.MY_CHANNEL_2.setText(config.get('MY_CHANNEL', 'test_ch'))
-        #
-        # form.VIP1.setChecked(bool(int(ini_form_cfg.value('VIP1', 0))))
-        # if form.VIP1.isChecked():
-        #     form.VIP1.setStyleSheet("color: Green;")
-        # else:
-        #     form.VIP1.setStyleSheet("color: Red;")
-        # form.VIP2.setChecked(bool(int(ini_form_cfg.value('VIP2', 0))))
-        # if form.VIP2.isChecked():
-        #     form.VIP2.setStyleSheet("color: Green;")
-        # else:
-        #     form.VIP2.setStyleSheet("color: Red;")
-        # form.VIP3.setChecked(bool(int(ini_form_cfg.value('VIP3', 0))))
-        # if form.VIP3.isChecked():
-        #     form.VIP3.setStyleSheet("color: Green;")
-        # else:
-        #     form.VIP3.setStyleSheet("color: Red;")
-        # form.VIP4.setChecked(bool(int(ini_form_cfg.value('VIP4', 0))))
-        # if form.VIP4.isChecked():
-        #     form.VIP4.setStyleSheet("color: Green;")
-        # else:
-        #     form.VIP4.setStyleSheet("color: Red;")
-        # form.VIP5.setChecked(bool(int(ini_form_cfg.value('VIP5', 0))))
-        # if form.VIP5.isChecked():
-        #     form.VIP5.setStyleSheet("color: Green;")
-        # else:
-        #     form.VIP5.setStyleSheet("color: Red;")
-        # form.VIP6.setChecked(bool(int(ini_form_cfg.value('VIP6', 0))))
-        # if form.VIP6.isChecked():
-        #     form.VIP6.setStyleSheet("color: Green;")
-        # else:
-        #     form.VIP6.setStyleSheet("color: Red;")
-        # form.VIP7.setChecked(bool(int(ini_form_cfg.value('VIP7', 0))))
         # if form.VIP7.isChecked():
         #     form.VIP7.setStyleSheet("color: Green;")
         # else:
         #     form.VIP7.setStyleSheet("color: Red;")
-        # form.no_vip.setChecked(bool(int(ini_form_cfg.value('no_vip', 0))))
-        # if form.no_vip.isChecked():
-        #     form.no_vip.setStyleSheet("color: Green;")
-        # else:
-        #     form.no_vip.setStyleSheet("color: Red;")
-        # form.test_ch.setChecked(bool(int(ini_form_cfg.value('test_ch', 0))))
-        # if form.test_ch.isChecked():
-        #     form.test_ch.setStyleSheet("color: Green;")
-        # else:
-        #     form.test_ch.setStyleSheet("color: Red;")
-        # form.api_token.setText(config.get('Telegram', 'api_token'))
-        # form.api_id.setText(config.get('Telegram', 'api_id'))
-        # form.api_hash.setText(config.get('Telegram', 'api_hash'))
-        # form.session_string.setText(config.get('Telegram', 'session_string'))
     except:
         pass
 
@@ -830,21 +697,117 @@ def openini(mode=None):
 
 
 def saveActs():
+    save_form()
     objFolder = settings.value('objFolder')
-
+    objectName = settings.value('objectName')
     if objFolder != '':
-        config = configparser.ConfigParser()
-        config.read_file(open(objFolder))
-        objectName = config.get('Объект', 'object')
-        # if objectName != '':
-        #     print(objectName)
-        #     # print(exists(file))
-        #     # if form.CheckBoxPromezh.isChecked():
-        #     #     shutil.copyfile('.\Shablon\!промежуточный.docx', f'{objFolder}\{objectName}.docx')
-        # else:
-        #     form.object.setFocus()
+        if objectName != '':
+            # print(objectName)
+            # print(exists(file))
+            # Промежуточный
+            if form.CheckBoxPromezh.isChecked():
+                myFile = f'{objFolder}\промежуточный.docx'
+                # shutil.copyfile('.\Shablon\!промежуточный.docx', myFile)
+                shutil.copyfile(".\\Shablon\\промежуточный.docx", myFile)
+                changeDocx(myFile, last_form)
+                print('промежуточный OK')
+            # ОГС
+            if form.CheckBoxRD1.isChecked():
+                act = form.nActOGS.text().replace('/', '-')
+                print(act)
+                myFile = f'{objFolder}\{act}(1РД1(ГРО)).docx'
+                shutil.copyfile(".\\Shablon\\1РД1(ГРО).docx", myFile)
+                changeDocx1(myFile, last_form)
+                print('РД ОГС OK')
+            if form.CheckBoxKAT1.isChecked():
+                act = form.nActOGS.text().replace('/', '-')
+                myFile = f'{objFolder}\{act}(Каталог координат и высот ОГС).docx'
+                shutil.copyfile(".\\Shablon\\Каталог координат и высот ОГС.docx", myFile)
+                changeDocx1(myFile, last_form)
+                print('каталог ОГС OK')
+            # Отвод
+            if form.CheckBoxRD2.isChecked():
+                act = form.nActOtvod.text().replace('/', '-')
+                print(act)
+                myFile = f'{objFolder}\{act}(1РД2(землеотвод)).docx'
+                shutil.copyfile(".\\Shablon\\1РД2(землеотвод).docx", myFile)
+                changeDocx1(myFile, last_form)
+                print('РД отвод OK')
+            if form.CheckBoxVSN2.isChecked():
+                d = config_to_dict(last_form, '_1')
+                act = form.nActOtvod.text().replace('/', '-')
+                myFile = f'{objFolder}\{act}(2ВСН(землеотвод)).docx'
+                shutil.copyfile(".\\Shablon\\2ВСН(землеотвод).docx", myFile)
+                # changeDocx1(myFile, last_form)
+                changeDocx(myFile, d)
+                print('ВСН отвод OK')
+            if form.CheckBoxSP2.isChecked():
+                act = form.nActOtvod.text().replace('/', '-')
+                myFile = f'{objFolder}\{act}(3СП(землеотвод)).docx'
+                shutil.copyfile(".\\Shablon\\3СП(землеотвод).docx", myFile)
+                changeDocx1(myFile, last_form)
+                print('СП отвод OK')
+            if form.CheckBoxKAT2.isChecked():
+                act = form.nActOtvod.text().replace('/', '-')
+                myFile = f'{objFolder}\{act}(Каталог координат землеотвода).docx'
+                shutil.copyfile('.\\Shablon\\Каталог координат закрепительных знаков землеотвода.docx', myFile)
+                changeDocx1(myFile, last_form)
+                print('каталог отвод OK')
+            # ОСИ
+            if form.CheckBoxActOs_1.isChecked():
+                act = form.nActOs_1.toPlainText().replace('/', '-')
+                print(act)
+                d = config_to_dict(last_form, '_1')
+                if form.CheckBoxRD3.isChecked():
+                    myFile = f'{objFolder}\{act}(1РД2(ОСИ)).docx'
+                    shutil.copyfile('.\\Shablon\\1РД2(ОСИ).docx', myFile)
+                    changeDocx(myFile, d)
+
+                if form.CheckBoxVSN3.isChecked():
+                    myFile = f'{objFolder}\{act}(2ВСН(ОСИ)).docx'
+                    # shutil.copyfile('.\\Shablon\\2ВСН(ОСИ).docx', myFile)
+                    shutil.copyfile('.\\Shablon\\ggg.docx', myFile)
+                    changeDocx(myFile, d)
+
+                if form.CheckBoxSP3.isChecked():
+                    myFile = f'{objFolder}\{act}(3СП(ОСИ)).docx'
+                    shutil.copyfile('.\\Shablon\\3СП(ОСИ).docx', myFile)
+                    changeDocx(myFile, d)
+
+                if form.CheckBoxKAT3.isChecked():
+                    myFile = f'{objFolder}\{act}(Каталог координат осей).docx'
+                    shutil.copyfile('.\\Shablon\\Каталог координат закрепительных знаков осей.docx', myFile)
+                    changeDocx(myFile, d)
+
+                # changeDocx(myFile, last_form)
+                print('ОСИ OK')
+        else:
+            pass
     else:
         pass
+
+
+def config_to_dict(file_path, rt):
+    # form.QCheckBox('CheckBoxALLKAT').setChecked(True)
+    config = configparser.ConfigParser()
+    config.read(file_path)
+    d = {}
+
+    # print(config['ОСИ'].keys())
+    # print(config.sections())
+
+    for section in config.sections():
+        for key in config[section]:
+            if section == 'ОСИ':
+                if rt in key:
+                    key2 = '#' + key.replace(rt, '_0')
+                    d[key2] = config[section][key]
+            else:
+                key2 = '#' + key
+                d[key2] = config[section][key]
+            # print((f'${key}', config[section][key]))
+    print(d)
+    return d
 
 
 def allACT():
@@ -853,10 +816,12 @@ def allACT():
         form.CheckBoxALLRD.setChecked(True)
         form.CheckBoxALLVSN.setChecked(True)
         form.CheckBoxALLSP.setChecked(True)
+        form.CheckBoxALLACT.setStyleSheet("color: Green;")
     else:
         form.CheckBoxALLRD.setChecked(False)
         form.CheckBoxALLVSN.setChecked(False)
         form.CheckBoxALLSP.setChecked(False)
+        form.CheckBoxALLACT.setStyleSheet("color: Red;")
 
 
 def allRD():
@@ -865,31 +830,37 @@ def allRD():
         form.CheckBoxRD1.setChecked(True)
         form.CheckBoxRD2.setChecked(True)
         form.CheckBoxRD3.setChecked(True)
+        form.CheckBoxALLRD.setStyleSheet("color: Green;")
     else:
         form.CheckBoxALLACT.setChecked(False)
         form.CheckBoxRD1.setChecked(False)
         form.CheckBoxRD2.setChecked(False)
         form.CheckBoxRD3.setChecked(False)
+        form.CheckBoxALLRD.setStyleSheet("color: Red;")
 
 
 def allVSN():
     if form.CheckBoxALLVSN.isChecked():
         form.CheckBoxVSN2.setChecked(True)
         form.CheckBoxVSN3.setChecked(True)
+        form.CheckBoxALLVSN.setStyleSheet("color: Green;")
     else:
         form.CheckBoxALLACT.setChecked(False)
         form.CheckBoxVSN2.setChecked(False)
         form.CheckBoxVSN3.setChecked(False)
+        form.CheckBoxALLVSN.setStyleSheet("color: Red;")
 
 
 def allSP():
     if form.CheckBoxALLSP.isChecked():
         form.CheckBoxSP2.setChecked(True)
         form.CheckBoxSP3.setChecked(True)
+        form.CheckBoxALLSP.setStyleSheet("color: Green;")
     else:
         form.CheckBoxALLACT.setChecked(False)
         form.CheckBoxSP2.setChecked(False)
         form.CheckBoxSP3.setChecked(False)
+        form.CheckBoxALLSP.setStyleSheet("color: Red;")
 
 
 def allKAT():
@@ -897,10 +868,39 @@ def allKAT():
         form.CheckBoxKAT1.setChecked(True)
         form.CheckBoxKAT2.setChecked(True)
         form.CheckBoxKAT3.setChecked(True)
+        form.CheckBoxALLKAT.setStyleSheet("color: Green;")
     else:
         form.CheckBoxKAT1.setChecked(False)
         form.CheckBoxKAT2.setChecked(False)
         form.CheckBoxKAT3.setChecked(False)
+        form.CheckBoxALLKAT.setStyleSheet("color: Red;")
+
+
+def read_ini(file_path, rt):
+    # form.QCheckBox('CheckBoxALLKAT').setChecked(True)
+    config = configparser.ConfigParser()
+    config.read(file_path)
+    d = {}
+
+    # print(config['ОСИ'].keys())
+    # print(config.sections())
+
+    for section in config.sections():
+        for key in config[section]:
+            if section == 'ОСИ':
+                if rt in key:
+                    key2 = '${' + key.replace(rt, '_0') + '}'
+                    d[key2] = config[section][key]
+            else:
+                key2 = '${' + key + '}'
+                d[key2] = config[section][key]
+            # print((f'${key}', config[section][key]))
+    print(d)
+
+
+def btngroup(btn):
+    print(btn.text() + " is selected")
+    # print(form.CheckBoxActOs_1.text())
 
 
 if __name__ == '__main__':
@@ -910,8 +910,25 @@ if __name__ == '__main__':
     form = Form()
     form.setupUi(window)
 
+    # form.bg = QButtonGroup()
+    # form.bg.addButton(form.CheckBoxActOs_1, 1)
+    # form.bg.addButton(form.CheckBoxActOs_2, 1)
+    # form.bg.addButton(form.CheckBoxActOs_3, 1)
+    # form.bg.addButton(form.CheckBoxActOs_4, 1)
+    # form.bg.addButton(form.CheckBoxActOs_5, 5)
+    # form.bg.addButton(form.CheckBoxActOs_6, 6)
+    # form.bg.addButton(form.CheckBoxActOs_7, 7)
+    # form.bg.addButton(form.CheckBoxActOs_8, 8)
+    # form.bg.addButton(form.CheckBoxActOs_9, 9)
+    # form.bg.addButton(form.CheckBoxActOs_10, 10)
+    # form.bg.addButton(form.CheckBoxActOs_11, 11)
+    # form.bg.addButton(form.CheckBoxActOs_12, 12)
+    # form.bg.addButton(form.CheckBoxActOs_13, 13)
+    # form.bg.addButton(form.CheckBoxActOs_14, 14)
+    # form.bg.addButton(form.CheckBoxActOs_15, 15)
+    # form.bg.buttonClicked[QAbstractButton].connect(btngroup)
     window.show()
-    # ini_form(last_form)
+
     openini('last')
 
     # работа с формой
@@ -930,5 +947,6 @@ if __name__ == '__main__':
 
     # Акты
     form.pushButtonSaveAct.clicked.connect(saveActs)
+    # form.pushButtonClear_2.clicked.connect(lambda: read_ini(last_form, '_2'))
 
     app.exec()
