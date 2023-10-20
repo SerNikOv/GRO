@@ -1,0 +1,9 @@
+pip install auto-py-to-exe
+auto-py-to-exe
+или
+python -m auto_py_to_exe
+
+Установка через GitHub
+$ git clone https://github.com/brentvollebregt/auto-py-to-exe.git
+$ cd auto-py-to-exe
+$ python setup.py install

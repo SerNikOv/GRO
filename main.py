@@ -7,7 +7,7 @@ import configparser
 from pathlib import Path, PurePath, PurePosixPath
 from os.path import abspath, dirname, exists
 import shutil
-from change_docx import changeDocx1, changeDocx
+from change_docx import changeDocx, DocxProp
 
 defoult_form = './Config/defoult_form.ini'
 # last_form = './Config/ini_form.ini'
@@ -500,173 +500,6 @@ def ini_form(file=None):
         pass
 
 
-# def change_form(mode):
-#     if mode == 'setBybit':
-#         config_bybit.setValue("ON_Bybit", int(form.ON_Bybit.isChecked()))
-#         if form.ON_Bybit.isChecked():  # BYBIT
-#             form.ON_Bybit.setText('ВКЛ')
-#             form.ON_Bybit.setStyleSheet("color: Green;")
-#         else:
-#             form.ON_Bybit.setText('ВЫКЛ')
-#             form.ON_Bybit.setStyleSheet("color: Red;")
-#     if mode == 'Hedge':
-#         if form.Hedge.isChecked():  # BYBIT
-#             mode_bybit = 'BothSide'
-#             strategy_config.setValue("Hedge", mode_bybit)
-#             form.Hedge.setText('Режим хэджирования включен')
-#             form.Hedge.setStyleSheet("color: Green;")
-#         else:
-#             mode_bybit = 'MergedSingle'
-#             strategy_config.setValue("Hedge", mode_bybit)
-#             form.Hedge.setText('Установлен односторонний режим')
-#             form.Hedge.setStyleSheet("color: Red;")
-#         if form.checkApi_Bybit.isChecked():
-#             if Bybit.position_mode_switch(mode_bybit):
-#                 form.statusBar.showMessage(f'Установлен {mode_bybit} режим')
-#     if mode == 'leverage':
-#         leverage = int(form.leverage.value())
-#         strategy_config.setValue("leverage", leverage)
-#     if mode == 'fix_margin':
-#         fix_margin = int(form.fix_margin.value())
-#         if fix_margin != 0:
-#             form.rb_set_margin.setChecked(True)
-#             percent_margin = 0
-#             margin = round(fix_margin)
-#             strategy_config.setValue("percent_margin", percent_margin)
-#             strategy_config.setValue("margin", margin)
-#             form.percent_margin.setValue(percent_margin)
-#             form.margin_Bybit.setText(str(margin))
-#         strategy_config.setValue("fix_margin", fix_margin)
-#         set_min_margin()
-#     if mode == 'percent_margin':
-#         percent_margin = float(form.percent_margin.value())
-#         if percent_margin != 0:
-#             form.rb_set_percent.setChecked(True)
-#             strategy_config.setValue("percent_margin", percent_margin)
-#             fix_margin = 0
-#             strategy_config.setValue("fix_margin", fix_margin)
-#             margin = Utils.set_margin()
-#             form.fix_margin.setValue(fix_margin)
-#             form.margin_Bybit.setText(str(margin))
-#         strategy_config.setValue("percent_margin", percent_margin)
-#         set_min_margin()
-#     if mode == 'max_margin':
-#         max_margin = int(form.max_margin.value())
-#         strategy_config.setValue("maxmargin", max_margin)
-#     if mode == 'panicsell':
-#         panicsell = int(form.panicsell.value())
-#         strategy_config.setValue("panicsell", panicsell)
-#     if mode == 'TP1':
-#         TP_1st = int(form.TP_1st.value())
-#         strategy_config.setValue("TP_1st", TP_1st)
-#         set_min_margin()
-#     if mode == 'TP2':
-#         TP_2nd = int(form.TP_2nd.value())
-#         strategy_config.setValue("TP_2nd", TP_2nd)
-#         set_min_margin()
-#     if mode == 'LMT':
-#         poluorder = int(form.poluorder.value())
-#         strategy_config.setValue("poluorder", poluorder)
-#     if mode == 'LMT1':
-#         LMT_1st = int(form.LMT_1st.value())
-#         # form.LMT_1st.setMaximum(LMT_1stmax)
-#         strategy_config.setValue("LMT_1st", LMT_1st)
-#     if mode == 'LMT2':
-#         LMT_2nd = int(form.LMT_2nd.value())
-#         strategy_config.setValue("LMT_2nd", LMT_2nd)
-#     if mode == 'MY_CHANNEL':
-#         try:
-#             my = form.MY_CHANNEL.text()
-#             m = [int(s) for s in re.findall(r'-?\d+\.?\d*', my)][0]
-#             # tst = form.MY_CHANNEL_2.text()
-#             # t = [int(x) for x in re.findall(r'-?\d+\.?\d*', tst)][0]
-#             config.set('MY_CHANNEL', 'my_channel', str(m))
-#             # config.set('MY_CHANNEL', 'test_ch', str(t))
-#             with open(file_config, 'w') as configfile:
-#                 config.write(configfile)
-#         except:
-#             form.statusBar.showMessage(f'неверный формат id канала')
-#     if mode == 'Telega':
-#         api_token = str(form.api_token.text())
-#         api_id = str(form.api_id.text())
-#         api_hash = str(form.api_hash.text())
-#         session_string = str(form.session_string.text())
-#         config.set('Telegram', 'api_token', api_token)
-#         config.set('Telegram', 'api_id', api_id)
-#         config.set('Telegram', 'api_hash', api_hash)
-#         config.set('Telegram', 'session_string', session_string)
-#         with open(file_config, 'w') as configfile:
-#             config.write(configfile)
-#     if mode == 'VIP1':
-#         if form.VIP1.isChecked():  # BYBIT
-#             form.VIP1.setStyleSheet("color: Green;")
-#         else:
-#             form.VIP1.setStyleSheet("color: Red;")
-#         strategy_config.setValue("VIP1", int(form.VIP1.isChecked()))
-#         Utils.add_channel()
-#     if mode == 'VIP2':
-#         if form.VIP2.isChecked():  # BYBIT
-#             form.VIP2.setStyleSheet("color: Green;")
-#         else:
-#             form.VIP2.setStyleSheet("color: Red;")
-#         strategy_config.setValue("VIP2", int(form.VIP2.isChecked()))
-#         Utils.add_channel()
-#     if mode == 'VIP3':
-#         if form.VIP3.isChecked():  # BYBIT
-#             form.VIP3.setStyleSheet("color: Green;")
-#         else:
-#             form.VIP3.setStyleSheet("color: Red;")
-#         strategy_config.setValue("VIP3", int(form.VIP3.isChecked()))
-#         Utils.add_channel()
-#     if mode == 'VIP4':
-#         if form.VIP4.isChecked():  # BYBIT
-#             form.VIP4.setStyleSheet("color: Green;")
-#         else:
-#             form.VIP4.setStyleSheet("color: Red;")
-#         strategy_config.setValue("VIP4", int(form.VIP4.isChecked()))
-#         Utils.add_channel()
-#     if mode == 'VIP5':
-#         if form.VIP5.isChecked():  # BYBIT
-#             form.VIP5.setStyleSheet("color: Green;")
-#         else:
-#             form.VIP5.setStyleSheet("color: Red;")
-#         strategy_config.setValue("VIP5", int(form.VIP5.isChecked()))
-#         Utils.add_channel()
-#     if mode == 'VIP6':
-#         if form.VIP6.isChecked():  # BYBIT
-#             form.VIP6.setStyleSheet("color: Green;")
-#         else:
-#             form.VIP6.setStyleSheet("color: Red;")
-#         strategy_config.setValue("VIP6", int(form.VIP6.isChecked()))
-#         Utils.add_channel()
-#     if mode == 'VIP7':
-#         if form.VIP7.isChecked():  # BYBIT
-#             form.VIP7.setStyleSheet("color: Green;")
-#         else:
-#             form.VIP7.setStyleSheet("color: Red;")
-#         strategy_config.setValue("VIP7", int(form.VIP7.isChecked()))
-#         Utils.add_channel()
-#     if mode == 'no_vip':
-#         if form.no_vip.isChecked():  # BYBIT
-#             form.no_vip.setStyleSheet("color: Green;")
-#         else:
-#             form.no_vip.setStyleSheet("color: Red;")
-#         strategy_config.setValue("no_vip", int(form.no_vip.isChecked()))
-#         Utils.add_channel()
-#     if mode == 'test_ch':
-#         if form.test_ch.isChecked():  # BYBIT
-#             form.test_ch.setStyleSheet("color: Green;")
-#         else:
-#             form.test_ch.setStyleSheet("color: Red;")
-#         strategy_config.setValue("test_ch", int(form.test_ch.isChecked()))
-#         tst = form.MY_CHANNEL_2.text()
-#         t = [int(x) for x in re.findall(r'-?\d+\.?\d*', tst)][0]
-#         config.set('MY_CHANNEL', 'test_ch', str(t))
-#         with open(file_config, 'w') as configfile:
-#             config.write(configfile)
-#         Utils.add_channel()
-
-
 def openini(mode=None):
     try:
         if mode != 'last':
@@ -878,6 +711,7 @@ def makeActOsy(act, d):
         shutil.copyfile('.\\Shablon\\Каталог координат закрепительных знаков осей.docx', myFile)
         changeDocx(myFile, d)
 
+
 def config_to_dict(file_path, rt):
     # form.QCheckBox('CheckBoxALLKAT').setChecked(True)
     config = configparser.ConfigParser()
@@ -966,28 +800,6 @@ def allKAT():
         form.CheckBoxALLKAT.setStyleSheet("color: Red;")
 
 
-def read_ini(file_path, rt):
-    # form.QCheckBox('CheckBoxALLKAT').setChecked(True)
-    config = configparser.ConfigParser()
-    config.read(file_path)
-    d = {}
-
-    # print(config['ОСИ'].keys())
-    # print(config.sections())
-
-    for section in config.sections():
-        for key in config[section]:
-            if section == 'ОСИ':
-                if rt in key:
-                    key2 = '${' + key.replace(rt, '_0') + '}'
-                    d[key2] = config[section][key]
-            else:
-                key2 = '${' + key + '}'
-                d[key2] = config[section][key]
-            # print((f'${key}', config[section][key]))
-    print(d)
-
-
 def btngroup(btn):
     print(btn.text() + " is selected")
     # print(form.CheckBoxActOs_1.text())
@@ -1023,6 +835,5 @@ if __name__ == '__main__':
 
     # Акты
     form.pushButtonSaveAct.clicked.connect(saveActs)
-    # form.pushButtonClear_2.clicked.connect(lambda: read_ini(last_form, '_2'))
-
+    # form.pushButtonClear_2.clicked.connect(DocxProp)
     app.exec()
