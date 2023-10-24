@@ -36,13 +36,14 @@ def save_form():
         settings.setValue("objectName", objectName)
         if objFolder != '':
             file = objFolder + '/Карточка объекта - ' + objectName + '.gro'
+            objFolder = dirname(file)
         else:
             nfile = dirname(last_form) + '/Карточка объекта - ' + form.object.toPlainText() + '.gro'
             file = \
                 QFileDialog().getSaveFileName(window, 'Выберите путь для карточки объекта', nfile, filter="*.gro")[0]
             objFolder = dirname(file)
-            settings.setValue("objFolder", objFolder)
-            window.statusBar().showMessage(objFolder)
+        settings.setValue("objFolder", objFolder)
+        window.statusBar().showMessage(objFolder)
         if file != '':
             # my_file = open(file, "w+")
             # my_file.close()
@@ -534,6 +535,7 @@ def saveActs():
     save_form()
     objFolder = settings.value('objFolder')
     objectName = settings.value('objectName')
+    last_form = settings.value('last_form')
     if objFolder != '':
         if objectName != '':
             # print(objectName)
@@ -552,7 +554,10 @@ def saveActs():
                 print(act)
                 myFile = f'{objFolder}\{act}(1РД1(ГРО)).docx'
                 d = config_to_dict(last_form, '')
-                shutil.copyfile(".\\Shablon\\1РД1(ГРО).docx", myFile)
+                if form.rd_new.isChecked():
+                    shutil.copyfile(".\\Shablon\\1РД1(ГРО)нов.docx", myFile)
+                if form.rd_old.isChecked():
+                    shutil.copyfile(".\\Shablon\\1РД1(ГРО)олд.docx", myFile)
                 changeDocx(myFile, d)
                 print('РД ОГС OK')
             if form.CheckBoxKAT1.isChecked():
@@ -568,7 +573,10 @@ def saveActs():
                 print(act)
                 myFile = f'{objFolder}\{act}(1РД2(землеотвод)).docx'
                 d = config_to_dict(last_form, '')
-                shutil.copyfile(".\\Shablon\\1РД2(землеотвод).docx", myFile)
+                if form.rd_new.isChecked():
+                    shutil.copyfile(".\\Shablon\\1РД2(землеотвод)нов.docx", myFile)
+                if form.rd_old.isChecked():
+                    shutil.copyfile(".\\Shablon\\1РД2(землеотвод)олд.docx", myFile)
                 changeDocx(myFile, d)
                 print('РД отвод OK')
             if form.CheckBoxVSN2.isChecked():
@@ -693,7 +701,10 @@ def makeActOsy(act, d):
     objFolder = settings.value('objFolder')
     if form.CheckBoxRD3.isChecked():
         myFile = f'{objFolder}\{act}(1РД2(ОСИ)).docx'
-        shutil.copyfile('.\\Shablon\\1РД2(ОСИ).docx', myFile)
+        if form.rd_new.isChecked():
+            shutil.copyfile(".\\Shablon\\1РД2(ОСИ)нов.docx", myFile)
+        if form.rd_old.isChecked():
+            shutil.copyfile('.\\Shablon\\1РД2(ОСИ)олд.docx', myFile)
         changeDocx(myFile, d)
 
     if form.CheckBoxVSN3.isChecked():
