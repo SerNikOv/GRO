@@ -2133,7 +2133,7 @@ p, li { white-space: pre-wrap; }
          </font>
         </property>
         <property name="text">
-         <string>объекты чертежа (акта)                |     №акта           |       RP   |   NR       |     тчк    |   схем  |   кат     |             шифр чертежа</string>
+         <string>объекты чертежа (акта)                                     |     №акта           |       RP       |      NR         |     тчк    |   схем    |   кат     |             шифр чертежа</string>
         </property>
        </widget>
        <widget class="QScrollArea" name="scrollArea">

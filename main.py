@@ -43,6 +43,7 @@ def save_form():
                 QFileDialog().getSaveFileName(window, 'Выберите путь для карточки объекта', nfile, filter="*.gro")[0]
             objFolder = dirname(file)
         settings.setValue("objFolder", objFolder)
+        window.statusBar().setStyleSheet("color: Black;")
         window.statusBar().showMessage(objFolder)
         if file != '':
             # my_file = open(file, "w+")
@@ -288,8 +289,10 @@ def ini_form(file=None):
                 objFolder = ''
 
             if objFolder != '':
+                window.statusBar().setStyleSheet("color: Black;")
                 window.statusBar().showMessage(objFolder)
             if objFolder == '':
+                window.statusBar().setStyleSheet("color: Red;")
                 window.statusBar().showMessage('Папка не задана!!!')
 
             # Объект
@@ -548,6 +551,7 @@ def saveActs():
                 shutil.copyfile(".\\Shablon\\!промежуточный.docx", myFile)
                 changeDocx(myFile, d)
                 print('промежуточный OK')
+                window.statusBar().showMessage('промежуточный OK')
             # ОГС
             if form.CheckBoxRD1.isChecked():
                 act = form.nactogs.text().replace('/', '-')
@@ -560,6 +564,7 @@ def saveActs():
                     shutil.copyfile(".\\Shablon\\1РД1(ГРО)олд.docx", myFile)
                 changeDocx(myFile, d)
                 print('РД ОГС OK')
+                window.statusBar().showMessage('РД ОГС OK')
             if form.CheckBoxKAT1.isChecked():
                 act = form.nactogs.text().replace('/', '-')
                 myFile = f'{objFolder}\{act}(Каталог координат и высот ОГС).docx'
@@ -567,6 +572,7 @@ def saveActs():
                 shutil.copyfile(".\\Shablon\\Каталог координат и высот ОГС.docx", myFile)
                 changeDocx(myFile, d)
                 print('каталог ОГС OK')
+                window.statusBar().showMessage('каталог ОГС OK')
             # Отвод
             if form.CheckBoxRD2.isChecked():
                 act = form.nactotvod.text().replace('/', '-')
@@ -579,6 +585,7 @@ def saveActs():
                     shutil.copyfile(".\\Shablon\\1РД2(землеотвод)олд.docx", myFile)
                 changeDocx(myFile, d)
                 print('РД отвод OK')
+                window.statusBar().showMessage('РД отвод OK')
             if form.CheckBoxVSN2.isChecked():
                 d = config_to_dict(last_form, '')
                 act = form.nactotvod.text().replace('/', '-')
@@ -586,6 +593,7 @@ def saveActs():
                 shutil.copyfile(".\\Shablon\\2ВСН(землеотвод).docx", myFile)
                 changeDocx(myFile, d)
                 print('ВСН отвод OK')
+                window.statusBar().showMessage('ВСН отвод OK')
             if form.CheckBoxSP2.isChecked():
                 act = form.nactotvod.text().replace('/', '-')
                 myFile = f'{objFolder}\{act}(3СП(землеотвод)).docx'
@@ -593,6 +601,7 @@ def saveActs():
                 shutil.copyfile(".\\Shablon\\3СП(землеотвод).docx", myFile)
                 changeDocx(myFile, d)
                 print('СП отвод OK')
+                window.statusBar().showMessage('СП отвод OK')
             if form.CheckBoxKAT2.isChecked():
                 act = form.nactotvod.text().replace('/', '-')
                 myFile = f'{objFolder}\{act}(Каталог координат землеотвода).docx'
@@ -600,6 +609,7 @@ def saveActs():
                 shutil.copyfile('.\\Shablon\\Каталог координат закрепительных знаков землеотвода.docx', myFile)
                 changeDocx(myFile, d)
                 print('каталог отвод OK')
+                window.statusBar().showMessage('каталог отвод OK')
             # ОСИ
             if form.CheckBoxActOs_1.isChecked():
                 act = form.nactos_1.toPlainText().replace('/', '-')
@@ -607,90 +617,107 @@ def saveActs():
                 d = config_to_dict(last_form, '1')
                 makeActOsy(act, d)
                 print('ОСИ 1 OK')
+                window.statusBar().showMessage('ОСИ 1 OK')
             if form.CheckBoxActOs_2.isChecked():
                 act = form.nactos_2.toPlainText().replace('/', '-')
                 print(act)
                 d = config_to_dict(last_form, '2')
                 makeActOsy(act, d)
                 print('ОСИ 2 OK')
+                window.statusBar().showMessage('ОСИ 2 OK')
             if form.CheckBoxActOs_3.isChecked():
                 act = form.nactos_3.toPlainText().replace('/', '-')
                 print(act)
                 d = config_to_dict(last_form, '3')
                 makeActOsy(act, d)
                 print('ОСИ 3 OK')
+                window.statusBar().showMessage('ОСИ 3 OK')
             if form.CheckBoxActOs_4.isChecked():
                 act = form.nactos_4.toPlainText().replace('/', '-')
                 print(act)
                 d = config_to_dict(last_form, '4')
                 makeActOsy(act, d)
                 print('ОСИ 4 OK')
+                window.statusBar().showMessage('ОСИ 4 OK')
             if form.CheckBoxActOs_5.isChecked():
                 act = form.nactos_5.toPlainText().replace('/', '-')
                 print(act)
                 d = config_to_dict(last_form, '5')
                 makeActOsy(act, d)
                 print('ОСИ 5 OK')
+                window.statusBar().showMessage('ОСИ 5 OK')
             if form.CheckBoxActOs_6.isChecked():
                 act = form.nactos_6.toPlainText().replace('/', '-')
                 print(act)
                 d = config_to_dict(last_form, '6')
                 makeActOsy(act, d)
                 print('ОСИ 6 OK')
+                window.statusBar().showMessage('ОСИ 6 OK')
             if form.CheckBoxActOs_7.isChecked():
                 act = form.nactos_7.toPlainText().replace('/', '-')
                 print(act)
                 d = config_to_dict(last_form, '7')
                 makeActOsy(act, d)
                 print('ОСИ 7 OK')
+                window.statusBar().showMessage('ОСИ 7 OK')
             if form.CheckBoxActOs_8.isChecked():
                 act = form.nactos_8.toPlainText().replace('/', '-')
                 print(act)
                 d = config_to_dict(last_form, '8')
                 makeActOsy(act, d)
                 print('ОСИ 8 OK')
+                window.statusBar().showMessage('ОСИ 8 OK')
             if form.CheckBoxActOs_9.isChecked():
                 act = form.nactos_9.toPlainText().replace('/', '-')
                 print(act)
                 d = config_to_dict(last_form, '9')
                 makeActOsy(act, d)
                 print('ОСИ 9 OK')
+                window.statusBar().showMessage('ОСИ 9 OK')
             if form.CheckBoxActOs_10.isChecked():
                 act = form.nactos_10.toPlainText().replace('/', '-')
                 print(act)
                 d = config_to_dict(last_form, '10')
                 makeActOsy(act, d)
                 print('ОСИ 10 OK')
+                window.statusBar().showMessage('ОСИ 10 OK')
             if form.CheckBoxActOs_11.isChecked():
                 act = form.nactos_11.toPlainText().replace('/', '-')
                 print(act)
                 d = config_to_dict(last_form, '11')
                 makeActOsy(act, d)
                 print('ОСИ 11 OK')
+                window.statusBar().showMessage('ОСИ 11 OK')
             if form.CheckBoxActOs_12.isChecked():
                 act = form.nactos_12.toPlainText().replace('/', '-')
                 print(act)
                 d = config_to_dict(last_form, '12')
                 makeActOsy(act, d)
                 print('ОСИ 12 OK')
+                window.statusBar().showMessage('ОСИ 12 OK')
             if form.CheckBoxActOs_13.isChecked():
                 act = form.nactos_13.toPlainText().replace('/', '-')
                 print(act)
                 d = config_to_dict(last_form, '13')
                 makeActOsy(act, d)
                 print('ОСИ 13 OK')
+                window.statusBar().showMessage('ОСИ 13 OK')
             if form.CheckBoxActOs_14.isChecked():
                 act = form.nactos_14.toPlainText().replace('/', '-')
                 print(act)
                 d = config_to_dict(last_form, '14')
                 makeActOsy(act, d)
                 print('ОСИ 14 OK')
+                window.statusBar().showMessage('ОСИ 14 OK')
             if form.CheckBoxActOs_15.isChecked():
                 act = form.nactos_15.toPlainText().replace('/', '-')
                 print(act)
                 d = config_to_dict(last_form, '15')
                 makeActOsy(act, d)
                 print('ОСИ 15 OK')
+                window.statusBar().showMessage('ОСИ 15 OK')
+            window.statusBar().setStyleSheet("color: Green;")
+            window.statusBar().showMessage('Акты готовы!')
         else:
             pass
     else:
