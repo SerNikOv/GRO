@@ -32,6 +32,7 @@ else:
 def save_form():
     objFolder = settings.value('objFolder')
     objectName = form.object.toPlainText()
+    form.progressBar.setValue(0)
     if objectName != '':
         settings.setValue("objectName", objectName)
         if objFolder != '':
@@ -280,7 +281,7 @@ def ini_form(file=None):
         if file != "":
             config = configparser.ConfigParser()
             config.read_file(open(file))
-
+            form.progressBar.setValue(0)
             # Папка объекта
             if settings.contains("objFolder"):
                 objFolder = settings.value('objFolder')
@@ -552,6 +553,7 @@ def saveActs():
                 changeDocx(myFile, d)
                 print('промежуточный OK')
                 window.statusBar().showMessage('промежуточный OK')
+            form.progressBar.setValue(form.progressBar.value() + 5)
             # ОГС
             if form.CheckBoxRD1.isChecked():
                 act = form.nactogs.text().replace('/', '-')
@@ -565,6 +567,7 @@ def saveActs():
                 changeDocx(myFile, d)
                 print('РД ОГС OK')
                 window.statusBar().showMessage('РД ОГС OK')
+            form.progressBar.setValue(form.progressBar.value() + 5)
             if form.CheckBoxKAT1.isChecked():
                 act = form.nactogs.text().replace('/', '-')
                 myFile = f'{objFolder}\{act}(Каталог координат и высот ОГС).docx'
@@ -573,6 +576,7 @@ def saveActs():
                 changeDocx(myFile, d)
                 print('каталог ОГС OK')
                 window.statusBar().showMessage('каталог ОГС OK')
+            form.progressBar.setValue(form.progressBar.value() + 5)
             # Отвод
             if form.CheckBoxRD2.isChecked():
                 act = form.nactotvod.text().replace('/', '-')
@@ -586,6 +590,7 @@ def saveActs():
                 changeDocx(myFile, d)
                 print('РД отвод OK')
                 window.statusBar().showMessage('РД отвод OK')
+            form.progressBar.setValue(form.progressBar.value() + 5)
             if form.CheckBoxVSN2.isChecked():
                 d = config_to_dict(last_form, '')
                 act = form.nactotvod.text().replace('/', '-')
@@ -594,6 +599,7 @@ def saveActs():
                 changeDocx(myFile, d)
                 print('ВСН отвод OK')
                 window.statusBar().showMessage('ВСН отвод OK')
+            form.progressBar.setValue(form.progressBar.value() + 5)
             if form.CheckBoxSP2.isChecked():
                 act = form.nactotvod.text().replace('/', '-')
                 myFile = f'{objFolder}\{act}(3СП(землеотвод)).docx'
@@ -602,6 +608,7 @@ def saveActs():
                 changeDocx(myFile, d)
                 print('СП отвод OK')
                 window.statusBar().showMessage('СП отвод OK')
+            form.progressBar.setValue(form.progressBar.value() + 5)
             if form.CheckBoxKAT2.isChecked():
                 act = form.nactotvod.text().replace('/', '-')
                 myFile = f'{objFolder}\{act}(Каталог координат землеотвода).docx'
@@ -611,6 +618,7 @@ def saveActs():
                 print('каталог отвод OK')
                 window.statusBar().showMessage('каталог отвод OK')
             # ОСИ
+            form.progressBar.setValue(form.progressBar.value() + 5)
             if form.CheckBoxActOs_1.isChecked():
                 act = form.nactos_1.toPlainText().replace('/', '-')
                 print(act)
@@ -618,6 +626,7 @@ def saveActs():
                 makeActOsy(act, d)
                 print('ОСИ 1 OK')
                 window.statusBar().showMessage('ОСИ 1 OK')
+            form.progressBar.setValue(form.progressBar.value() + 5)
             if form.CheckBoxActOs_2.isChecked():
                 act = form.nactos_2.toPlainText().replace('/', '-')
                 print(act)
@@ -625,6 +634,7 @@ def saveActs():
                 makeActOsy(act, d)
                 print('ОСИ 2 OK')
                 window.statusBar().showMessage('ОСИ 2 OK')
+            form.progressBar.setValue(form.progressBar.value() + 5)
             if form.CheckBoxActOs_3.isChecked():
                 act = form.nactos_3.toPlainText().replace('/', '-')
                 print(act)
@@ -632,6 +642,7 @@ def saveActs():
                 makeActOsy(act, d)
                 print('ОСИ 3 OK')
                 window.statusBar().showMessage('ОСИ 3 OK')
+            form.progressBar.setValue(form.progressBar.value() + 5)
             if form.CheckBoxActOs_4.isChecked():
                 act = form.nactos_4.toPlainText().replace('/', '-')
                 print(act)
@@ -639,6 +650,7 @@ def saveActs():
                 makeActOsy(act, d)
                 print('ОСИ 4 OK')
                 window.statusBar().showMessage('ОСИ 4 OK')
+            form.progressBar.setValue(form.progressBar.value() + 5)
             if form.CheckBoxActOs_5.isChecked():
                 act = form.nactos_5.toPlainText().replace('/', '-')
                 print(act)
@@ -646,6 +658,7 @@ def saveActs():
                 makeActOsy(act, d)
                 print('ОСИ 5 OK')
                 window.statusBar().showMessage('ОСИ 5 OK')
+            form.progressBar.setValue(form.progressBar.value() + 5)
             if form.CheckBoxActOs_6.isChecked():
                 act = form.nactos_6.toPlainText().replace('/', '-')
                 print(act)
@@ -653,6 +666,7 @@ def saveActs():
                 makeActOsy(act, d)
                 print('ОСИ 6 OK')
                 window.statusBar().showMessage('ОСИ 6 OK')
+            form.progressBar.setValue(form.progressBar.value() + 5)
             if form.CheckBoxActOs_7.isChecked():
                 act = form.nactos_7.toPlainText().replace('/', '-')
                 print(act)
@@ -660,6 +674,7 @@ def saveActs():
                 makeActOsy(act, d)
                 print('ОСИ 7 OK')
                 window.statusBar().showMessage('ОСИ 7 OK')
+            form.progressBar.setValue(form.progressBar.value() + 5)
             if form.CheckBoxActOs_8.isChecked():
                 act = form.nactos_8.toPlainText().replace('/', '-')
                 print(act)
@@ -667,6 +682,7 @@ def saveActs():
                 makeActOsy(act, d)
                 print('ОСИ 8 OK')
                 window.statusBar().showMessage('ОСИ 8 OK')
+            form.progressBar.setValue(form.progressBar.value() + 5)
             if form.CheckBoxActOs_9.isChecked():
                 act = form.nactos_9.toPlainText().replace('/', '-')
                 print(act)
@@ -674,6 +690,7 @@ def saveActs():
                 makeActOsy(act, d)
                 print('ОСИ 9 OK')
                 window.statusBar().showMessage('ОСИ 9 OK')
+            form.progressBar.setValue(form.progressBar.value() + 5)
             if form.CheckBoxActOs_10.isChecked():
                 act = form.nactos_10.toPlainText().replace('/', '-')
                 print(act)
@@ -681,6 +698,7 @@ def saveActs():
                 makeActOsy(act, d)
                 print('ОСИ 10 OK')
                 window.statusBar().showMessage('ОСИ 10 OK')
+            form.progressBar.setValue(form.progressBar.value() + 5)
             if form.CheckBoxActOs_11.isChecked():
                 act = form.nactos_11.toPlainText().replace('/', '-')
                 print(act)
@@ -688,6 +706,7 @@ def saveActs():
                 makeActOsy(act, d)
                 print('ОСИ 11 OK')
                 window.statusBar().showMessage('ОСИ 11 OK')
+            form.progressBar.setValue(form.progressBar.value() + 5)
             if form.CheckBoxActOs_12.isChecked():
                 act = form.nactos_12.toPlainText().replace('/', '-')
                 print(act)
@@ -695,6 +714,7 @@ def saveActs():
                 makeActOsy(act, d)
                 print('ОСИ 12 OK')
                 window.statusBar().showMessage('ОСИ 12 OK')
+            form.progressBar.setValue(form.progressBar.value() + 5)
             if form.CheckBoxActOs_13.isChecked():
                 act = form.nactos_13.toPlainText().replace('/', '-')
                 print(act)
@@ -702,6 +722,7 @@ def saveActs():
                 makeActOsy(act, d)
                 print('ОСИ 13 OK')
                 window.statusBar().showMessage('ОСИ 13 OK')
+            form.progressBar.setValue(form.progressBar.value() + 5)
             if form.CheckBoxActOs_14.isChecked():
                 act = form.nactos_14.toPlainText().replace('/', '-')
                 print(act)
@@ -709,6 +730,7 @@ def saveActs():
                 makeActOsy(act, d)
                 print('ОСИ 14 OK')
                 window.statusBar().showMessage('ОСИ 14 OK')
+            form.progressBar.setValue(form.progressBar.value() + 5)
             if form.CheckBoxActOs_15.isChecked():
                 act = form.nactos_15.toPlainText().replace('/', '-')
                 print(act)
@@ -717,6 +739,7 @@ def saveActs():
                 print('ОСИ 15 OK')
                 window.statusBar().showMessage('ОСИ 15 OK')
             window.statusBar().setStyleSheet("color: Green;")
+            form.progressBar.setValue(100)
             window.statusBar().showMessage('Акты готовы!')
         else:
             pass
